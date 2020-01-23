@@ -1,0 +1,38 @@
+﻿@model  HouseListViewModel 
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+      
+</head>
+<body>
+     
+        <table class="table table-condensed table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="col-lg-2">Address</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Plot?</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Houses)
+                {
+                <tr>
+                    <td> @Html.DisplayFor(modelItem => item.StreetNumber) @Html.DisplayFor(modelItem => item.StreetName)</td>
+               
+                    <td>@item.Category.CategoryName</td>
+                    <td>@item.Description</td>
+                    <td>@item.IsPlot</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.HouseId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.HouseId })
+                    </td>
+
+                </tr>
+                }
+            </tbody>
+        </table> 
+</body>
+</html>
