@@ -24,13 +24,16 @@ namespace Infrastructure
             base.OnModelCreating(modelBuilder);
 
             //seed categories
-            modelBuilder.Entity<Category>().HasData(new Category { CategoryId = 1, CategoryName = "Fruit Houses" });
-            modelBuilder.Entity<Category>().HasData(new Category { CategoryId = 2, CategoryName = "Cheese cakes" });
-            modelBuilder.Entity<Category>().HasData(new Category { CategoryId = 3, CategoryName = "Seasonal Houses" });
+            modelBuilder.Entity<Category>().HasData(new Category { CategoryId = 1, CategoryName = "ÖwnerOccupied", Description = "Full time owner occupied" });
+            modelBuilder.Entity<Category>().HasData(new Category { CategoryId = 2, CategoryName = "Swallow", Description = "Occupied but usually away overseas" });
+            modelBuilder.Entity<Category>().HasData(new Category { CategoryId = 3, CategoryName = "Tenanted", Description = "Tenants staying" });
+            modelBuilder.Entity<Category>().HasData(new Category { CategoryId = 4, CategoryName = "Vacant", Description = "House is empty" });
+            modelBuilder.Entity<Category>().HasData(new Category { CategoryId = 5, CategoryName = "Plot", Description = "Just a plot of land" });
 
             modelBuilder.Entity<Owner>().HasData(new Owner { OwnerId = 1, FullName = "S D Jone", EmailAddress = "aaa@gmail.com",PhoneNumber= "3342423"}); 
             modelBuilder.Entity<Owner>().HasData(new Owner { OwnerId = 2, FullName = "J Jonaronw", EmailAddress = "SDSSSSaa@gmail.com", PhoneNumber= "3342423"}); 
-            modelBuilder.Entity<Owner>().HasData(new Owner { OwnerId = 3, FullName = "E Foeinf", EmailAddress = "sdsA@gmail.com", PhoneNumber= "3342423"}); 
+            modelBuilder.Entity<Owner>().HasData(new Owner { OwnerId = 3, FullName = "E Foeinf", EmailAddress = "sdsA@gmail.com", PhoneNumber= "3342423"});
+ 
 
             //seed Houses
 

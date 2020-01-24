@@ -5,6 +5,7 @@
     <title>@ViewBag.Title</title>
       
 </head>
+
 <body>
      
         <table class="table table-condensed table-bordered table-hover">
@@ -19,9 +20,13 @@
             <tbody>
                 @foreach (var item in Model.Houses)
                 {
-                <tr>
-                    <td> @Html.DisplayFor(modelItem => item.StreetNumber) @Html.DisplayFor(modelItem => item.StreetName)</td>
-               
+                <tr> 
+                    <td>
+                        <a asp-controller="House"
+                           asp-action="Details"
+                           asp-route-id="@item.HouseId">@item.StreetName </a>  
+                    </td>
+
                     <td>@item.Category.CategoryName</td>
                     <td>@item.Description</td>
                     <td>@item.IsPlot</td>

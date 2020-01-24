@@ -26,5 +26,15 @@ namespace PropertyAdministration
             houselistVM.CurrentCategory = "the current category";
             return View(houselistVM);
         }
+        public IActionResult Details(int id)
+        {
+            var house = _houseRepo.GetById(id);
+            if (house == null)
+                return NotFound();
+
+            return View(house);
+
+
+        }
     }
 }
