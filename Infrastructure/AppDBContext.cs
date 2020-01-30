@@ -49,7 +49,7 @@ namespace Infrastructure
                     "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
                 CategoryId = 1,
                  IsPlot = false,
-                 OwnersId = 1 
+                 OwnerId = 1 
             }) ;
 
             modelBuilder.Entity<House>().HasData(new House
@@ -63,7 +63,7 @@ namespace Infrastructure
                     "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
                 CategoryId = 1,
                 IsPlot = false,
-                OwnersId = 1
+                OwnerId = 1
             });
 
             modelBuilder.Entity<House>().HasData(new House
@@ -78,7 +78,7 @@ namespace Infrastructure
                     "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
                 CategoryId = 2,
                 IsPlot = false,
-                OwnersId = 2
+                OwnerId = 2
             });
 
             modelBuilder.Entity<House>().HasData(new House
@@ -93,7 +93,7 @@ namespace Infrastructure
                     "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
                 CategoryId = 2,
                 IsPlot = false,
-                OwnersId = 3
+                OwnerId = 3
             });
 
             modelBuilder.Entity<House>().HasData(new House
@@ -108,7 +108,7 @@ namespace Infrastructure
                     "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
                 CategoryId = 1,
                 IsPlot = false,
-                OwnersId =2
+                OwnerId =2
             });
               
         }

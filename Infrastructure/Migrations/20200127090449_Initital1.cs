@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class IntitalMigration : Migration
+    public partial class Initital1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,7 +62,7 @@ namespace Infrastructure.Migrations
                     StreetNumber = table.Column<int>(nullable: false),
                     StreetName = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    OwnersId = table.Column<int>(nullable: false),
+                    OwnerId = table.Column<int>(nullable: false),
                     ERF = table.Column<string>(nullable: true),
                     DateMoveIn = table.Column<DateTime>(nullable: false),
                     IsPlot = table.Column<bool>(nullable: false),
@@ -76,6 +76,12 @@ namespace Infrastructure.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade); 
+                    table.ForeignKey(
+                        name: "FK_Houses_Owners_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Owners",
+                        principalColumn: "OwnerId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -84,9 +90,11 @@ namespace Infrastructure.Migrations
                 columns: new[] { "CategoryId", "CategoryName", "Description" },
                 values: new object[,]
                 {
-                    { 1, "Fruit Houses", null },
-                    { 2, "Cheese cakes", null },
-                    { 3, "Seasonal Houses", null }
+                    { 1, "ÖwnerOccupied", "Full time owner occupied" },
+                    { 2, "Swallow", "Occupied but usually away overseas" },
+                    { 3, "Tenanted", "Tenants staying" },
+                    { 4, "Vacant", "House is empty" },
+                    { 5, "Plot", "Just a plot of land" }
                 });
 
             migrationBuilder.InsertData(
@@ -101,7 +109,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Houses",
-                columns: new[] { "HouseId", "CategoryId", "DateMoveIn", "Description", "ERF", "IsPlot", "OwnersId", "StreetName", "StreetNumber" },
+                columns: new[] { "HouseId", "CategoryId", "DateMoveIn", "Description", "ERF", "IsPlot", "OwnerId", "StreetName", "StreetNumber" },
                 values: new object[,]
                 {
                     { 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2006), "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.", "dd55da", false, 1, "Whittle Way", 11 },

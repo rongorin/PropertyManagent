@@ -18,13 +18,13 @@ namespace PropertyAdministration.Core.Mocking
             { 
                   new House { HouseId = 2, StreetName = "Whittle Way", StreetNumber = 3, Description = "Ok house", ERF = "123",
                             Category = _categoryRepo.GetAll.ToList()[0],
-                            DateMoveIn = DateTime.Now, IsPlot=false ,OwnersId=0 },
+                            DateMoveIn = DateTime.Now, IsPlot=false ,OwnerId=0 },
                   new House { HouseId = 3, StreetName = "Jan Smuts", StreetNumber = 22, Description = "fine", ERF = "444",
                             Category = _categoryRepo.GetAll.ToList()[1],
-                            DateMoveIn = DateTime.Now, IsPlot=false ,OwnersId=0 },
+                            DateMoveIn = DateTime.Now, IsPlot=false ,OwnerId=0 },
                   new House { HouseId = 4, StreetName = "Jan Smuts", StreetNumber= 1, Description = "soso house", ERF = "4421",
                             Category = _categoryRepo.GetAll.ToList()[2],
-                            DateMoveIn = DateTime.Now, IsPlot=false ,OwnersId=0 },
+                            DateMoveIn = DateTime.Now, IsPlot=false ,OwnerId=0 },
 
                  };
 
@@ -37,7 +37,7 @@ namespace PropertyAdministration.Core.Mocking
 
         //                    Category =  new Category { CategoryId=1, CategoryName="aabbcc"} ,  //  _categoryRepo.GetAll.ToList()[1],
 
-        //                    DateMoveIn = DateTime.Now, IsPlot=false ,OwnersId=0
+        //                    DateMoveIn = DateTime.Now, IsPlot=false ,OwnerId=0
         //        }
         //    }; 
 

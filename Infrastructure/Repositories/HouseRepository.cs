@@ -22,7 +22,7 @@ namespace Infrastructure.Repositories
         {
             get
             {
-                return _appDbContext.Houses.Include(c => c.Category); 
+                return _appDbContext.Houses.Include(c => c.Category).Include(o => o.Owner);  
             } 
         }
 

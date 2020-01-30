@@ -8,6 +8,6 @@ namespace PropertyAdministration.Core.ViewModels
     public class HouseListViewModel
     {
         public IEnumerable<House> Houses { get; set; }
-        public string CurrentCategory { get; set; }
+        public string CurrentCategory { get; set; } 
     }
 }

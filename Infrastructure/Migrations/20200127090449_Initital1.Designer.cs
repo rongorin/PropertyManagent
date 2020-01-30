@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20200122151602_IntitalMigration")]
-    partial class IntitalMigration
+    [Migration("20200127090449_Initital1")]
+    partial class Initital1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,17 +42,32 @@ namespace Infrastructure.Migrations
                         new
                         {
                             CategoryId = 1,
-                            CategoryName = "Fruit Houses"
+                            CategoryName = "ÖwnerOccupied",
+                            Description = "Full time owner occupied"
                         },
                         new
                         {
                             CategoryId = 2,
-                            CategoryName = "Cheese cakes"
+                            CategoryName = "Swallow",
+                            Description = "Occupied but usually away overseas"
                         },
                         new
                         {
                             CategoryId = 3,
-                            CategoryName = "Seasonal Houses"
+                            CategoryName = "Tenanted",
+                            Description = "Tenants staying"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Vacant",
+                            Description = "House is empty"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Plot",
+                            Description = "Just a plot of land"
                         });
                 });
 
@@ -78,7 +93,7 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsPlot")
                         .HasColumnType("bit");
 
-                    b.Property<int>("OwnersId")
+                    b.Property<int>("OwnerId")
                         .HasColumnType("int");
 
                     b.Property<string>("StreetName")
@@ -102,7 +117,7 @@ namespace Infrastructure.Migrations
                             Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
                             ERF = "dd55da",
                             IsPlot = false,
-                            OwnersId = 1,
+                            OwnerId = 1,
                             StreetName = "Whittle Way",
                             StreetNumber = 11
                         },
@@ -114,7 +129,7 @@ namespace Infrastructure.Migrations
                             Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
                             ERF = "6662222",
                             IsPlot = false,
-                            OwnersId = 1,
+                            OwnerId = 1,
                             StreetName = "JanSmuts Ave",
                             StreetNumber = 121
                         },
@@ -126,7 +141,7 @@ namespace Infrastructure.Migrations
                             Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
                             ERF = "663333",
                             IsPlot = false,
-                            OwnersId = 2,
+                            OwnerId = 2,
                             StreetName = "Colebrook Cls",
                             StreetNumber = 3
                         },
@@ -138,7 +153,7 @@ namespace Infrastructure.Migrations
                             Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
                             ERF = "1255a",
                             IsPlot = false,
-                            OwnersId = 3,
+                            OwnerId = 3,
                             StreetName = "Whittle Way",
                             StreetNumber = 31
                         },
@@ -150,7 +165,7 @@ namespace Infrastructure.Migrations
                             Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
                             ERF = "64332",
                             IsPlot = false,
-                            OwnersId = 2,
+                            OwnerId = 2,
                             StreetName = "Whittle Way",
                             StreetNumber = 4
                         });

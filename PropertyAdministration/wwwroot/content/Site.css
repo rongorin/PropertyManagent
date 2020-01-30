@@ -96,3 +96,62 @@ footer {
     background-color: #fcaeae !important;
     border-color: #fba1a1 !important;
 }
+
+/* My specific Page-level styles */
+.houses {
+    list-style: none;
+}
+
+.houses > li {
+    position: relative;
+    margin-bottom: 30px;
+}
+    .houses > li .address {
+        background: yellow;
+        color: white;
+        text-align: center;
+        width: 200px;
+        -ms-border-radius: 8px;
+        border-radius: 8px;
+    }
+        .houses > li .address .housenumber {
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 6px;
+        }
+
+        .houses > li .address .fullname {
+            background: #f7f7f7;
+            color: #333;
+            font-size: 17px;
+            padding: 6px 12px;
+        }
+    .houses > li .details {
+        position: absolute;
+        top: 0;
+        left: 210px;
+    }
+
+        .houses > li .details .categoryname {
+            font-weight: normal;
+            display: block;
+        }
+
+        .houses > li .details .descr {
+            font-size: 15px;
+        }
+    .houses > li .details2 {
+        position: absolute;
+        top: 0;
+        left: 320px;
+    }
+
+    .houses > li .details2 .ownername {
+        font-weight: bold;
+        display: block;
+    }
+
+        .houses > li .details2 .descr {
+            font-size: 15px;
+        }

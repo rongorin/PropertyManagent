@@ -1,30 +1,53 @@
-﻿@model  HouseListViewModel 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-      
-</head>
-
-<body>
+﻿@model HouseListViewModel
      
-        <table class="table table-condensed table-bordered table-hover">
-            <thead>
+        @foreach (var item in Model.Houses)
+        {
+        <li>
+            <div class="address">
+                <div class="housenumber">
+                    <a asp-controller="House"
+                       asp-action="Details"
+                       asp-route-id="@item.HouseId">@item.StreetNumber @item.StreetName</a>
+
+                </div>
+                <div class="fullname">
+                    @item.Owner.FullName
+                </div>      
+            </div>
+            <div class="details">
+                <span class="categoryname">
+                    @item.Category.CategoryName 
+                </span>
+                <span class="invstatus">
+                   nothing owed
+                </span> 
+            </div>
+            <div class="details2">
+                <span class="descr">
+                    @item.Description  
+                </span>
+               
+            </div>
+        </li>
+        }
+ 
+    <table class="table table-condensed table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="col-lg-2">Addresss </th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Plot?</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Houses)
+            {
                 <tr>
-                    <th class="col-lg-2">Address</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Plot?</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Houses)
-                {
-                <tr> 
                     <td>
                         <a asp-controller="House"
                            asp-action="Details"
-                           asp-route-id="@item.HouseId">@item.StreetName </a>  
+                           asp-route-id="@item.HouseId">@item.StreetName </a>
                     </td>
 
                     <td>@item.Category.CategoryName</td>
@@ -36,8 +59,9 @@
                     </td>
 
                 </tr>
-                }
-            </tbody>
-        </table> 
-</body>
-</html>
+            }
+        </tbody>
+    </table>
+
+
+
