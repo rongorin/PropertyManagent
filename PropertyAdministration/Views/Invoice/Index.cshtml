@@ -1,0 +1,42 @@
+﻿@model InvoiceListViewModel
+
+<h2>Invoices listing</h2>
+<h4>please check each.</h4>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Dated</th>
+            <th>description</th>
+            <th class="text-right">Date Paid</th>
+            <th class="text-right">Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Invoices)
+        {
+            <tr>
+                <td class="newColours text-left">@line.InvoiceDate.ToString("dd/MM/yyyy")</td>
+                <td class="newColours text-left">@line.Description</td>
+                <td class="newColours text-right">@line.DatePaid.ToString("dd/MM/yyyy")</td>
+                <td class="newColours text-right">
+                    @line.Amount.ToString("c")
+                </td>
+            </tr> 
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td class="text-right">
+                @Model.InvoicesTotal.ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a class="btn btn-primary" asp-controller="Invoice" 
+                                asp-action="Create"
+                              asp-route-houseId="@Model.HouseId">New Invoice</a>
+</div>

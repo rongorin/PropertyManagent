@@ -7,8 +7,12 @@ namespace PropertyAdministration.Core.Interface
 {
     public interface IInvoiceRepository
     {
-        IEnumerable<Invoice> GetAll { get; }
-            //  IEnumerable<Invoice> PiesOfTheWeek { get; }
+        IEnumerable<Invoice> GetAll { get; } 
+        IEnumerable<Invoice> GetAllForHouse(int houseId);
+        decimal GetHouseBalance(int houseId);
         Invoice GetById(int invoiceId);
+
+        void Create(Invoice invoice);
+
     }
 }

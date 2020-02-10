@@ -22,13 +22,17 @@ namespace Infrastructure.Repositories
         {
             get
             {
-                return _appDbContext.Houses.Include(c => c.Category).Include(o => o.Owner);  
+                return _appDbContext.Houses.
+                                Include(c => c.Category).
+                                Include(o => o.Owner).
+                                Include(i => i.Invoices);  
             } 
         }
 
         public House GetById(int houseId)
         {
-            return _appDbContext.Houses.FirstOrDefault(c => c.HouseId == houseId);
+            return _appDbContext.Houses.
+                                Include(o => o.Owner).FirstOrDefault(c => c.HouseId == houseId);
         }
     }
 }

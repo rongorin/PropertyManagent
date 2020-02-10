@@ -1,7 +1,22 @@
 ﻿@model House
-<h2>@Model.Description</h2>
-<div>
-    <h4>@Model.HouseId<h4>
-    <h4>@Model.StreetNumber<h4>
-    <h4>@Model.StreetName</h4>
-</div> 
+    <h2> @Model.StreetNumber @Model.StreetName </h2>
+ 
+<div class="thumbnail"> 
+    <div class="caption-full">
+        <h3>
+            @Model.Owner.FullName
+            @* <a href="#">@Model.StreetNumber @Model.StreetName</a>*@
+        </h3>
+        <h4>House Notes</h4>
+        <p>@Model.Description</p>
+        <div class="goToInvoices">
+            <p class="button">
+                <a class="btn btn-sm"
+                   asp-controller="Invoice"
+                   asp-action="Index"
+                   asp-route-houseId="@Model.HouseId">Invoices</a>
+            </p>
+            @await Component.InvokeAsync("InvoiceSummary", new { houseId = @Model.HouseId })
+        </div>
+    </div>
+</div>

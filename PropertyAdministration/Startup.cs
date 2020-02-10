@@ -35,6 +35,9 @@ namespace PropertyAdministration
 
             services.AddScoped<ICategoryRepository,CategoryRepository>(); //
             services.AddScoped<IHouseRepository, HouseRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+
+            services.AddScoped<IInvoiceEngine,  InvoiceEngine>();
             //services.AddScoped<IHouseRepository, MockHouseRepository>();
             services.AddControllersWithViews() ;//services.AddMvc(); would also work still
             services.AddRazorPages();

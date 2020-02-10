@@ -17,5 +17,7 @@ namespace PropertyAdministration.Core.Model
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public Owner Owner { get; set; }
+
+        public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

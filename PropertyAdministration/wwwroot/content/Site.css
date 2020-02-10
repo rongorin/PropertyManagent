@@ -6,9 +6,10 @@
 
 body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    background-image: url('/images/pattern.png');
+    background-image: url('/images/sea-image.jpg');
     background-repeat: repeat;
     font-family: Ubuntu, 'Source Sans Pro', sans-serif;
+    color: white;
 }
 
 
@@ -38,9 +39,9 @@ body {
     width: 100%;
 }
 
-.addToCart {
-    padding-right: 10px;
-    padding-left: 10px;
+.goToInvoices{
+    padding-right: 5px;
+    padding-left: 5px;
 }
 
 .thumbnail {
@@ -61,8 +62,8 @@ footer {
 }
 
 .navbar-inverse {
-    background-color: #a593c2;
-    border-color: #a593c2;
+    background-color: hsl(207, 90%, 53%);
+    border-color: hsl(207, 90%, 53%);
 }
 
 .nav.navbar-nav.navbar-right li a {
@@ -97,6 +98,13 @@ footer {
     border-color: #fba1a1 !important;
 }
 
+.newColours {
+    color: black;
+}
+
+.redHighlight {
+    color: red;
+}
 /* My specific Page-level styles */
 .houses {
     list-style: none;
@@ -122,7 +130,7 @@ footer {
         }
 
         .houses > li .address .fullname {
-            background: #f7f7f7;
+            background: yellow;
             color: #333;
             font-size: 17px;
             padding: 6px 12px;
