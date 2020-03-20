@@ -43,7 +43,7 @@ namespace PropertyAdministration.Core.Mocking
 
         public House GetById(int houseId)
         {
-            return GetAll.FirstOrDefault(p => p.HouseId == houseId);
+            return GetAll.FirstOrDefault(p => p.HouseId == houseId) ;
         }
     }
 

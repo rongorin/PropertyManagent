@@ -21,8 +21,7 @@ namespace PropertyAdministration
 
         }
         public ActionResult Index()
-        { 
-
+        {  
             var houseViewModel = _houseRepo.GetAll
               .Select(a => new HOMEIndexViewModel
               {

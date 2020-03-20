@@ -10,5 +10,6 @@ namespace PropertyAdministration.Core.ViewModels
             public IEnumerable<Invoice> Invoices { get; set; }
             public int HouseId { get; set; }
             public decimal InvoicesTotal { get; set; }
+            public string HouseAddress { get; set; }
     }
 }

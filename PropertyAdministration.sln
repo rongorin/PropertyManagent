@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PropertyAdministration.Core
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PropertyAdministration.UI", "PropertyAdministration.UI\PropertyAdministration.UI.csproj", "{E7B69C1F-27FD-4194-B4D8-0F4C283C92F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{755889F3-401C-4EF3-AF23-AAA869D6723E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{755889F3-401C-4EF3-AF23-AAA869D6723E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

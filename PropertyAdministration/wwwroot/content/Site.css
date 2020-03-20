@@ -6,9 +6,10 @@
 
 body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    background-image: url('/images/sea-image.jpg');
+    background-image: none; /*url('/images/sea-image.jpg');*/
     background-repeat: repeat;
-    font-family: Ubuntu, 'Source Sans Pro', sans-serif;
+    font-family: Inconsolata, 'Source Sans Pro', sans-serif;
+    background-color: #2c3853;
     color: white;
 }
 
@@ -62,8 +63,8 @@ footer {
 }
 
 .navbar-inverse {
-    background-color: hsl(207, 90%, 53%);
-    border-color: hsl(207, 90%, 53%);
+    background-color: #00a698;
+    border-color: #00a698;
 }
 
 .nav.navbar-nav.navbar-right li a {
@@ -92,14 +93,14 @@ footer {
     background-color: #fcaeae !important;
     border-color: #fba1a1 !important;
 }
-
+/* this colour out  #31485f   2c3853 */
 .btn {
     background-color: #fcaeae !important;
     border-color: #fba1a1 !important;
 }
 
 .newColours {
-    color: black;
+    color: lightblue;
 }
 
 .redHighlight {

@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject IAuthorizationService AuthorizationService
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -9,7 +18,8 @@
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Titillium+Web|Ubuntu&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Montserrat|Titillium+Web|Ubuntu|Nunito:400,700&display=swap" rel="stylesheet">
+    
     <link href="~/Content/site.css" rel="stylesheet" />
 </head>
 <body>
@@ -26,18 +36,27 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Home" asp-action="Index">In Arrears</a></li>
-                    <li><a asp-controller="House" asp-action="Index">Show All</a></li> 
+                    <li><a asp-controller="House" asp-action="Index">Show All</a></li>
+                    @if (SignInManager.IsSignedIn(User))// && User.IsInRole("Administrator"))
+                    { 
+                        <li>
+                            <a asp-controller="Admin" asp-action="UserManagement">Manange users</a>
+                        </li>
+                    }
+
+                    <partial name="_LoginPartial" />
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container">
         <div class="row"></div>
-        <div class="col-md-1"> 
+        <div class="col-md-1">
         </div>
         <div class="col-md-11">
             @RenderBody()
         </div>
-    </div> 
+        @RenderSection("Scripts", required: false)
+    </div>
 </body>
 </html>

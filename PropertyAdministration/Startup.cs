@@ -13,6 +13,8 @@ using PropertyAdministration.Core.Interface;
 using PropertyAdministration.Core.Mocking;
 using Infrastructure;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Identity;
+using PropertyAdministration.Core.Services;
 
 namespace PropertyAdministration
 {
@@ -33,9 +35,18 @@ namespace PropertyAdministration
             services.AddDbContext<AppDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+                        {
+                            options.Password.RequiredLength = 8;  
+                        })
+                        .AddDefaultTokenProviders()
+                        .AddDefaultUI()
+                        .AddEntityFrameworkStores<AppDBContext>();
+
             services.AddScoped<ICategoryRepository,CategoryRepository>(); //
             services.AddScoped<IHouseRepository, HouseRepository>();
-            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>(); 
+            services.AddScoped<InvoiceService, InvoiceService>();
 
             services.AddScoped<IInvoiceEngine,  InvoiceEngine>();
             //services.AddScoped<IHouseRepository, MockHouseRepository>();
@@ -50,19 +61,21 @@ namespace PropertyAdministration
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseRouting();
-            //app.UseAuthentication();
-            //app.UseAuthorization();
+            app.UseRouting(); 
+            app.UseAuthentication();
+             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                 
+
+                endpoints.MapRazorPages();
             });
         }
     }

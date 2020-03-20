@@ -13,6 +13,8 @@ namespace PropertyAdministration.Core.Interface
         Invoice GetById(int invoiceId);
 
         void Create(Invoice invoice);
+        void Edit(Invoice invoice);
+        void Delete(int invoiceId);
 
     }
 }
