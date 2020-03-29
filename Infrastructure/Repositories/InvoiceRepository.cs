@@ -33,7 +33,8 @@ namespace Infrastructure.Repositories
 
         public IEnumerable<Invoice> GetAllForHouse(int houseId)
         {
-            return _appDbContext.Invoices.Where(c => c.HouseId == houseId);
+            var invoices = _appDbContext.Invoices.Where(c => c.HouseId == houseId);
+            return invoices;
 
         }
 

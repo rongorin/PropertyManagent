@@ -2,11 +2,12 @@
 using PropertyAdministration.Core.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PropertyAdministration.Core.Services
 {
-   public class InvoiceService
+    public class InvoiceService
     {
         private IInvoiceRepository _invoiceRepository;
         private IHouseRepository _houseRepository;
@@ -20,8 +21,13 @@ namespace PropertyAdministration.Core.Services
             _categoryRepository = catRepository;
 
         }
-        public void Edit(int invoiceId, int houseId, DateTime invoiceDate, string description,
-                        DateTime paidDate)
+        public IEnumerable<Invoice> GetAllForHouse( int houseId )
+        {
+            var i = _invoiceRepository.GetAllForHouse(houseId);
+            return i; 
+        } 
+        public void Edit(int invoiceId, int houseId, DateTime invoiceDate, string description,bool isPaid,
+                        DateTime? paidDate)
         { 
             Invoice invoice = new Invoice()
             {
@@ -29,6 +35,7 @@ namespace PropertyAdministration.Core.Services
                 HouseId= houseId ,
                 InvoiceDate = invoiceDate,
                 DatePaid = paidDate,
+                IsPaid = isPaid,
                 Description = description
             };  
              

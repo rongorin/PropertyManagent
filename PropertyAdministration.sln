@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PropertyAdministration.UI",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{755889F3-401C-4EF3-AF23-AAA869D6723E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{17C92E2C-5BD8-46FA-B311-5168B45C82FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyAdministration.Test", "PropertyAdministration.Test\PropertyAdministration.Test.csproj", "{C17665E4-9337-4CAD-9F1D-A155B0409EC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,16 @@ Global
 		{755889F3-401C-4EF3-AF23-AAA869D6723E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{755889F3-401C-4EF3-AF23-AAA869D6723E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{755889F3-401C-4EF3-AF23-AAA869D6723E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C17665E4-9337-4CAD-9F1D-A155B0409EC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C17665E4-9337-4CAD-9F1D-A155B0409EC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C17665E4-9337-4CAD-9F1D-A155B0409EC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C17665E4-9337-4CAD-9F1D-A155B0409EC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C17665E4-9337-4CAD-9F1D-A155B0409EC7} = {17C92E2C-5BD8-46FA-B311-5168B45C82FF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F7BD0238-0004-43DF-AD69-493E7A1DB702}

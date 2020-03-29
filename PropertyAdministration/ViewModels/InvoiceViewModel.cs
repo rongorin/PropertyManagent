@@ -26,6 +26,7 @@ namespace PropertyAdministration.ViewModels
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         [Display(Name = "Date Paid ")]
-        public DateTime DatePaid { get; set; }
+        public DateTime? DatePaid { get; set; }
+        public bool  IsPaid{ get; set; }
     }
 }

@@ -1,14 +1,15 @@
 ﻿@model InvoiceListViewModel
 
-<h2>Invoices listing  </h2>
-<h4>for @Model.HouseAddress</h4>
+    <h2> @Model.HouseAddress </h2>
+    <h4>Invoices listing`</h4>
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered ">
     <thead>
         <tr>
             <th>Dated</th>
             <th>description</th>
             <th class="text-right">Date Paid</th>
+            <th class="text-right">Paid?</th>
             <th class="text-right">Amount</th>
             <th></th>
         </tr>
@@ -17,14 +18,14 @@
         @foreach (var line in Model.Invoices)
         {
         <tr>
-            <td class="newColours text-left">@line.InvoiceDate.ToString("dd/MM/yyyy")</td>
-            <td class="newColours text-left">@line.Description</td>
-            <td class="newColours text-right">@line.DatePaid.ToString("dd/MM/yyyy")</td>
-            <td class="newColours text-right">
+            <td>@line.InvoiceDate </td>
+            <td>@line.Description</td>
+            <td>@line.DatePaid </td> 
+            <td  class="text-right">@(@line.IsPaid ? "Yes" : "No") </td> 
+            <td class="text-right">
                 @line.Amount.ToString("c")
             </td>
-            <td>
-                  <a class="btn btn-sm btn-primary" asp-action="Delete" asp-route-id="@line.InvoiceId">de</a>
+            <td> 
                 <form asp-action="Delete" asp-route-id="@line.InvoiceId" method="get">
                     <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-invoiceId="@line.InvoiceId" asp-route-houseId="@line.HouseId">Edit</a>
                     <button type="submit" class="btn btn-sm btn-danger">
@@ -37,7 +38,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="3" class="text-right">Total:</td>
+            <td colspan="4" class="text-right">Total:</td>
             <td class="text-right">
                 @Model.InvoicesTotal.ToString("c")
             </td>

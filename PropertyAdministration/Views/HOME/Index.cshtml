@@ -1,10 +1,12 @@
-﻿@model IEnumerable<HOMEIndexViewModel>
+﻿@model IEnumerable<PropertyAdministration.ViewModels.HOMEIndexViewModel>
+</p>
+@*<img src="https://raw.githubusercontent.com/pg0408/frontend-demo/master/statue.JPG" alt="a picture"  width="100%">*@
+<p>
+    <h2 class="redHighlight">In Arrears </h2>
+    <ul class="houses">
+        @foreach (var item in Model)
+        {
+            <partial name="_HouseList" model="item" />
 
-<h2 class="redHighlight">In Arrears </h2> 
-<ul class="houses">
-    @foreach (var item in Model )
-    {
-        <partial name="_HouseList" model="item" />
-
-    }
-</ul>
+        }
+    </ul>

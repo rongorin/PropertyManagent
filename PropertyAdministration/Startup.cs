@@ -15,6 +15,7 @@ using Infrastructure;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using PropertyAdministration.Core.Services;
+using Microsoft.Extensions.Logging;
 
 namespace PropertyAdministration
 {
@@ -49,17 +50,27 @@ namespace PropertyAdministration
             services.AddScoped<InvoiceService, InvoiceService>();
 
             services.AddScoped<IInvoiceEngine,  InvoiceEngine>();
+
+            services.AddMemoryCache(); //caching
+
             //services.AddScoped<IHouseRepository, MockHouseRepository>();
             services.AddControllersWithViews() ;//services.AddMvc(); would also work still
             services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env )
         {
+            //app.UseWelcomePage();
+
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage(); 
+                app.UseStatusCodePages();
+            }
+            else
+            {
+                app.UseExceptionHandler("/AppException"); //blank pag!
             }
 
             app.UseHttpsRedirection();
@@ -68,6 +79,7 @@ namespace PropertyAdministration
             app.UseRouting(); 
             app.UseAuthentication();
              app.UseAuthorization();
+ 
 
             app.UseEndpoints(endpoints =>
             {

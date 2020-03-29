@@ -5,7 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ViewModels\HouseListViewModel.cs" />
+    <Compile Remove="ViewModels\InvoiceEditViewModel.cs" />
+    <Compile Remove="ViewModels\InvoiceListViewModel.cs" />
+    <Compile Remove="ViewModels\InvoiceSummaryViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>

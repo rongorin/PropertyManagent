@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PropertyAdministration.Core.Interface;
-using PropertyAdministration.Core.ViewModels;
+using PropertyAdministration.Core.Interface; 
 using System;
 using System.Collections.Generic;
 using System.Linq;

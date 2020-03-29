@@ -1,4 +1,5 @@
-﻿@model IEnumerable<HOMEIndexViewModel> 
+﻿ 
+@model IEnumerable<PropertyAdministration.ViewModels.HOMEIndexViewModel>
 
 <h2>All Properties</h2>
 <ul class="houses">
@@ -14,11 +15,11 @@
             <th class="col-lg-2">Address </th>
             <th>Category</th>
             <th>Price</th>
-            <th>Plot?</th>  
+            <th>Plot?</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model )
+        @foreach (var item in Model)
         {
             <tr>
                 <td>

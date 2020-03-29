@@ -24,7 +24,29 @@ namespace PropertyAdministration.Core.Model
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}" )]
-        [Display(Name = "Date Paid ")]
-        public DateTime DatePaid{ get; set; }
+        [Display(Name = "Date Paid")]
+        public DateTime? DatePaid{ get; set; }
+
+        [Display(Name = "Is Paid")]
+        public bool IsPaid { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || this.GetType() != obj.GetType())
+                return false;
+
+            Invoice compareInv = obj as Invoice;
+
+            if (compareInv != null &&
+                compareInv.InvoiceId == this.InvoiceId &&
+                compareInv.HouseId == this.HouseId &&
+                compareInv.Amount == this.Amount &&
+                compareInv.IsPaid == this.IsPaid &&
+                compareInv.Description == this.Description &&
+                compareInv.DatePaid == this.DatePaid)
+                return true;
+
+            return base.Equals(obj);    
+        }
     }
 }

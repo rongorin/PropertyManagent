@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PropertyAdministration.Core.Interface;
 using PropertyAdministration.Core.Model;
 using PropertyAdministration.Core.Services;
@@ -21,28 +22,34 @@ namespace PropertyAdministration.Controllers
         private IHouseRepository _houseRepo;
         private ICategoryRepository _categoryRepository;
         private InvoiceService _invoiceService;
+        private readonly ILogger<InvoiceController> _logger;
 
         public InvoiceController(IInvoiceRepository InvoiceRepository,
                                  IHouseRepository HouseRepository,
                                  ICategoryRepository CategoryRepository,
-                                 InvoiceService invoiceService)
+                                 InvoiceService invoiceService,
+                                 ILogger<InvoiceController> logger
+                                 )
         {
             _invoiceRepo = InvoiceRepository;
             _houseRepo = HouseRepository;
             _categoryRepository = CategoryRepository;
             _invoiceService = invoiceService;
+            _logger = logger;
 
         }
         // GET: /<controller>/
 
 
         public IActionResult Index(int id)
-        {  
-            var indexViewModel = new PropertyAdministration.Core.ViewModels.InvoiceListViewModel
+        {
+            _logger.LogInformation( "testmeessage in the index");
+            var indexViewModel = new  InvoiceListViewModel
             {
                 HouseId = id,
-                Invoices = _invoiceRepo.GetAllForHouse(id).ToList(),
-                 HouseAddress = GetAddress(id)
+                //Invoices = _invoiceRepo.GetAllForHouse(id)  .ToList(),
+                Invoices = _invoiceService.GetAllForHouse(id).ToList(),
+                HouseAddress = GetAddress(id)
             };
             indexViewModel.InvoicesTotal = indexViewModel.Invoices.Sum(o => o.Amount); 
 
@@ -97,6 +104,7 @@ namespace PropertyAdministration.Controllers
                       InvoiceDate = invoice.InvoiceDate,
                       Amount  = invoice.Amount,
                       DatePaid = invoice.DatePaid,
+                      IsPaid = invoice.IsPaid,
                       Description = invoice.Description,
                       InvoiceId  = invoice.InvoiceId,
                       HouseId = invoice.HouseId 
@@ -119,6 +127,7 @@ namespace PropertyAdministration.Controllers
                                     invoiceVM.Invoice.HouseId,
                                      invoiceVM.Invoice.InvoiceDate,
                                      invoiceVM.Invoice.Description, 
+                                     invoiceVM.Invoice.IsPaid,
                                      invoiceVM.Invoice.DatePaid);
 
                 return RedirectToAction("Index", new { id = invoiceVM.Invoice.HouseId });
