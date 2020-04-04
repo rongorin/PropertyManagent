@@ -8,62 +8,71 @@
         @for (var i = 0; i < Model.Count; i++)
         {
 
-            <div class="form-group">
-                <label asp-for="@Model[i].StreetName" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="@Model[i].StreetName" class="form-control" readonly="readonly" />
-                    <span asp-validation-for="@Model[i].StreetName" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="@Model[i].Invoicev.Amount" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="@Model[i].Invoicev.Amount" class="form-control" />
-                    <span asp-validation-for="@Model[i].Invoicev.Amount" class="text-danger"></span>
-                </div>
-            </div>
-        }
-        <button type="submit" class="btn btn-primary">Submit</button>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="@Model[i].StreetNumber" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="@Model[i].StreetNumber" class="form-control" readonly="readonly" />
-                        <span asp-validation-for="@Model[i].StreetNumber" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="form-group">
+            <div class="row">
+                <div class="col-md-6 cliente">
                     <div class="form-group">
-                        <label asp-for="@Model[i].Invoicev.Amount" class="col-md-2 control-label"></label>
-                        <div class="col-md-10">
+                        <label asp-for="@Model[i].StreetNumber" class="col-md-2 cliente control-label">   @Model[i].StreetNumber  </label>
+                        <div class="col-md-2 cliente">
+                            @Model[i].StreetName
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <label asp-for="@Model[i].Invoicev.Amount" class="col-md-2 cliente control-label"></label>
+                        <div class="col-md-2 cliente">
                             <input asp-for="@Model[i].Invoicev.Amount" class="form-control" />
                             <span asp-validation-for="@Model[i].Invoicev.Amount" class="text-danger"></span>
                         </div>
                     </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <label asp-for="@Model[i].Invoicev.Amount" class="col-md-2 cliente control-label"></label>
+                        <div class="col-md-2 cliente">
+                            <input asp-for="@Model[i].Invoicev.Amount" class="form-control" />
+                            <span asp-validation-for="@Model[i].Invoicev.Amount" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                </div>
+
+                <div class="col-md-6 cliente">
+                    <div class="form-group">
+                        <label asp-for="@Model[i].StreetName" class="col-md-4 control-label"></label>
+                        <div class="col-md-4">
+                            <input asp-for="@Model[i].StreetName" class="form-control" readonly="readonly" />
+                            <span asp-validation-for="@Model[i].StreetName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <label asp-for="@Model[i].FullName" class="col-md-4 control-label"></label>
+                        <div class="col-md-4">
+                            <input asp-for="@Model[i].FullName" class="form-control" readonly="readonly" />
+                            <span asp-validation-for="@Model[i].FullName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
                 </div>
             </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="@Model[i].StreetName" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="@Model[i].StreetName" class="form-control" readonly="readonly" />
-                        <span asp-validation-for="@Model[i].StreetName" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-9">
-                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div> 
-
+        }
+        <button type="submit" class="btn btn-primary">Submit</button> 
     </form>
+    <style>
+
+        .clearfix {
+            clear: both;
+            padding: 0;
+            margin: 0;
+            height: 5px;
+            display: block;
+        }
+        .cliente {
+            margin-top: 10px;
+            border: #cdcdcd  medium solid;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+        }
+    </style>
