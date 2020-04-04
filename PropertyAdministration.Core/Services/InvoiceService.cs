@@ -51,5 +51,7 @@ namespace PropertyAdministration.Core.Services
         {
             _invoiceRepository.Delete(id); 
         }
+
+ 
     }
 }

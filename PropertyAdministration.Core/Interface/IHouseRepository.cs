@@ -10,5 +10,6 @@ namespace PropertyAdministration.Core.Interface
         IEnumerable<House> GetAll { get; }
       
         House GetById(int invoiceId);
+        void Edit(House house);
     }
 }

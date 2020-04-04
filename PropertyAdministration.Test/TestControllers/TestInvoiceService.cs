@@ -38,7 +38,11 @@ namespace PropertyAdministration.Test.TestControllers
                                 mockCategoryRepository.Object);
              
         } 
-
+        [TestCleanup]
+        public void Teardown()
+        {
+            invoiceService = null;
+        }
         [TestMethod]
         public void GetAIvoicesForHouse_ReturnsValid_invoicesList()
         {
@@ -93,6 +97,25 @@ namespace PropertyAdministration.Test.TestControllers
             //act
             invoiceService.Edit(newInv.InvoiceId, newInv.HouseId, newInv.InvoiceDate, newInv.Description, newInv.IsPaid,newInv.DatePaid);
              var resultInv = invoiceService.GetById(newInv.InvoiceId);
+
+            //assert
+            Assert.IsTrue(resultInv.Equals(newInv));
+            // CollectionAssert()
+        }
+        [TestMethod]
+        public void Edit_ChangeInvoice_ReturnsNotFound()
+        {
+            //arrange
+            var invoices = RepoMocks.RepositoryMocks.RepositoryInvoiceList();
+            mockInvoiceRepository.Setup(repo => repo.GetById(It.IsAny<int>()))
+                                    .Returns(invoices[0]);
+
+            var newInv = mockInvoiceRepository.Object.GetById(1);
+            newInv.Amount = 100M;
+
+            //act
+            invoiceService.Edit(newInv.InvoiceId, newInv.HouseId, newInv.InvoiceDate, newInv.Description, newInv.IsPaid, newInv.DatePaid);
+            var resultInv = invoiceService.GetById(newInv.InvoiceId);
 
             //assert
             Assert.IsTrue(resultInv.Equals(newInv));

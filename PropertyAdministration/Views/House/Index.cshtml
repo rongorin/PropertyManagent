@@ -1,12 +1,12 @@
-﻿ 
+﻿
 @model IEnumerable<PropertyAdministration.ViewModels.HOMEIndexViewModel>
 
 <h2>All Properties</h2>
+@Html.Partial("_MsgSuccessFail", Model)
 <ul class="houses">
     @foreach (var item in Model)
     {
-        <partial name="_HouseList" model="item" />
-
+        <partial name="_HouseList" model="item" /> 
     }
 </ul>
 <table class="table table-condensed table-bordered table-hover">

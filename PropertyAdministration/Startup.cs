@@ -48,6 +48,7 @@ namespace PropertyAdministration
             services.AddScoped<IHouseRepository, HouseRepository>();
             services.AddScoped<IInvoiceRepository, InvoiceRepository>(); 
             services.AddScoped<InvoiceService, InvoiceService>();
+            services.AddScoped<HouseService, HouseService>();
 
             services.AddScoped<IInvoiceEngine,  InvoiceEngine>();
 

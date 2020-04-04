@@ -19,4 +19,8 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PropertyAdministration.Application\PropertyAdministration.Application.csproj" />
+  </ItemGroup>
+
 </Project>

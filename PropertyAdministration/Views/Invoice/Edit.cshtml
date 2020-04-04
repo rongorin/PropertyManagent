@@ -1,13 +1,13 @@
-﻿@model PropertyAdministration.ViewModels.InvoiceEditViewModel 
+﻿@model PropertyAdministration.ViewModels.InvoiceEditViewModel
 @{
-    ViewData["Title"] = "Edit";
-} 
-<h2>Edit</h2>
+    ViewData["Title"] = "Edit Invoice ";
+}
+<h2>Edit Invoice </h2>
 
-<h4>Invoice for @Model.HouseAddress</h4>
+<h4>for @Model.HouseAddress</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Invoice.InvoiceId" />
@@ -29,31 +29,49 @@
                 <span asp-validation-for="Invoice.Amount" class="text-danger"></span>
             </div>
 
-            <div class="form-group"> 
-                    <label asp-for="Invoice.IsPaid" class=" control-label"></label>
-                    <input asp-for="Invoice.IsPaid" class="form-control  " />
-                    <span asp-validation-for="Invoice.IsPaid" class="text-danger"></span> 
-            </div>
-
             <div class="form-group">
-                <label asp-for="Invoice.DatePaid" class="control-label"></label>
-                <input asp-for="Invoice.DatePaid" class="form-control" />
-                <span asp-validation-for="Invoice.DatePaid" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Categories" class=" control-label"></label>
+                <label asp-for="Invoice.IsPaid" class=" control-label"></label>
+             
+                    <input asp-for="Invoice.IsPaid" id="chkIsPd" onchange="checkSelection()" class="form-control" />
+                    <span asp-validation-for="Invoice.IsPaid" class="text-danger"></span>
+           
 
-                <select asp-for="CategoryId" class="form-control"
-                        asp-items="Model.Categories"></select>
 
             </div>
+            <div id="showDatePd" style="display:block">
+
+                <div class="form-group">
+                    <label asp-for="Invoice.DatePaid" class="control-label"></label>
+                    <input asp-for="Invoice.DatePaid" class="form-control" />
+                    <span asp-validation-for="Invoice.DatePaid" class="text-danger"></span>
+                </div>
+            </div>
+
+          
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>
-</div> 
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
+<div>
+    <a asp-action="Index" asp-route-id="@Model.Invoice.HouseId">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            checkSelection();
+        });
+        function checkSelection() { 
+            var checkedItem = $('#chkIsPd').is(":checked"); 
+            if (checkedItem == false) {
+                $("#showDatePd").hide();
+            } else {
+                $("#showDatePd").show();
+            }
+        };
+    </script>
+}
+
 

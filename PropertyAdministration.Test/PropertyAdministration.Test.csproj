@@ -19,8 +19,4 @@
     <ProjectReference Include="..\PropertyAdministration\PropertyAdministration.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="TestServices\" />
-  </ItemGroup>
-
 </Project>

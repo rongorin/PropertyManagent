@@ -28,6 +28,11 @@ namespace PropertyAdministration.Core.Mocking
 
                  };
 
+        public void Edit(House house)
+        {
+            throw new NotImplementedException();
+        }
+
 
 
         //public IEnumerable<House> GetAll => 
@@ -45,6 +50,7 @@ namespace PropertyAdministration.Core.Mocking
         {
             return GetAll.FirstOrDefault(p => p.HouseId == houseId) ;
         }
+      
     }
 
 }

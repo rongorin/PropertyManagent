@@ -10,6 +10,8 @@ using PropertyAdministration.Core.Interface;
 using PropertyAdministration.Core.Model;
 using PropertyAdministration.Core.Services;
 using PropertyAdministration.ViewModels;
+using Microsoft.Extensions.Configuration;
+
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -18,6 +20,9 @@ namespace PropertyAdministration.Controllers
 {
     public class InvoiceController : Controller
     {
+        private readonly IConfiguration _config;
+        public string Message { get; set; }
+
         private IInvoiceRepository _invoiceRepo;
         private IHouseRepository _houseRepo;
         private ICategoryRepository _categoryRepository;
@@ -28,7 +33,8 @@ namespace PropertyAdministration.Controllers
                                  IHouseRepository HouseRepository,
                                  ICategoryRepository CategoryRepository,
                                  InvoiceService invoiceService,
-                                 ILogger<InvoiceController> logger
+                                 ILogger<InvoiceController> logger,
+                                 IConfiguration config
                                  )
         {
             _invoiceRepo = InvoiceRepository;
@@ -36,6 +42,8 @@ namespace PropertyAdministration.Controllers
             _categoryRepository = CategoryRepository;
             _invoiceService = invoiceService;
             _logger = logger;
+            _config = config;
+
 
         }
         // GET: /<controller>/
@@ -58,7 +66,7 @@ namespace PropertyAdministration.Controllers
         // GET: /<controller>/
         public IActionResult Create(int houseId)
         {
-            var newInvoice = new Invoice { InvoiceDate = DateTime.Now };
+            var newInvoice = new Invoice { InvoiceDate = DateTime.Now, HouseId =  houseId };
 
             return View(newInvoice);
         }
@@ -79,7 +87,7 @@ namespace PropertyAdministration.Controllers
             { 
             }
             
-            return View( );
+            return View(invoice);
         }
         public IActionResult InvoiceComplete()
         {
@@ -188,5 +196,31 @@ namespace PropertyAdministration.Controllers
             return $"{house.StreetNumber} {house.StreetName}";
 
         }
+        [HttpGet] 
+        public IActionResult BulkCreate()
+        {
+            Message = _config["InvoiceTemplateMsg"];
+             
+
+            var invoiceViewModel = _houseRepo.GetAll
+                .Select(a => new CreateBulkInvoiceViewModel
+                {
+                    Invoicev = new InvoiceViewModel
+                    {
+                        InvoiceDate = DateTime.Now,
+                        IsPaid = false,
+                        Amount = 1290M,
+                        Description = "Annual Subs 2020",
+                        HouseId = a.HouseId 
+                    },
+                    IsCreate = true,
+                    StreetNumber = a.StreetNumber,
+                    StreetName = a.StreetName,
+                    FullName = a.Owner.FullName
+                }); 
+
+            return View(invoiceViewModel.ToList());
+        }
+
     }
 }

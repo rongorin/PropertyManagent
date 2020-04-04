@@ -15,7 +15,7 @@ namespace Infrastructure.Repositories
             
         public HouseRepository(AppDBContext appDbContext)
         {
-            _appDbContext = appDbContext;
+            _appDbContext = appDbContext; 
         }
 
         public IEnumerable<House> GetAll
@@ -33,6 +33,13 @@ namespace Infrastructure.Repositories
         {
             return _appDbContext.Houses.
                                 Include(o => o.Owner).FirstOrDefault(c => c.HouseId == houseId);
+           
         }
+        public void Edit(House house)
+        {
+            _appDbContext.Houses.Update(house);
+            _appDbContext.SaveChanges();
+        }
+
     }
 }

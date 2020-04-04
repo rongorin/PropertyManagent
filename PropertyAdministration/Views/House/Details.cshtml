@@ -1,7 +1,7 @@
 ﻿@model House
-    <h2> @Model.StreetNumber @Model.StreetName </h2>
- 
-<div class="thumbnail"> 
+<h2> @Model.StreetNumber @Model.StreetName </h2>
+@Html.Partial("_MsgSuccessFail", Model)
+<div class="thumbnail">
     <div class="caption-full">
         <h3>
             @Model.Owner.FullName
@@ -18,5 +18,13 @@
             </p>
             @await Component.InvokeAsync("InvoiceSummary", new { houseId = @Model.HouseId })
         </div>
+
     </div>
+
+</div>
+<div class="btn-group">
+    <a href="../Edit/@Model.HouseId " class="btn btn-primary active">
+        <i class="glyphicon button" aria-hidden="true"></i> Edit
+    </a>
+
 </div>

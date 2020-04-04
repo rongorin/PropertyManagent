@@ -1,0 +1,76 @@
+﻿@model PropertyAdministration.Application.AppModels.HouseEditViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit </h2>
+<h4>@Model.House.StreetNumber @Model.House.StreetName</h4>
+<h4>ERF: @Model.House.ERF</h4>
+<h4>OWNER: @Model.House.FullName</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="House.HouseId" />
+            <input type="hidden" asp-for="House.OwnerId" />
+            <input type="hidden" asp-for="House.ERF" />
+            <input type="hidden" asp-for="House.StreetName" />
+            <input type="hidden" asp-for="House.StreetNumber" />
+            <input type="hidden" asp-for="House.FullName" />
+
+
+            <div class="form-group">
+                <label asp-for="House.DateMoveIn" class="control-label"></label>
+                <input asp-for="House.DateMoveIn" class="form-control" />
+                <span asp-validation-for="House.DateMoveIn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Categories" class=" control-label"></label>
+
+                <select asp-for="CategoryId" class="form-control" onchange="checkSelection()" 
+                        asp-items="Model.Categories"></select>
+            </div>
+        
+                <div class="form-group">
+                    <label asp-for="House.IsPlot" class=" control-label"></label>
+                    <input asp-for="House.IsPlot" class="form-control  " id="chkIsPlot"/>
+                    <span asp-validation-for="House.IsPlot" class="text-danger"></span>
+                </div>
+     
+              
+            <div class="form-group">
+                <label asp-for="House.Description" class="control-label"></label>
+                <textarea asp-for="House.Description" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="House.Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    <script>
+
+        $(function () {
+            checkSelection();
+        });
+        function checkSelection(e) {
+            var selectedItem = $('#CategoryId option:selected').text();
+         
+            if (selectedItem == "Plot") {
+                $("#chkIsPlot").prop('checked', true);
+            } else {
+                $("#chkIsPlot").prop('checked', false);
+            }
+        };
+
+    </script>
+}
