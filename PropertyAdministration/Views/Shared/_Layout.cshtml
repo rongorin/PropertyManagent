@@ -19,7 +19,7 @@
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway|Inconsolata|Montserrat|Titillium+Web|Ubuntu|Nunito:400,700&display=swap" rel="stylesheet">
-    
+
     <link href="~/Content/site.css" rel="stylesheet" />
 </head>
 <body>
@@ -38,7 +38,7 @@
                     <li><a asp-controller="Home" asp-action="Index">In Arrears</a></li>
                     <li><a asp-controller="House" asp-action="Index">Show All</a></li>
                     @if (SignInManager.IsSignedIn(User))// && User.IsInRole("Administrator"))
-                    { 
+                    {
                         <li>
                             <a asp-controller="Admin" asp-action="UserManagement">Manange users</a>
                         </li>
@@ -56,7 +56,18 @@
         <div class="col-md-11">
             @RenderBody()
         </div>
-        @RenderSection("Scripts", required: false)
     </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            @RenderSection("footer", required: false)
+
+            &copy; 2020 - RG - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <img src="/x.png" />
+        </div>
+    </footer>
+    @RenderSection("Scripts", required: false)
+     
 </body>
+
+
 </html>

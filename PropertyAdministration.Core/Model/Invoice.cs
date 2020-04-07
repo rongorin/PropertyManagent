@@ -11,7 +11,7 @@ namespace PropertyAdministration.Core.Model
         public int HouseId { get; set; }
         [Required(ErrorMessage = "Enter a invoice date")]
         [DataType(DataType.Date)] 
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}" )]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}" )]
         [Display(Name = "Invoicing Date")]
         public DateTime InvoiceDate { get; set; }
 
@@ -23,7 +23,7 @@ namespace PropertyAdministration.Core.Model
         public decimal Amount { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}" )]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}" )]
         [Display(Name = "Date Paid")]
         public DateTime? DatePaid{ get; set; }
 

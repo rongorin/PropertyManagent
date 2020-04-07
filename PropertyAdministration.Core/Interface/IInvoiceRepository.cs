@@ -15,6 +15,7 @@ namespace PropertyAdministration.Core.Interface
         void Create(Invoice invoice);
         void Edit(Invoice invoice);
         void Delete(int invoiceId);
+        void Save();
 
     }
 }

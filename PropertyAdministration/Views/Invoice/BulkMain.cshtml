@@ -1,0 +1,11 @@
+﻿@model string
+@{
+}
+<h2>Bulk generating of invoices page</h2> 
+
+<div class="text-center">
+    <h3>@TempData["Message"]</h3>
+    <a class="btn btn-primary left" asp-controller="Invoice"
+       asp-action="BulkCreate">Click to Begin</a>
+
+</div>

@@ -95,7 +95,7 @@ namespace PropertyAdministration.Test.TestControllers
             newInv.Amount = 100M; 
 
             //act
-            invoiceService.Edit(newInv.InvoiceId, newInv.HouseId, newInv.InvoiceDate, newInv.Description, newInv.IsPaid,newInv.DatePaid);
+            invoiceService.Edit(newInv.InvoiceId, newInv.HouseId, newInv.InvoiceDate,newInv.Amount, newInv.Description, newInv.IsPaid,newInv.DatePaid);
              var resultInv = invoiceService.GetById(newInv.InvoiceId);
 
             //assert
@@ -114,7 +114,7 @@ namespace PropertyAdministration.Test.TestControllers
             newInv.Amount = 100M;
 
             //act
-            invoiceService.Edit(newInv.InvoiceId, newInv.HouseId, newInv.InvoiceDate, newInv.Description, newInv.IsPaid, newInv.DatePaid);
+            invoiceService.Edit(newInv.InvoiceId, newInv.HouseId, newInv.InvoiceDate, newInv.Amount, newInv.Description, newInv.IsPaid, newInv.DatePaid);
             var resultInv = invoiceService.GetById(newInv.InvoiceId);
 
             //assert

@@ -7,7 +7,7 @@
 <h4>for @Model.HouseAddress</h4>
 <hr />
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Invoice.InvoiceId" />
@@ -33,10 +33,7 @@
                 <label asp-for="Invoice.IsPaid" class=" control-label"></label>
              
                     <input asp-for="Invoice.IsPaid" id="chkIsPd" onchange="checkSelection()" class="form-control" />
-                    <span asp-validation-for="Invoice.IsPaid" class="text-danger"></span>
-           
-
-
+                    <span asp-validation-for="Invoice.IsPaid" class="text-danger"></span>  
             </div>
             <div id="showDatePd" style="display:block">
 
@@ -45,8 +42,7 @@
                     <input asp-for="Invoice.DatePaid" class="form-control" />
                     <span asp-validation-for="Invoice.DatePaid" class="text-danger"></span>
                 </div>
-            </div>
-
+            </div> 
           
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

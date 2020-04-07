@@ -11,5 +11,6 @@ namespace PropertyAdministration.ViewModels
             public int HouseId { get; set; }
             public decimal InvoicesTotal { get; set; }
             public string HouseAddress { get; set; }
+            public string FullName { get; set; }
     }
 }

@@ -45,8 +45,7 @@ namespace Infrastructure.Repositories
 
         public void Create(Invoice invoice)
         {
-            _appDbContext.Invoices.Add(invoice);
-            _appDbContext.SaveChanges();
+            _appDbContext.Invoices.Add(invoice); 
         }
 
         public void Edit(Invoice invoice)
@@ -59,7 +58,11 @@ namespace Infrastructure.Repositories
         {
             var invoice = GetById(invoiceId);
             _appDbContext.Set<Invoice>().Remove(invoice);
-            _appDbContext.SaveChanges();
+            
+        }
+        public void Save()
+        {
+            _appDbContext.SaveChanges(); 
         }
     }
 }

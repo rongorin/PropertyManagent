@@ -97,6 +97,16 @@ footer {
     background-color: #fcaeae !important;
     border-color: #fba1a1 !important;
 }
+.dropdown-menu > li > a { 
+    background-color: #00a698;
+}
+    .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+        color: #262626;
+        text-decoration: none;
+        background-color: #ce3d3d;
+        color: black;
+    }
+
 
 .newColours {
     color: lightblue;

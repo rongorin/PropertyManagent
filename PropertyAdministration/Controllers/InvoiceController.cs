@@ -11,6 +11,7 @@ using PropertyAdministration.Core.Model;
 using PropertyAdministration.Core.Services;
 using PropertyAdministration.ViewModels;
 using Microsoft.Extensions.Configuration;
+using PropertyAdministration.Application.AppModels;
 
 
 
@@ -21,7 +22,6 @@ namespace PropertyAdministration.Controllers
     public class InvoiceController : Controller
     {
         private readonly IConfiguration _config;
-        public string Message { get; set; }
 
         private IInvoiceRepository _invoiceRepo;
         private IHouseRepository _houseRepo;
@@ -46,27 +46,43 @@ namespace PropertyAdministration.Controllers
 
 
         }
-        // GET: /<controller>/
-
-
-        public IActionResult Index(int id)
+        // GET: /<controller>/  
+        public IActionResult Index(int? id)
         {
-            _logger.LogInformation( "testmeessage in the index");
-            var indexViewModel = new  InvoiceListViewModel
+            _logger.LogInformation("testmeessage in the index");
+            InvoiceListViewModel indexViewModel ;
+            if (id.HasValue)
             {
-                HouseId = id,
-                //Invoices = _invoiceRepo.GetAllForHouse(id)  .ToList(),
-                Invoices = _invoiceService.GetAllForHouse(id).ToList(),
-                HouseAddress = GetAddress(id)
-            };
-            indexViewModel.InvoicesTotal = indexViewModel.Invoices.Sum(o => o.Amount); 
+                indexViewModel = new InvoiceListViewModel
+                {
+                    HouseId = id.Value,
+                    //Invoices = _invoiceRepo.GetAllForHouse(id)  .ToList(),
+                    Invoices = _invoiceService.GetAllForHouse(id.Value).ToList(),
+                    HouseAddress =( GetAddress(id.Value).Item1),
+                    FullName =( GetAddress(id.Value).Item1)
+                };
+                indexViewModel.InvoicesTotal = indexViewModel.Invoices.Sum(o => o.Amount);
 
+            }
+            else
+            {
+                indexViewModel = _invoiceService.GetAllByHouse
+                indexViewModel = new InvoiceListViewModel
+                {
+                    //Invoices = _invoiceRepo.GetAllForHouse(id)  .ToList(),
+                    Invoices = _invoiceService.GetAll(),
+                    //HouseAddress = GetAddress(id)
+                };
+            }
+           
             return View(indexViewModel);
-        }
+
+        } // GET: /<controller>/  
+         
         // GET: /<controller>/
         public IActionResult Create(int houseId)
         {
-            var newInvoice = new Invoice { InvoiceDate = DateTime.Now, HouseId =  houseId };
+            var newInvoice = new Invoice { InvoiceDate = DateTime.Now, HouseId = houseId };
 
             return View(newInvoice);
         }
@@ -79,14 +95,15 @@ namespace PropertyAdministration.Controllers
                 if (ModelState.IsValid)
                 {
                     _invoiceRepo.Create(invoice);
-                        // _shoppingCart.ClearCart();
+                    _invoiceRepo.Save();
+                    // _shoppingCart.ClearCart();
                     return RedirectToAction("Index", new { id = invoice.HouseId });
                 }
             }
             catch
-            { 
+            {
             }
-            
+
             return View(invoice);
         }
         public IActionResult InvoiceComplete()
@@ -96,28 +113,28 @@ namespace PropertyAdministration.Controllers
         }
         [HttpGet]
         public IActionResult Edit(int invoiceId, int houseId)
-        { 
+        {
             Invoice invoice = _invoiceRepo.GetById(invoiceId);
-            var categories = _categoryRepository.GetAll  ; //for dropdown
+            var categories = _categoryRepository.GetAll; //for dropdown
 
             if (invoice == null) return RedirectToAction("Index", new { id = houseId });
 
             var invoiceEditVModel = new InvoiceEditViewModel
-            { 
-                HouseAddress = GetAddress(houseId),
-                Categories = categories.Select(c => new SelectListItem() 
-                                        { Text = c.CategoryName, Value = c.CategoryId.ToString() }).ToList() ,
+            {
+                HouseAddress =  (GetAddress(houseId).Item1),
+                Categories = categories.Select(c => new SelectListItem()
+                { Text = c.CategoryName, Value = c.CategoryId.ToString() }).ToList(),
                 Invoice = new InvoiceViewModel
                 {
-                      InvoiceDate = invoice.InvoiceDate,
-                      Amount  = invoice.Amount,
-                      DatePaid = invoice.DatePaid,
-                      IsPaid = invoice.IsPaid,
-                      Description = invoice.Description,
-                      InvoiceId  = invoice.InvoiceId,
-                      HouseId = invoice.HouseId 
+                    InvoiceDate = invoice.InvoiceDate,
+                    Amount = invoice.Amount,
+                    DatePaid = invoice.DatePaid,
+                    IsPaid = invoice.IsPaid,
+                    Description = invoice.Description,
+                    InvoiceId = invoice.InvoiceId,
+                    HouseId = invoice.HouseId
                 }
-            }; 
+            };
 
             return View(invoiceEditVModel);
         }
@@ -126,15 +143,16 @@ namespace PropertyAdministration.Controllers
         {
             if (invoiceVM == null)
             {
-                ModelState.AddModelError("", "no invoice object has been passed!");  
+                ModelState.AddModelError("", "no invoice object has been passed!");
             }
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 // _invoiceRepo.Edit(invoice ); 
-                _invoiceService.Edit(invoiceVM.Invoice.InvoiceId ,
+                _invoiceService.Edit(invoiceVM.Invoice.InvoiceId,
                                     invoiceVM.Invoice.HouseId,
                                      invoiceVM.Invoice.InvoiceDate,
-                                     invoiceVM.Invoice.Description, 
+                                     invoiceVM.Invoice.Amount,
+                                     invoiceVM.Invoice.Description,
                                      invoiceVM.Invoice.IsPaid,
                                      invoiceVM.Invoice.DatePaid);
 
@@ -146,7 +164,7 @@ namespace PropertyAdministration.Controllers
         [HttpGet]
         public IActionResult Delete(int id, bool? saveChangesError = false)
         {
-             var invoice = _invoiceService.GetById(id);
+            var invoice = _invoiceService.GetById(id);
 
             if (invoice == null)
                 return NotFound();
@@ -159,10 +177,10 @@ namespace PropertyAdministration.Controllers
 
             var deleteInvoiceViewModel = new DeleteInvoiceViewModel
             {
-                 InvoiceId  = invoice.InvoiceId,
-                 Description  = invoice.Description,
-                 InvoiceDate = invoice.InvoiceDate,
-                 HouseId = invoice.HouseId
+                InvoiceId = invoice.InvoiceId,
+                Description = invoice.Description,
+                InvoiceDate = invoice.InvoiceDate,
+                HouseId = invoice.HouseId
             };
 
             return View(deleteInvoiceViewModel);
@@ -173,35 +191,54 @@ namespace PropertyAdministration.Controllers
         {
             var deleteInvoiceId = id;
             var invoice = _invoiceService.GetById(deleteInvoiceId);
-                
+
             if (invoice == null)
                 return RedirectToAction(nameof(DeleteConfirmed), new { id = id, saveChangesError = true });
 
             try
             {
-                _invoiceService.Delete(deleteInvoiceId); 
+                _invoiceService.Delete(deleteInvoiceId);
             }
             catch (DbUpdateException /* ex */)
             {
                 //Log the error (uncomment ex variable name and write a log.)
                 return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
             }
-             
+
             return RedirectToAction(nameof(Index), new { id = invoice.HouseId });
 
         }
-        private string GetAddress(int houseId)
+        private (string,string) GetAddress(int houseId)
         {
             House house = _houseRepo.GetById(houseId);
-            return $"{house.StreetNumber} {house.StreetName}";
+            return ($"{house.StreetNumber} {house.StreetName}",house.Owner.FullName);
 
         }
-        [HttpGet] 
+        [HttpGet]
+        public IActionResult BulkMain()
+        { 
+            var errMsg = TempData["Message"] as string; 
+            return View("BulkMain"); 
+        }
+        [HttpGet]
         public IActionResult BulkCreate()
         {
-            Message = _config["InvoiceTemplateMsg"];
-             
+            ViewBag.InvoiceTemplateMsg = _config["InvoiceTemplateMsg"];
+            ViewBag.InvoiceAmount = _config["InvoiceAmount"];
+            TempData["Message"] = "";
+  
+            if (!Decimal.TryParse(_config["InvoiceAmountHouse"], out _invoiceService.AmountHouse))
+            {
+                //ModelState.AddModelError("InvoiceAmountTemplate", "The InvoiceAmount in the settings is not a valid amount");
+                TempData["Message"] = "Error: Check the Invoice template settings as error on the Amount";
 
+                return RedirectToAction("BulkMain");
+            }
+            if (!Decimal.TryParse(_config["InvoiceAmountPlot"], out _invoiceService.AmountPlot))
+            {
+                TempData["Message"] = "Error: Check the Invoice template settings as error on the Plot amount"; 
+                return RedirectToAction("BulkMain");
+            }
             var invoiceViewModel = _houseRepo.GetAll
                 .Select(a => new CreateBulkInvoiceViewModel
                 {
@@ -209,18 +246,40 @@ namespace PropertyAdministration.Controllers
                     {
                         InvoiceDate = DateTime.Now,
                         IsPaid = false,
-                        Amount = 1290M,
+                        Amount = _invoiceService.CalcInvoiceAmount(a.IsPlot),
                         Description = "Annual Subs 2020",
-                        HouseId = a.HouseId 
+                        HouseId = a.HouseId
                     },
                     IsCreate = true,
                     StreetNumber = a.StreetNumber,
                     StreetName = a.StreetName,
                     FullName = a.Owner.FullName
-                }); 
+                });
 
             return View(invoiceViewModel.ToList());
         }
+        [HttpPost]
+        public IActionResult BulkCreate(List<CreateBulkInvoiceViewModel> invoices)
+        {
+            TempData["Message"] = "";
 
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    int count = _invoiceService.BulkCreate(invoices);
+                    //_invoiceRepo.Create(invoice);
+                    ////  _shoppingCart.ClearCart();
+                    TempData["Message"] = (count > 0) ? $"Successfully created {count} invoices!" : "No invoices created";
+                    return RedirectToAction("BulkMain");
+                }
+            }
+            catch
+            {
+                throw;
+            }
+
+            return View(invoices);
+        }
     }
 }
