@@ -21,6 +21,7 @@ namespace PropertyAdministration
         private IInvoiceEngine _invoiceRepo;
         private ICategoryRepository _categoryRepo;
         private HouseService _houseService;
+        private OwnerService _ownerService;
 
         private readonly IMemoryCache _memoryCache; 
 
@@ -28,6 +29,7 @@ namespace PropertyAdministration
         public HouseController(IHouseRepository houseRepository, IInvoiceEngine  invoiceEngine,
                                 ICategoryRepository  categoryRepository,
                                  HouseService houseService,
+                                 OwnerService ownerService,
                                 IMemoryCache memoryCache)
         {
             _houseRepo = houseRepository;
@@ -35,48 +37,31 @@ namespace PropertyAdministration
             _memoryCache = memoryCache;
             _categoryRepo = categoryRepository;
             _houseService = houseService;
+            _ownerService = ownerService;
 
         }
         public ActionResult Index()
         {
-            //IEnumerable<HOMEIndexViewModel> housesCached;
-            //if (!_memoryCache.TryGetValue(CacheEntryConstants.AllHouses, out housesCached))
-            //{
-            //    housesCached = _houseRepo.GetAll
-            //          .Select(a => new HOMEIndexViewModel
-            //          {
-            //              HouseId = a.HouseId,
-            //              StreetNumber = a.StreetNumber,
-            //              StreetName = a.StreetName,
-            //              Description = a.Description,
-            //              CategoryName = a.Category.CategoryName,
-            //              FullName = a.Owner.FullName
-            //          });
 
-            //    var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(30));
-            //    //cacheEntryOptions.RegisterPostEvictionCallback(FillCacheAgain, this);
-
-            //    _memoryCache.Set(CacheEntryConstants.AllHouses, housesCached, cacheEntryOptions);
-            //}
-            var houseViewModel = _houseRepo.GetAll
-              .Select(a => new HOMEIndexViewModel
-              {
-                  HouseId = a.HouseId,
-                  StreetNumber = a.StreetNumber,
-                  StreetName = a.StreetName,
-                  Description = a.Description,
-                  CategoryName = a.Category.CategoryName,
-                  FullName = a.Owner.FullName
-              });
-
-            // houseViewModel.CurrentCategory = "the current category";
-
+            var houseViewModel = _houseService.GetAll()
+                  .Select(a => new HOMEIndexViewModel
+                  {
+                      HouseId = a.HouseId,
+                      StreetNumber = a.StreetNumber,
+                      StreetName = a.StreetName,
+                      Description = a.Description,
+                      CategoryName = a.CategoryName,
+                      FullName = a.FullName,
+                      InvoicesBalance = a.InvoicesBalance
+                  });
+             
             return View(houseViewModel);
           
         }
         public IActionResult Edit(int id)
         { 
             var categories = _categoryRepo.GetAll; //for dropdown
+            var owners = _ownerService.GetAll(); //for dropdown
 
             var house = _houseService.GetById(id);
 
@@ -85,8 +70,14 @@ namespace PropertyAdministration
                 House  = house , 
                 CategoryId = house.CategoryId,           
                 Categories = categories.Select(c => new SelectListItem { Text = c.CategoryName , 
-                                                                         Value = c.CategoryId.ToString()}).ToList()
-           
+                                                                         Value = c.CategoryId.ToString()}).ToList(),
+                OwnerId = house.OwnerId,
+                Owners = owners.Select(c => new SelectListItem
+                {
+                    Text = c.FullName,
+                    Value = c.OwnerId.ToString()
+                }).ToList()
+
             };
 
             return View(houseViewModel);
@@ -94,8 +85,9 @@ namespace PropertyAdministration
         [HttpPost]
         public IActionResult Edit(HouseEditViewModel houseVM)
         {
-            houseVM.House.CategoryId = houseVM.CategoryId;
-            
+            houseVM.House.CategoryId = houseVM.CategoryId; 
+            houseVM.House.OwnerId = houseVM.OwnerId;
+
             if (ModelState.IsValid)
             {  
                 var house = houseVM.House;
@@ -106,10 +98,10 @@ namespace PropertyAdministration
 
                 return RedirectToAction("Details", new { id = house.HouseId});  
 
-            }
+            }   
             return View(houseVM);
         }
-        
+         
         //[HttpGet]
         //public IActionResult Edit(int invoiceId, int houseId)
         //{

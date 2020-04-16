@@ -1,0 +1,60 @@
+﻿@model PropertyAdministration.Application.AppModels.OwnerEditViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit Owner @Model.Owner.FullName </h2>
+ 
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Owner.OwnerId" />
+
+            @*<div class="form-group">
+            <label asp-for="Categories" class=" control-label"></label>
+
+            <select asp-for="CategoryId" class="form-control"
+                    asp-items="Model.Categories"></select>
+        </div>*@
+            <div class="form-group">
+                <label asp-for="Owner.Title" class="control-label"></label>
+                <input asp-for="Owner.Title" class="form-control" />
+                <span asp-validation-for="Owner.Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Owner.FullName" class="control-label"></label>
+                <input asp-for="Owner.FullName" class="form-control" />
+                <span asp-validation-for="Owner.FullName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Owner.PhoneNumber" class="control-label"></label>
+                <input asp-for="Owner.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Owner.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Owner.EmailAddress" class="control-label"></label>
+                <input asp-for="Owner.EmailAddress" class="form-control" />
+                <span asp-validation-for="Owner.EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Owner.PropertiesOwned" class=" control-label"></label>
+
+                <input asp-for="Owner.PropertiesOwned" id="chkIsPd" onchange="checkSelection()" class="form-control" />
+                <span asp-validation-for="Owner.PropertiesOwned" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

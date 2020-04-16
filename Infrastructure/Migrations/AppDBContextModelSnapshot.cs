@@ -279,10 +279,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(1000)");
 
                     b.Property<string>("ERF")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(10)");
 
                     b.Property<bool>("IsPlot")
                         .HasColumnType("bit");
@@ -291,7 +291,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("StreetName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(70)");
 
                     b.Property<int>("StreetNumber")
                         .HasColumnType("int");
@@ -382,8 +382,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(150)")
-                        .HasMaxLength(150);
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
 
                     b.Property<int>("HouseId")
                         .HasColumnType("int");
@@ -409,30 +409,22 @@ namespace Infrastructure.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("EmailAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("varchar(70)");
 
                     b.Property<string>("EmailAddress2")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(70)");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("varchar(70)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("varchar(70)");
 
                     b.Property<string>("PhoneNumber2")
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("varchar(70)");
 
                     b.Property<string>("PhoneNumber3")
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("varchar(70)");
 
                     b.Property<int>("PropertiesOwned")
                         .HasColumnType("int");
@@ -451,7 +443,9 @@ namespace Infrastructure.Migrations
                             EmailAddress = "aaa@gmail.com",
                             FullName = "S D Jone",
                             PhoneNumber = "3342423",
-                            PropertiesOwned = 0
+                            PhoneNumber2 = "0943342423",
+                            PropertiesOwned = 0,
+                            Title = "Mr"
                         },
                         new
                         {
@@ -459,15 +453,20 @@ namespace Infrastructure.Migrations
                             EmailAddress = "SDSSSSaa@gmail.com",
                             FullName = "J Jonaronw",
                             PhoneNumber = "3342423",
-                            PropertiesOwned = 0
+                            PhoneNumber2 = "0943342423",
+                            PropertiesOwned = 0,
+                            Title = "Mr"
                         },
                         new
                         {
                             OwnerId = 3,
                             EmailAddress = "sdsA@gmail.com",
+                            EmailAddress2 = "sds22A@gmail.com",
                             FullName = "E Foeinf",
                             PhoneNumber = "3342423",
-                            PropertiesOwned = 0
+                            PhoneNumber2 = "0943342423",
+                            PropertiesOwned = 0,
+                            Title = "Mrs"
                         });
                 });
 
@@ -531,7 +530,7 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("PropertyAdministration.Core.Model.Owner", "Owner")
-                        .WithMany()
+                        .WithMany("Houses")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -539,7 +538,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("PropertyAdministration.Core.Model.Invoice", b =>
                 {
-                    b.HasOne("PropertyAdministration.Core.Model.House", null)
+                    b.HasOne("PropertyAdministration.Core.Model.House", "House")
                         .WithMany("Invoices")
                         .HasForeignKey("HouseId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -17,7 +17,7 @@ namespace PropertyAdministration.Application.AppModels
         public DateTime InvoiceDate { get; set; }
 
         [Required(ErrorMessage = "Please enter a description")]
-        [StringLength(150)]
+        [StringLength(1000, MinimumLength = 4)]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Please enter an amount")]

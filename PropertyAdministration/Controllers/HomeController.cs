@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PropertyAdministration.Core.Interface;
-using PropertyAdministration.ViewModels;
-
+using PropertyAdministration.Application.AppModels;
+using PropertyAdministration.Core.Interface; 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PropertyAdministration.Controllers
@@ -31,7 +30,7 @@ namespace PropertyAdministration.Controllers
                     Description = a.Description,
                     CategoryName = a.Category.CategoryName,
                     FullName = a.Owner.FullName ,
-                    InvoicesBalance = a.Invoices.Sum(o => o.Amount),
+                    InvoicesBalance = a.Invoices.Where(a => a.IsPaid == false).Sum(a => a.Amount),
                 }).Where(o => o.InvoicesBalance > 10)   ;
 
             return View(houseViewModel);

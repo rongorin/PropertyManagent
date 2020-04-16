@@ -170,6 +170,31 @@ footer {
         display: block;
     }
 
-        .houses > li .details2 .descr {
-            font-size: 15px;
+    .houses > li .details2 .descr {
+        font-size: 15px;
+    }
+
+/*for a row color-profile Netflix animations fter https://css-tricks.com/how-to-re-create-a-nifty-netflix-animation-in-css/ */
+        /*.containerx {
+            display: flex;
+            margin-top: 50px;
         }
+
+        .itemx {
+            position: relative;
+            display: block;
+            flex: 1 1 0px;
+        }
+
+            .itemx img {
+                display: block;
+                max-width: 100%;
+            }
+        html as follows::
+        <div class="containerx" >
+        <a href="" class="itemx" > <img src="https://placeimg.com/640/480/animals" alt="Animals" > </a >
+        <a href="/Invoice/Index" class="itemx" > <img src="https://placeimg.com/640/480/architecture" alt="Architecture" > </a >
+        <a href="#nature" class="itemx" > <img src="https://placeimg.com/640/480/nature" alt="Nature" > </a >
+        <a href="#people" class="itemx" > <img src="https://placeimg.com/640/480/people" alt="People" > </a >
+        <a href="#tech" class="itemx" > <img src="https://placeimg.com/640/480/tech" alt="Tech" > </a >
+        </div >*/

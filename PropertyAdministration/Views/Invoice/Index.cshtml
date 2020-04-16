@@ -1,45 +1,48 @@
-﻿@model InvoiceListViewModel
+﻿@model  InvoiceListVM 
 
-<h2> @Model.HouseAddress </h2>
-<h4>Invoices listing`</h4>
+    <h2>@Html.DisplayFor(item => Model.ListingHeader)</h2>
+<h4>Invoices listing </h4>
 
 <table class="table table-bordered ">
     <thead>
         <tr>
             <th>Dated</th>
-            <th>description</th>
-            <th class="text-right">Date Paid</th>   
+            <th colspan="2">House</th> 
+            <th>Decription</th>
+            <th>Date Paid</th>
             <th class="text-right">Paid?</th>
             <th class="text-right">Amount</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var line in Model.Invoices)
+        @foreach (var line in Model.invoiceListViewModel)
         {
-            <tr>
-                <td> @Html.DisplayFor(item => line.InvoiceDate) </td>
-                <td>@line.Description</td>
-                <td>@Html.DisplayFor(item => line.DatePaid)  </td>
-                <td class="text-right">@(@line.IsPaid ? "Yes" : "No") </td>
-                <td class="text-right">
-                    @line.Amount.ToString("c")
-                </td>
-                <td>
-                    <form asp-action="Delete" asp-route-id="@line.InvoiceId" method="get">
-                        <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-invoiceId="@line.InvoiceId" asp-route-houseId="@line.HouseId">Edit</a>
-                        <button type="submit" class="btn btn-sm btn-danger">
-                            Delete
-                        </button>
-                    </form>
-                </td>
-            </tr>
-
+        <tr>
+            <td class="text-left"> @line.Invoicev.InvoiceDate.ToString("d MMM yyyy") </td>
+            <td>@line.HouseAddress</td>
+            <td>@line.FullName</td>
+            <td>@line.Invoicev.Description</td>
+            <td>@Html.DisplayFor(item => line.Invoicev.DatePaid)  </td>
+            <td class="text-right">@(line.Invoicev.IsPaid ? "Yes" : "No") </td>
+            <td class="text-right">
+                @line.Invoicev.Amount.ToString("c")
+            </td>
+            <td>
+                <form asp-action="Delete" asp-route-id="@line.Invoicev.InvoiceId" method="get">
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-invoiceId="@line.Invoicev.InvoiceId" asp-route-houseId="@line.Invoicev.HouseId">Edit</a>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
         }
-    </tbody>
+
+        </tbody>
     <tfoot>
         <tr>
-            <td colspan="4" class="text-right">Total:</td>
+            <td colspan="6" class="text-right">Total:</td>
             <td class="text-right">
                 @Model.InvoicesTotal.ToString("c")
             </td>
@@ -50,11 +53,6 @@
 <div class="text-center">
     <a class="btn btn-primary" asp-controller="Invoice"
        asp-action="Create"
-       asp-route-houseId="@Model.HouseId">New Invoice</a>
+       asp-route-houseId=@Model.HouseId>New Invoice</a>
 </div>
-
-
-<div class="text-center">
-    <a class="btn btn-primary" asp-controller="Invoice"
-       asp-action="BulkMain">Create Bulk Invoices</a>
-</div>
+ 

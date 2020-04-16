@@ -4,9 +4,8 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit </h2>
-<h4>@Model.House.StreetNumber @Model.House.StreetName</h4>
-<h4>ERF: @Model.House.ERF</h4>
+<h2>Edit House</h2>
+<h3>@Model.House.StreetNumber @Model.House.StreetName</h3> 
 <h4>OWNER: @Model.House.FullName</h4>
 <hr />
 <div class="row">
@@ -22,27 +21,39 @@
 
 
             <div class="form-group">
+                <label asp-for="Owners" class="col-md-2 control-label"></label>
+                <div class="col-md-5">
+                    <select asp-for="OwnerId" class="form-control"
+                            asp-items="Model.Owners"></select>
+                </div>
+            </div> 
+            <div class="form-group">
+                <label asp-for="House.ERF" class=" control-label"></label>
+                <input asp-for="House.ERF" class="form-control  " id="chkIsPlot" />
+                <span asp-validation-for="House.ERF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="House.DateMoveIn" class="control-label"></label>
                 <input asp-for="House.DateMoveIn" class="form-control" />
                 <span asp-validation-for="House.DateMoveIn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Categories" class=" control-label"></label>
+                <label class=" control-label">Current habitation</label>
 
-                <select asp-for="CategoryId" class="form-control" onchange="checkSelection()" 
+                <select asp-for="CategoryId" class="form-control" onchange="checkSelection()"
                         asp-items="Model.Categories"></select>
             </div>
-        
-                <div class="form-group">
-                    <label asp-for="House.IsPlot" class=" control-label"></label>
-                    <input asp-for="House.IsPlot" class="form-control  " id="chkIsPlot"/>
-                    <span asp-validation-for="House.IsPlot" class="text-danger"></span>
-                </div>
-     
-              
+
             <div class="form-group">
-                <label asp-for="House.Description" class="control-label"></label>
-                <textarea asp-for="House.Description" class="form-control" rows="5"></textarea>
+                <label asp-for="House.IsPlot" class=" control-label"></label>
+                <input asp-for="House.IsPlot" type="checkbox" class="form-control  " id="chkIsPlot" />
+                <span asp-validation-for="House.IsPlot" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label">Notes/Description</label>
+                <textarea asp-for="House.Description" class="form-control" rows="7"></textarea>
                 <span asp-validation-for="House.Description" class="text-danger"></span>
             </div>
 
@@ -60,15 +71,15 @@
     <script>
 
         $(function () {
-            checkSelection();
+            checkSelection(); 
         });
         function checkSelection(e) {
             var selectedItem = $('#CategoryId option:selected').text();
-         
             if (selectedItem == "Plot") {
-                $("#chkIsPlot").prop('checked', true);
+                $('#chkIsPlot').prop('checked', true); 
+
             } else {
-                $("#chkIsPlot").prop('checked', false);
+                $("#chkIsPlot").prop('checked', false); 
             }
         };
 

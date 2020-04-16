@@ -50,7 +50,11 @@ namespace PropertyAdministration.Core.Mocking
         {
             return GetAll.FirstOrDefault(p => p.HouseId == houseId) ;
         }
-      
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

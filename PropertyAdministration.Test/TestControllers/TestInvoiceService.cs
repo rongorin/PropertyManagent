@@ -63,23 +63,27 @@ namespace PropertyAdministration.Test.TestControllers
             var invoices = RepoMocks.RepositoryMocks.RepositoryInvoiceList(); 
             mockInvoiceRepository.Setup(repo => repo.GetById(It.IsAny<int>()))
                              .Returns(invoices[0]);  
+
             var test = mockInvoiceRepository.Object.GetById(1);  
+
             //act 
-            var result = invoiceService.GetById(202);    
+            var result = invoiceService.GetById(202);
+
             //assert  
+            Assert.IsNotNull(result);
+
             mockInvoiceRepository.Verify(x => x.GetById(202), Times.Once);
-        }
+        } 
         [TestMethod]
-        public void GetInvoice_ReturnsInValid_InvoiceItem()
+        public void GetInvoice_ReturnsInValid_NullInvoiceItemReturned()
         {
             //arrange 
             var invoices = RepoMocks.RepositoryMocks.RepositoryInvoiceList();
 
-            mockInvoiceRepository.Setup(repo => repo.GetById(It.IsAny<int>()))
-                             .Returns((Invoice)null); 
-            var test = mockInvoiceRepository.Object.GetById(1); 
+            //mockInvoiceRepository.Setup(repo => repo.GetById(It.IsAny<int>()))
+            //                 .Returns((Invoice)null);  
             //act 
-            var result = invoiceService.GetById(99999); 
+            var result = invoiceService.GetById(1); 
             //assert   
             Assert.IsNull(result);
         }

@@ -1,9 +1,8 @@
 ﻿using PropertyAdministration.Application.AppModels;
 using PropertyAdministration.Core.Interface;
 using PropertyAdministration.Core.Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace PropertyAdministration.Core.Services
 {
@@ -18,9 +17,26 @@ namespace PropertyAdministration.Core.Services
             _categoryRepository = catRepository;
 
         }
+        public IEnumerable<HOMEIndexViewModel>  GetAll()
+        {
+            var houseViewModel = _houseRepository.GetAll
+             .Select(a => new HOMEIndexViewModel
+             {
+                 HouseId = a.HouseId,
+                 StreetNumber = a.StreetNumber,
+                 StreetName = a.StreetName,
+                 Description = a.Description,
+                 CategoryName = a.Category.CategoryName,
+                 InvoicesBalance = a.Invoices.Where(s =>s.IsPaid==false).Sum( s=> s.Amount),
+                 FullName = a.Owner.FullName
+             });
+            return houseViewModel;
+            
+        }
         public HouseViewModel GetById(int id) 
         {
             House house = _houseRepository.GetById(id);
+             
             var houseV = new HouseViewModel
             {
                  HouseId = house.HouseId,
@@ -28,7 +44,7 @@ namespace PropertyAdministration.Core.Services
                  ERF = house.ERF,
                  StreetName = house.StreetName,
                  StreetNumber = house.StreetNumber,
-                 FullName =   house.Owner.FullName,
+                 FullName = house.Owner.FullName ==null?"":house.Owner.FullName,
                  CategoryId = house.CategoryId,
                  IsPlot =   house.IsPlot,
                  DateMoveIn = house.DateMoveIn,
@@ -38,7 +54,7 @@ namespace PropertyAdministration.Core.Services
             return houseV;
 
         }
-        public void Edit(HouseViewModel houseV)
+        public  void Edit(HouseViewModel houseV)
         {
             House house = new House()
             {
@@ -51,8 +67,12 @@ namespace PropertyAdministration.Core.Services
                 IsPlot = houseV.IsPlot,
                 CategoryId = houseV.CategoryId,
                 ERF = houseV.ERF 
-            };
+            }; 
+
             _houseRepository.Edit(house);
+
+            _houseRepository.Save();
+
 
         }
 

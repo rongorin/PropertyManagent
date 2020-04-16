@@ -11,6 +11,9 @@ namespace PropertyAdministration.Application.AppModels
     { 
             public HouseViewModel House { get; set; }
             public List<SelectListItem> Categories { get; set; }
-            public int CategoryId { get; set; } 
+            public int CategoryId { get; set; }
+            public List<SelectListItem> Owners { get; set; }
+            public int OwnerId { get; set; }
+
     }
 }

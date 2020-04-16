@@ -14,6 +14,9 @@
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
             </li>
             @*<li><a asp-controller="Invoice" asp-action="BulkMain">Invoicing</a></li>*@
+            <li>
+                <a asp-controller="Admin" asp-action="UserManagement">Manange users</a>
+            </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     Invoice
@@ -21,7 +24,7 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
 
-                    <li><a asp-controller="Invoice" asp-action="Index">Invoices</a></li>
+                    <li><a asp-controller="Invoice" asp-action="Index" asp-route-id="">Invoices</a></li>
                     <li><a asp-controller="Invoice" asp-action="BulkMain">Bulk Invoicing</a></li>
                 </ul>
             </li>

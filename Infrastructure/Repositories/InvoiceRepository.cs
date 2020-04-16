@@ -1,4 +1,5 @@
-﻿using PropertyAdministration.Core.Interface;
+﻿using Microsoft.EntityFrameworkCore;
+using PropertyAdministration.Core.Interface;
 using PropertyAdministration.Core.Model;
 using System;
 using System.Collections;
@@ -21,19 +22,19 @@ namespace Infrastructure.Repositories
         {
             get
             {
-                return _appDbContext.Invoices;
+                return _appDbContext.Invoices.Include(a => a.House ).Include(a => a.House.Owner);
             }
         }
 
         public Invoice GetById(int invoiceId)
         {
-            return _appDbContext.Invoices.FirstOrDefault(c => c.InvoiceId == invoiceId);
+            return _appDbContext.Invoices.Include(a => a.House).FirstOrDefault(c => c.InvoiceId == invoiceId);
 
         }
 
         public IEnumerable<Invoice> GetAllForHouse(int houseId)
         {
-            var invoices = _appDbContext.Invoices.Where(c => c.HouseId == houseId);
+            var invoices = _appDbContext.Invoices.Include(a => a.House).Include(a => a.House.Owner).Where(c => c.HouseId == houseId);
             return invoices;
 
         }

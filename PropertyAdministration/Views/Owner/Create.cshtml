@@ -1,0 +1,55 @@
+﻿@model PropertyAdministration.Application.AppModels.OwnerEditViewModel
+<h2>Create a new Owner person</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+
+        <form asp-action="Create" method="post" class="form-horizontal" role="form">
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            @*@Html.HiddenFor(model => model.HouseId)*@
+             
+            <div class="form-group">
+                <label asp-for="Owner.Title" class="control-label"></label>
+                <input asp-for="Owner.Title" class="form-control" />
+                <span asp-validation-for="Owner.Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Owner.FullName" class="control-label"></label>
+                <input asp-for="Owner.FullName" class="form-control" />
+                <span asp-validation-for="Owner.FullName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Owner.PhoneNumber" class="control-label"></label>
+                <input asp-for="Owner.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Owner.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Owner.EmailAddress" class="control-label"></label>
+                <input asp-for="Owner.EmailAddress" class="form-control" />
+                <span asp-validation-for="Owner.EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Owner.PropertiesOwned" class=" control-label"></label>
+
+                <input asp-for="Owner.PropertiesOwned" class="form-control" />
+                <span asp-validation-for="Owner.PropertiesOwned" class="text-danger"></span>
+            </div>
+
+            <div class="form-group"> 
+                    <input type="submit" class="btn btn-primary" value="Save" />
+             
+
+            </div>
+        </form>
+
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

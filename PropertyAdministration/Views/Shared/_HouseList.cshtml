@@ -1,4 +1,4 @@
-﻿@model PropertyAdministration.ViewModels.HOMEIndexViewModel
+﻿@model PropertyAdministration.Application.AppModels.HOMEIndexViewModel
 
     <li>
         <div class="address">
@@ -13,7 +13,7 @@
         </div>
         <div class="details">
             <span class="categoryname">
-                @Model.CategoryName
+                @Model.InvoicesBalance.ToString("c")
             </span>
             <span class="invstatus">
                 <div class="goToInvoices">

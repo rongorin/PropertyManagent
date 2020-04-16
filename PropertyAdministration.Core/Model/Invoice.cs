@@ -16,7 +16,7 @@ namespace PropertyAdministration.Core.Model
         public DateTime InvoiceDate { get; set; }
 
         [Required(ErrorMessage = "Please enter a description")]
-        [StringLength(150)]
+        [StringLength(1000)]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Please enter an amount")] 
@@ -29,6 +29,8 @@ namespace PropertyAdministration.Core.Model
 
         [Display(Name = "Is Paid")]
         public bool IsPaid { get; set; }
+
+        public virtual House House { get; set; }
 
         public override bool Equals(object obj)
         {

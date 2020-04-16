@@ -13,7 +13,7 @@ namespace PropertyAdministration.ViewModels
 
         public string HouseAddress { get; set; }
 
-         public List<SelectListItem> Categories { get; set; }
+        // public List<SelectListItem> Categories { get; set; }
 
          public int CategoryId { get; set; }
 

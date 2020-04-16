@@ -11,5 +11,6 @@ namespace PropertyAdministration.Core.Interface
       
         House GetById(int invoiceId);
         void Edit(House house);
+        void Save();
     }
 }

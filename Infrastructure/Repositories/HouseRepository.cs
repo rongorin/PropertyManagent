@@ -38,8 +38,10 @@ namespace Infrastructure.Repositories
         public void Edit(House house)
         {
             _appDbContext.Houses.Update(house);
+        }
+        public void Save()
+        {
             _appDbContext.SaveChanges();
         }
-
     }
 }

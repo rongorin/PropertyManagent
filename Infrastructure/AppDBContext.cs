@@ -32,9 +32,9 @@ namespace Infrastructure
             modelBuilder.Entity<Category>().HasData(new Category { CategoryId = 4, CategoryName = "Vacant", Description = "House is empty" });
             modelBuilder.Entity<Category>().HasData(new Category { CategoryId = 5, CategoryName = "Plot", Description = "Just a plot of land" });
 
-            modelBuilder.Entity<Owner>().HasData(new Owner { OwnerId = 1, FullName = "S D Jone", EmailAddress = "aaa@gmail.com",PhoneNumber= "3342423"}); 
-            modelBuilder.Entity<Owner>().HasData(new Owner { OwnerId = 2, FullName = "J Jonaronw", EmailAddress = "SDSSSSaa@gmail.com", PhoneNumber= "3342423"}); 
-            modelBuilder.Entity<Owner>().HasData(new Owner { OwnerId = 3, FullName = "E Foeinf", EmailAddress = "sdsA@gmail.com", PhoneNumber= "3342423"});
+            modelBuilder.Entity<Owner>().HasData(new Owner { OwnerId = 1, FullName = "S D Jone", EmailAddress = "aaa@gmail.com",PhoneNumber= "3342423", PhoneNumber2 = "0943342423", Title = "Mr"}); 
+            modelBuilder.Entity<Owner>().HasData(new Owner { OwnerId = 2, FullName = "J Jonaronw", Title = "Mr", EmailAddress = "SDSSSSaa@gmail.com", PhoneNumber= "3342423", PhoneNumber2 = "0943342423" }); 
+            modelBuilder.Entity<Owner>().HasData(new Owner { OwnerId = 3, FullName = "E Foeinf", Title = "Mrs", EmailAddress = "sdsA@gmail.com", PhoneNumber= "3342423", PhoneNumber2 = "0943342423", EmailAddress2 = "sds22A@gmail.com" });
  
 
             //seed Houses

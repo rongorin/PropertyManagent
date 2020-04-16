@@ -47,9 +47,10 @@ namespace PropertyAdministration
             services.AddScoped<ICategoryRepository,CategoryRepository>(); //
             services.AddScoped<IHouseRepository, HouseRepository>();
             services.AddScoped<IInvoiceRepository, InvoiceRepository>(); 
+            services.AddScoped<IOwnerRepository, OwnerRepository>();
             services.AddScoped<InvoiceService, InvoiceService>();
             services.AddScoped<HouseService, HouseService>();
-
+            services.AddScoped<OwnerService, OwnerService>(); 
             services.AddScoped<IInvoiceEngine,  InvoiceEngine>();
 
             services.AddMemoryCache(); //caching

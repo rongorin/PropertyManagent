@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using PropertyAdministration.Application.AppModels
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject IAuthorizationService AuthorizationService
@@ -18,6 +19,9 @@
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script> 
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Raleway|Inconsolata|Montserrat|Titillium+Web|Ubuntu|Nunito:400,700&display=swap" rel="stylesheet">
 
     <link href="~/Content/site.css" rel="stylesheet" />
@@ -36,12 +40,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Home" asp-action="Index">In Arrears</a></li>
-                    <li><a asp-controller="House" asp-action="Index">Show All</a></li>
+                    <li><a asp-controller="House" asp-action="Index">All Houses</a></li>
+                    <li><a asp-controller="Owner" asp-action="Index">Owners</a></li>
                     @if (SignInManager.IsSignedIn(User))// && User.IsInRole("Administrator"))
                     {
-                        <li>
-                            <a asp-controller="Admin" asp-action="UserManagement">Manange users</a>
-                        </li>
+                        @*<li>
+                <a asp-controller="Admin" asp-action="UserManagement">Manange users</a>
+            </li>*@
                     }
 
                     <partial name="_LoginPartial" />
@@ -62,11 +67,11 @@
             @RenderSection("footer", required: false)
 
             &copy; 2020 - RG - <a asp-area="" asp-page="/Privacy">Privacy</a>
-            <img src="/x.png" />
+          
         </div>
     </footer>
     @RenderSection("Scripts", required: false)
-     
+
 </body>
 
 

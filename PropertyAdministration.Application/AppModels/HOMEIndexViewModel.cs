@@ -1,9 +1,8 @@
-﻿using PropertyAdministration.Core.Model;
+﻿ 
 using System;
 using System.Collections.Generic;
 using System.Text;
-
-namespace PropertyAdministration.ViewModels
+namespace PropertyAdministration.Application.AppModels 
 {
     public class HOMEIndexViewModel
     {
@@ -17,10 +16,7 @@ namespace PropertyAdministration.ViewModels
         public bool IsPlot { get; set; } 
         public string CategoryName { get; set; }
         public decimal InvoicesBalance { get; set; }
-        public string FullName { get; set; }
-        // public Category Category { get; set; }
-        // public Owner Owner { get; set; }
-        //public virtual ICollection<Invoice> Invoices { get; set; }
+        public string FullName { get; set; } 
     }
 
 }

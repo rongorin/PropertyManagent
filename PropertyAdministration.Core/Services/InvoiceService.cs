@@ -35,9 +35,9 @@ namespace PropertyAdministration.Core.Services
         public IEnumerable<Invoice> GetAllForHouse( int houseId )
         {
             var invoices = _invoiceRepository.GetAllForHouse(houseId).OrderByDescending(a =>a.InvoiceDate);
-            return invoices; 
+                return invoices;    
         } 
-        public void Edit(int invoiceId, int houseId, DateTime invoiceDate, decimal Amount, string description,bool isPaid,
+        public void Edit(int invoiceId, int houseId, DateTime invoiceDate, decimal Amount, string description,bool isPaid, 
                         DateTime? paidDate)
         { 
             Invoice invoice = new Invoice()
@@ -48,17 +48,39 @@ namespace PropertyAdministration.Core.Services
                 Amount = Amount,
                 DatePaid = paidDate,
                 IsPaid = isPaid,
-                Description = description
+                Description = description  
             };  
              
              _invoiceRepository.Edit(invoice); 
         }
-        public Invoice GetById(int id)
+        public void Create(int invoiceId, int houseId, DateTime invoiceDate, decimal Amount, string description, bool isPaid,
+                        DateTime? paidDate)
         {
-            Invoice invoice = _invoiceRepository.GetById(id);
-            return invoice;
+            Invoice invoice = new Invoice()
+            {
+                InvoiceId = invoiceId,
+                HouseId = houseId,
+                InvoiceDate = invoiceDate,
+                Amount = Amount,
+                DatePaid = paidDate,
+                IsPaid = isPaid,
+                Description = description
+            };
+
+            _invoiceRepository.Create(invoice);
 
         }
+        public void Save()
+        {
+              _invoiceRepository.Save(); //finally commit:
+        }
+
+         public Invoice GetById(int id)
+        {
+            Invoice invoice = _invoiceRepository.GetById(id);
+            return invoice; 
+        }
+
         public void Delete(int id)
         {
             _invoiceRepository.Delete(id); 
