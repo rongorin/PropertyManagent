@@ -40,10 +40,10 @@ namespace PropertyAdministration
             _ownerService = ownerService;
 
         }
-        public ActionResult Index()
+        public ActionResult Index(string searchTerm = null)
         {
 
-            var houseViewModel = _houseService.GetAll()
+            var houseViewModel = _houseService.GetAll(searchTerm)
                   .Select(a => new HOMEIndexViewModel
                   {
                       HouseId = a.HouseId,
@@ -53,11 +53,26 @@ namespace PropertyAdministration
                       CategoryName = a.CategoryName,
                       FullName = a.FullName,
                       InvoicesBalance = a.InvoicesBalance
-                  });
+                  }).OrderBy(a => a.StreetName).ThenBy(a =>a.StreetNumber);
+
+            bool isAjaxCall = HttpContext.Request.Headers["x-requested-with"] == "XMLHttpRequest";
+            if (isAjaxCall)
+                return PartialView("_Houses", houseViewModel );
              
             return View(houseViewModel);
-          
+
         }
+        private List<SelectListItem> GetOwnersList()
+        {
+            var owners = _ownerService.GetAll();
+
+            return owners.Select(c => new SelectListItem
+            {
+                Text = c.FullName,
+                Value = c.OwnerId.ToString()
+            }).ToList(); 
+        }
+
         public IActionResult Edit(int id)
         { 
             var categories = _categoryRepo.GetAll; //for dropdown
@@ -67,16 +82,12 @@ namespace PropertyAdministration
 
             var houseViewModel = new HouseEditViewModel
             {
-                House  = house , 
-                CategoryId = house.CategoryId,           
-                Categories = categories.Select(c => new SelectListItem { Text = c.CategoryName , 
-                                                                         Value = c.CategoryId.ToString()}).ToList(),
+                House = house,
+                CategoryId = house.CategoryId,
+                Categories = categories.Select(c => new SelectListItem { Text = c.CategoryName,
+                    Value = c.CategoryId.ToString() }).ToList(),
                 OwnerId = house.OwnerId,
-                Owners = owners.Select(c => new SelectListItem
-                {
-                    Text = c.FullName,
-                    Value = c.OwnerId.ToString()
-                }).ToList()
+                Owners = GetOwnersList()
 
             };
 
@@ -98,7 +109,8 @@ namespace PropertyAdministration
 
                 return RedirectToAction("Details", new { id = house.HouseId});  
 
-            }   
+            }
+            houseVM.Owners = GetOwnersList();
             return View(houseVM);
         }
          

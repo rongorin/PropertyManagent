@@ -1,46 +1,61 @@
-﻿
-@model IEnumerable<PropertyAdministration.Application.AppModels.HOMEIndexViewModel>
+﻿@model IEnumerable<PropertyAdministration.Application.AppModels.HOMEIndexViewModel>
+<div class="row">
+    <div class="col-md-8">
+        <h2>All Properties</h2>
+    </div>
 
-<h2>All Properties</h2>
-@Html.Partial("_MsgSuccessFail", Model)
-<ul class="houses">
-    @foreach (var item in Model)
-    {
-        <partial name="_HouseList" model="item" /> 
-    }
-</ul>
+    <div class="col-md-4 ">
+        <partial name="_HousesSearch" model="Model" /> 
 
-<table class="table table-condensed table-bordered table-hover">
-    <thead>
-        <tr>
-            <th class="col-lg-2">Address </th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Plot?</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+        @*using (Ajax.BeginForm(
+         new AjaxOptions
+         {
+             HttpMethod = "get",
+             InsertionMode = InsertionMode.Replace,
+
+             UpdateTargetId = "portfolioListing"
+         }))
         {
-            <tr>
-                <td>
-                    <a asp-controller="House"
-                       asp-action="Details"
-                       asp-route-houseId="@item.HouseId">@item.StreetName </a>
-                </td>
-                houseId
-                <td>@item.CategoryName</td>
-                <td>@item.Description</td>
-                <td>@item.IsPlot</td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.HouseId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.HouseId })
-                </td>
 
-            </tr>
+            <h3>
+                <input type="search" name="searchTerm" class="btn btn-default" placeholder="Search" />
+                <input type="submit" name="Search by Port name" value="Search" class="btn btn-default" />
+            </h3>
+
         }
-    </tbody>
-</table>
+        *@
+    </div>
+</div>
 
+@await Html.PartialAsync("_MsgSuccessFail", Model)
+ 
+<partial name="_Houses" model="Model" />
+@section Scripts {
+    <script type='text/javascript'>
+        var sUrl = mtpApp.Urls.baseUrl + "House/Index"; 
+
+        housesController.init(sUrl);
+
+            //var mySearchingUrl = mtpApp.Urls.baseUrl + "Index";
+                //$(document).ready(function (e) {mtpApp
+
+                //    $("#search-btn").click(function () {
+                //        alert("n2");
+                //        var mySearchTerm = $('#search-text').val();
+                //        alert(mySearchTerm);
+                //        $.get(mySearchingUrl, { searchTerm: mySearchTerm })
+                //            .done(function () {
+                //                $('#portfolioListing')
+                //                    .html(data);
+                //            })
+                //            .fail(function (data) {
+                //                alert("Something Failed!!");
+                //            })
+                //    });
+                //}
+                //);
+    </script>
+
+}
 
 

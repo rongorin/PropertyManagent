@@ -1,91 +1,104 @@
 ﻿@model List<PropertyAdministration.Application.AppModels.CreateBulkInvoiceViewModel>
 
 @{
-    ViewData["Title"] = "BulkCreate";
+    ViewData["Title"] = "Bulk Generate Invoices";
 }
-<h2>Generate Invoices </h2> 
-<div class="row  ">
-    <h4 class="col-md-6 text-left">For all houses </h4>
+    <details title="Click for details">
+        <summary>Click here for instructions</summary>
+        Here the proposed invoices are displayed for each house.<br />un-check the checkbox for those you do not wish to create invoice for.
+        <br />
+        You can amend any of the description/ amounts shown. Click on Save button at bottom of screen to save invoices to the system.  
+    </details>
+<h2 >@ViewData["Title"] </h2>
+<div class="row">
+    <h2 class="col-md-6 text-left"> </h2>
     <h4 class="col-md-6 text-right">check to create </h4>
 </div>
- 
-    <hr />
-    <form asp-action="BulkCreate" method="post">
 
-        @for (var i = 0; i < Model.Count; i++)
-        {
-            <input type="hidden" asp-for="@Model[i].Invoicev.HouseId" />
-            <input type="hidden" asp-for="@Model[i].Invoicev.InvoiceDate" />
-            <input type="hidden" asp-for="@Model[i].FullName" />
-            <input type="hidden" asp-for="@Model[i].StreetNumber" />
-            <input type="hidden" asp-for="@Model[i].StreetName" />
+<hr />
+<form asp-action="BulkCreate" method="post">
 
-            <div class="row  ">
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            @Model[i].StreetNumber  @Model[i].StreetName
-                        </div>
-                        <div class="col-md-0">
+    @for (var i = 0; i < Model.Count; i++)
+    {
+        <input type="hidden" asp-for="@Model[i].Invoicev.HouseId" />
+        <input type="hidden" asp-for="@Model[i].Invoicev.InvoiceDate" />
+        <input type="hidden" asp-for="@Model[i].FullName" />
+        <input type="hidden" asp-for="@Model[i].StreetNumber" />
+        <input type="hidden" asp-for="@Model[i].StreetName" />
 
-                        </div>
+        <div class="row  ">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Model[i].StreetNumber  @Model[i].StreetName
                     </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="col-md-7">
+                    <div class="col-md-0">
 
-                    <div class="form-group">
-                        @*<label asp-for="@Model[i].FullName" class="col-md-5   control-label"></label>
-                            <input asp-for="@Model[i].FullName" class="col-md-5   control-label" />*@
-                        <div class="col-md-5  ">
-                            @Model[i].FullName
-                        </div>
-
-                        <div class="col-md-7">
-                            <input asp-for="@Model[i].Invoicev.Description" class="form-control" />
-                            <span asp-validation-for="@Model[i].Invoicev.Description" class="text-danger"></span>
-                        </div>
                     </div>
-
-                    <div class="clearfix"></div>
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">R</label>
-                        <div class="col-md-6  ">
-                            <input asp-for="@Model[i].Invoicev.Amount" class="form-control" />
-                            <span asp-validation-for="@Model[i].Invoicev.Amount" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-4">
-                            <input asp-for="@Model[i].IsCreate" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-
-                </div>
+                <div class="clearfix"></div>
             </div>
-        }
-        <button type="submit" class="btn btn-primary">Save All</button>
-    </form>
-    <style>
-        .clearfix {
-            clear: both;
-            padding: 0;
-            margin: 0;
-            height: 5px;
-            display: block;
-        }
 
-        .cliente {
-            margin-top: 10px;
-            border: #cdcdcd medium solid;
-            border-radius: 10px;
-            -moz-border-radius: 10px;
-            -webkit-border-radius: 10px;
-        }
-    </style>
-    @section footer {
-        <div>@ViewBag.InvoiceTemplateMsg</div>
-        <div>@ViewBag.InvoiceAmount</div>
+            @*<td class="text-right">@(line.Invoicev.IsPaid ? "Yes" : "No") </td>*@
 
+            <div class="col-md-7">
+
+                <div class="form-group">
+                    <div class="col-md-5  ">
+                         @(Model[i].IsPlot ? "Plot" : "Home")
+                    </div>
+                    @*<label asp-for="@Model[i].FullName" class="col-md-5   control-label"></label>
+        <input asp-for="@Model[i].FullName" class="col-md-5   control-label" />*@
+                    <div class="col-md-5  ">
+                        @Model[i].FullName
+                    </div>
+
+                    <div class="col-md-5">
+                        <input asp-for="@Model[i].Invoicev.Description" class="form-control" />
+                        <span asp-validation-for="@Model[i].Invoicev.Description" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">R</label>
+                    <div class="col-md-6  ">
+                        <input asp-for="@Model[i].Invoicev.Amount" class="form-control" />
+                        <span asp-validation-for="@Model[i].Invoicev.Amount" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <input asp-for="@Model[i].IsCreate" class="form-control" />
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+        </div>
     }
+    <button type="submit" class="btn btn-lg">Save All!</button>
+</form>
+<style>
+    /*increase some space between lines:*/
+    .clearfix {
+        clear: both;
+        padding: 0;
+        margin: 0;
+        height: 5px;
+        display: block;
+    }
+
+    .cliente {
+        margin-top: 10px;
+        border: #cdcdcd medium solid;
+        border-radius: 10px;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+    }
+</style>
+@section footer {
+    <div>@ViewBag.InvoiceTemplateMsg</div>
+    <div>@ViewBag.InvoiceAmount</div>
+
+}

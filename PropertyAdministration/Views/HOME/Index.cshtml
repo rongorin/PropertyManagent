@@ -1,12 +1,22 @@
 ﻿@model IEnumerable<PropertyAdministration.Application.AppModels.HOMEIndexViewModel>
-</p>
 @*<img src="https://raw.githubusercontent.com/pg0408/frontend-demo/master/statue.JPG" alt="a picture"  width="100%">*@
-<p>
-    <h2 class="redHighlight">In Arrears </h2>
-    <ul class="houses">
-        @foreach (var item in Model)
-        {
-            <partial name="_HouseList" model="item" />
+<div class="row">
 
-        }
-    </ul>
+    <div class="col-md-8 redHighlight">
+        <h2>In Arrears</h2>
+    </div>
+    <div class="col-md-4 ">
+        <partial name="_HousesSearch" model="Model" />
+    </div>
+</div>
+@await Html.PartialAsync("_MsgSuccessFail", Model)
+
+<partial name="_Houses" model="Model" />
+
+@section Scripts {
+    <script type='text/javascript'> 
+        var sUrl = mtpApp.Urls.baseUrl + "Home/Index"; 
+        housesController.init(sUrl); 
+    </script>
+
+}

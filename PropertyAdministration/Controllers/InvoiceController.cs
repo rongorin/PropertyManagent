@@ -12,6 +12,7 @@ using PropertyAdministration.Core.Services;
 using PropertyAdministration.ViewModels;
 using Microsoft.Extensions.Configuration;
 using PropertyAdministration.Application.AppModels;
+using System.Diagnostics;
 
 
 
@@ -46,86 +47,13 @@ namespace PropertyAdministration.Controllers
 
 
         }
+        
         // GET: /<controller>/  
         public IActionResult Index(int? id)
         {
             _logger.LogInformation("testmeessage in the index");
-            InvoiceListVM indexVM   ;
-            //IEnumerable<InvoiceListViewModel> indexViewModel = new List<InvoiceListViewModel>() ;
 
-            if (id.HasValue)
-            { 
-                indexVM = new InvoiceListVM 
-                {
-                    invoiceListViewModel = _invoiceService.GetAllForHouse(id.Value)
-                    .Select(a => new InvoiceListViewModel
-                    {
-                        FullName = a.House.Owner.FullName,
-                        Invoicev = new Invoice
-                        {
-                            Amount = a.Amount,
-                            DatePaid = a.DatePaid,
-                            Description = a.Description,
-                            InvoiceDate = a.InvoiceDate,
-                            IsPaid = a.IsPaid,
-                            InvoiceId = a.InvoiceId,
-                            HouseId = a.HouseId
-                             
-                        },
-                        HouseAddress = $"{a.House.StreetNumber} {a.House.StreetName } ",
-                        HouseId = a.HouseId
-                    }) .ToList()
-                };
-
-                indexVM.InvoicesTotal = indexVM.invoiceListViewModel.Sum(a => a.Invoicev.Amount);
-                indexVM.ListingHeader = $"{indexVM.invoiceListViewModel.Select(a => a.HouseAddress).FirstOrDefault()} - {indexVM.invoiceListViewModel.Select(a => a.FullName).FirstOrDefault()}"; 
-                indexVM.HouseId = id.Value ;
-
-
-                //indexViewModel = new InvoiceListViewModel
-                //{
-                //    HouseId = id.Value,
-                //    //Invoices = _invoiceRepo.GetAllForHouse(id)  .ToList(),
-                //    Invoices = _invoiceService.GetAllForHouse(id.Value).ToList(),
-                //    HouseAddress =( GetAddress(id.Value).Item1),
-                //    FullName =( GetAddress(id.Value).Item1)
-                //};
-
-                //indexViewModel.InvoicesTotal = indexViewModel.Invoices.Sum(o => o.Amount);
-
-            }
-            else
-            {
-                 
-                indexVM = new InvoiceListVM 
-                {
-                    invoiceListViewModel = _invoiceService.GetAll() 
-                    .Select(a => new InvoiceListViewModel
-                    {
-                        FullName =  a.House.Owner.FullName,
-                        Invoicev = new Invoice
-                        {
-                            Amount = a.Amount,
-                            DatePaid = a.DatePaid,
-                            Description = a.Description,
-                            InvoiceDate = a.InvoiceDate,
-                            IsPaid = a.IsPaid,
-                            InvoiceId = a.InvoiceId,
-                            HouseId = a.HouseId
-                        },
-                        HouseAddress = $"{a.House.StreetNumber} {a.House.StreetName } ",
-                        HouseId = a.HouseId,
-                   
-                    }).ToList()
-                };
-
-                indexVM.ListAll = true;
-                indexVM.InvoicesTotal = indexVM.invoiceListViewModel.Sum(a => a.Invoicev.Amount);
-                indexVM.ListingHeader = "Invoices for all properties"; 
-
-            }
-
-            return View(indexVM);
+            return View( GetListing(id ?? null));
 
         }  
           
@@ -299,30 +227,64 @@ namespace PropertyAdministration.Controllers
         [HttpGet]
         public IActionResult BulkMain()
         { 
-            var errMsg = TempData["Message"] as string; 
-            return View("BulkMain"); 
+            var errMsg = TempData["Message"] as string;
+
+            //ViewBag.InvoiceTemplateMsg = _config["InvoiceTemplateMsg"];
+            //ViewBag.InvoiceAmount = _config["InvoiceAmount"];
+
+
+            InvoiceBulkMainViewModel invoiceBulkMainViewModel = new InvoiceBulkMainViewModel
+            {
+                InvoiceTemplateMsg = "Type in description of invoice",
+                InvoiceAmountPlot = 0,
+                InvoiceAmountHouse = 0
+            };
+
+            return View(invoiceBulkMainViewModel);
+        }
+        [HttpPost]
+        public IActionResult BulkMain(InvoiceBulkMainViewModel bulkMainVm)
+        {
+            TempData["TemplateMessage"] = bulkMainVm.InvoiceTemplateMsg;
+
+            if (!ModelState.IsValid)
+                return View(bulkMainVm);
+
+            //if (!Decimal.TryParse(bulkMainVm.InvoiceAmount, out _invoiceService.AmountHouse))
+            //{
+            //    //ModelState.AddModelError("InvoiceAmountTemplate", "The InvoiceAmount in the settings is not a valid amount");
+            //    TempData["Message"] = "Error: Check the Invoice template settings as error on the Amount";
+
+            //    return RedirectToAction("BulkMain");
+            //}
+            //if (!Decimal.TryParse(_config["InvoiceAmountPlot"], out _invoiceService.AmountPlot))
+            //{
+            //    TempData["Message"] = "Error: Check the Invoice template settings as error on the Plot amount";
+            //    return RedirectToAction("BulkMain");
+            //}
+
+
+            return RedirectToAction("BulkCreate","Invoice", bulkMainVm);
+             
+
         }
         [HttpGet]
-        public IActionResult BulkCreate()
+        public IActionResult BulkCreate(InvoiceBulkMainViewModel bulkMainVm)
         {
-            ViewBag.InvoiceTemplateMsg = _config["InvoiceTemplateMsg"];
-            ViewBag.InvoiceAmount = _config["InvoiceAmount"];
+            Debug.WriteLine(bulkMainVm.InvoiceTemplateMsg); 
+ 
             TempData["Message"] = "";
-  
-            if (!Decimal.TryParse(_config["InvoiceAmountHouse"], out _invoiceService.AmountHouse))
-            {
-                //ModelState.AddModelError("InvoiceAmountTemplate", "The InvoiceAmount in the settings is not a valid amount");
-                TempData["Message"] = "Error: Check the Invoice template settings as error on the Amount";
 
-                return RedirectToAction("BulkMain");
-            }
-            if (!Decimal.TryParse(_config["InvoiceAmountPlot"], out _invoiceService.AmountPlot))
-            {
-                TempData["Message"] = "Error: Check the Invoice template settings as error on the Plot amount"; 
-                return RedirectToAction("BulkMain");
-            } 
-             
-            var invoiceViewModel = _houseRepo.GetAll 
+            _invoiceService.AmountPlot = bulkMainVm.InvoiceAmountPlot;
+            _invoiceService.AmountHouse = bulkMainVm.InvoiceAmountHouse; 
+
+            //if (!Decimal.TryParse(_config["InvoiceAmountPlot"], out _invoiceService.AmountPlot))
+            //{
+            //    TempData["Message"] = "Error: Check the Invoice template settings as error on the Plot amount"; 
+            //    return RedirectToAction("BulkMain");
+            //} 
+
+            var bulkInvoiceViewModel = _houseRepo.GetAll 
                 .Select(a => new CreateBulkInvoiceViewModel
                 {  
                     Invoicev = new InvoiceViewModel
@@ -330,7 +292,7 @@ namespace PropertyAdministration.Controllers
                         InvoiceDate = DateTime.Now,
                         IsPaid = false,
                         Amount = _invoiceService.CalcInvoiceAmount(a.IsPlot),
-                        Description = "Annual Subs 2020",
+                        Description = bulkMainVm.InvoiceTemplateMsg,
                         HouseId = a.HouseId
                     },
                     IsCreate = true,
@@ -339,7 +301,7 @@ namespace PropertyAdministration.Controllers
                     FullName = a.Owner.FullName
                 }) ;
 
-            return View(invoiceViewModel.ToList());
+            return View(bulkInvoiceViewModel.ToList());
         }
         [HttpPost]
         public IActionResult BulkCreate(List<CreateBulkInvoiceViewModel> invoices)
@@ -364,5 +326,75 @@ namespace PropertyAdministration.Controllers
 
             return View(invoices);
         }
+        private InvoiceListVM GetListing(int? id)
+        {
+            if (id.HasValue && id == 0)
+                id = null;
+
+            InvoiceListVM indexVM;
+            if (id.HasValue)
+            {
+                indexVM = new InvoiceListVM
+                {
+                    invoiceListViewModel = _invoiceService.GetAllForHouse(id.Value)
+                    .Select(a => new InvoiceListViewModel
+                    {
+                        FullName = a.House.Owner.FullName,
+                        Invoicev = new Invoice
+                        {
+                            Amount = a.Amount,
+                            DatePaid = a.DatePaid,
+                            Description = a.Description,
+                            InvoiceDate = a.InvoiceDate,
+                            IsPaid = a.IsPaid,
+                            InvoiceId = a.InvoiceId,
+                            HouseId = a.HouseId
+
+                        },
+                        HouseAddress = $"{a.House.StreetNumber} {a.House.StreetName } ",
+                        HouseId = a.HouseId
+                    }).ToList()
+                };
+
+                indexVM.InvoicesTotal = indexVM.invoiceListViewModel.Where(a => a.Invoicev.IsPaid==false).Sum(a => a.Invoicev.Amount);
+                indexVM.ListingHeader = $"{indexVM.invoiceListViewModel.Select(a => a.HouseAddress).FirstOrDefault()} - {indexVM.invoiceListViewModel.Select(a => a.FullName).FirstOrDefault()}";
+                indexVM.HouseId = id.Value;
+
+            }
+            else
+            {
+
+                indexVM = new InvoiceListVM
+                {
+                    invoiceListViewModel = _invoiceService.GetAll()
+                    .Select(a => new InvoiceListViewModel
+                    {
+                        FullName = a.House.Owner.FullName,
+                        Invoicev = new Invoice
+                        {
+                            Amount = a.Amount,
+                            DatePaid = a.DatePaid,
+                            Description = a.Description,
+                            InvoiceDate = a.InvoiceDate,
+                            IsPaid = a.IsPaid,
+                            InvoiceId = a.InvoiceId,
+                            HouseId = a.HouseId
+                        },
+                        HouseAddress = $"{a.House.StreetNumber} {a.House.StreetName } ",
+                        HouseId = a.HouseId,
+
+                    }).ToList()
+                };
+
+                indexVM.ListAll = true;
+                indexVM.InvoicesTotal = indexVM.invoiceListViewModel.Where(a => a.Invoicev.IsPaid == false).Sum(a => a.Invoicev.Amount);
+                indexVM.ListingHeader = "Invoices for all properties";
+
+
+            }
+            return indexVM;
+
+        }
+
     }
 }

@@ -28,7 +28,13 @@ namespace Infrastructure.Repositories
                                 Include(i => i.Invoices);  
             } 
         }
-
+        //public IEnumerable<House> GetAll(string searchCriteria)
+        //{
+        //    return _appDbContext.Houses.
+        //                               Include(c => c.Category).
+        //                               Include(o => o.Owner).
+        //                               Include(i => i.Invoices);
+        //}
         public House GetById(int houseId)
         {
             return _appDbContext.Houses.

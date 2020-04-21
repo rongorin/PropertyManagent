@@ -16,6 +16,8 @@ using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using PropertyAdministration.Core.Services;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace PropertyAdministration
 {
@@ -44,6 +46,7 @@ namespace PropertyAdministration
                         .AddDefaultUI()
                         .AddEntityFrameworkStores<AppDBContext>();
 
+            //services.AddScoped<IHouseRepository, MockHouseRepository>();
             services.AddScoped<ICategoryRepository,CategoryRepository>(); //
             services.AddScoped<IHouseRepository, HouseRepository>();
             services.AddScoped<IInvoiceRepository, InvoiceRepository>(); 
@@ -54,16 +57,26 @@ namespace PropertyAdministration
             services.AddScoped<IInvoiceEngine,  InvoiceEngine>();
 
             services.AddMemoryCache(); //caching
-
-            //services.AddScoped<IHouseRepository, MockHouseRepository>();
+ 
             services.AddControllersWithViews() ;//services.AddMvc(); would also work still
+
+            //User must be authenticated. This applies authenticated the default authentication scheme.
+            var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AuthorizeFilter(policy));
+            });
+
+
             services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env )
         {
-            //app.UseWelcomePage();
+             
 
             if (env.IsDevelopment())
             {

@@ -1,6 +1,6 @@
 ﻿@model  InvoiceListVM 
 
-    <h2>@Html.DisplayFor(item => Model.ListingHeader)</h2>
+ <h2>@Html.DisplayFor(item => Model.ListingHeader)</h2>
 <h4>Invoices listing </h4>
 
 <table class="table table-bordered ">
@@ -21,7 +21,16 @@
         <tr>
             <td class="text-left"> @line.Invoicev.InvoiceDate.ToString("d MMM yyyy") </td>
             <td>@line.HouseAddress</td>
-            <td>@line.FullName</td>
+            @if (@line.FullName.Length > 17)
+            {
+                <td>  @line.FullName.ToString().Substring(0, 17)  </td>
+
+            }
+            else
+            {
+                <td>  @line.FullName</td>
+
+            }
             <td>@line.Invoicev.Description</td>
             <td>@Html.DisplayFor(item => line.Invoicev.DatePaid)  </td>
             <td class="text-right">@(line.Invoicev.IsPaid ? "Yes" : "No") </td>
@@ -42,7 +51,7 @@
         </tbody>
     <tfoot>
         <tr>
-            <td colspan="6" class="text-right">Total:</td>
+            <td colspan="6" class="text-right">Owing:</td>
             <td class="text-right">
                 @Model.InvoicesTotal.ToString("c")
             </td>

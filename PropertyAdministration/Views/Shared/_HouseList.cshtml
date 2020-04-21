@@ -1,14 +1,19 @@
-﻿@model PropertyAdministration.Application.AppModels.HOMEIndexViewModel
+﻿
 
     <li>
         <div class="address">
-            <div class="housenumber">
+            <div class="housenumber"> 
+
                 <a asp-controller="House"
-                   asp-action="Details"
-                   asp-route-id="@Model.HouseId">@Model.StreetNumber @Model.StreetName</a>
+                    asp-action="Details"
+                    asp-route-id="@Model.HouseId">@Model.StreetNumber @Model.StreetName </a> 
+               
             </div>
             <div class="fullname">
-                @Model.FullName
+                @if (Model.FullName.Length > 39) 
+                    @Model.FullName.ToString().Substring(0, 39) 
+                else  
+                    @Model.FullName 
             </div>
         </div>
         <div class="details">

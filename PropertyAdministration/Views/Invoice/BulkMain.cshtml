@@ -1,11 +1,48 @@
-﻿@model string
+﻿@model PropertyAdministration.Application.AppModels.InvoiceBulkMainViewModel
 @{
+    ViewData["Title"] = "Start Bulk Invoicing";
 }
-<h2>Bulk generating of invoices page</h2> 
+<h2>Bulk generating of invoices page</h2>
+<div class="row">
+    <div class="col-md-6">
+        <h1>@TempData["Message"]</h1><br />
 
-<div class="text-center">
-    <h3>@TempData["Message"]</h3>
-    <a class="btn btn-primary left" asp-controller="Invoice"
-       asp-action="BulkCreate">Click to Begin</a>
+        <div>
 
+            <div>@ViewBag.InvoiceTemplateMsg</div>
+            <div>@ViewBag.InvoiceAmount</div>
+
+
+            <form asp-action="BulkMain">
+
+                <div class="form-group">
+                    <label asp-for="@Model.InvoiceTemplateMsg" class="control-label"></label>
+                    <input asp-for="@Model.InvoiceTemplateMsg" class="form-control" />
+                    <span asp-validation-for="@Model.InvoiceTemplateMsg" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.InvoiceAmountHouse" class="control-label"></label>
+                    <input asp-for="@Model.InvoiceAmountHouse" class="form-control" />
+                    <span asp-validation-for="@Model.InvoiceAmountHouse" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.InvoiceAmountPlot" class="control-label"></label>
+                    <input asp-for="@Model.InvoiceAmountPlot" class="form-control" />
+                    <span asp-validation-for="@Model.InvoiceAmountPlot" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Click to proceed" class="btn btn-lg" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <details title="Click for details">
+        <summary>Click here for details</summary>
+        On this page fill in the details you would like for the invoices to reflect. Its possible the invoice amount would be different for a house/ plot, therefore the two different text boxes for these.  <br />
+        When click on the proceed button, it will take you to the next step of the invoice creation process. <br /> <br />  Should you wish to specify different descriptions/values for different Houses, this can be done on the next
+        page.
+    </details>
 </div>

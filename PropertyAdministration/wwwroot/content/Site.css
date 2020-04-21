@@ -125,7 +125,7 @@ footer {
     margin-bottom: 30px;
 }
     .houses > li .address {
-        background: yellow;
+        background: #ebc634;
         color: white;
         text-align: center;
         width: 200px;
@@ -140,7 +140,7 @@ footer {
         }
 
         .houses > li .address .fullname {
-            background: yellow;
+            background: #ebc634;
             color: #333;
             font-size: 17px;
             padding: 6px 12px;

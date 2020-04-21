@@ -3,7 +3,7 @@ using PropertyAdministration.Core.Interface;
 using PropertyAdministration.Core.Model;
 using System.Collections.Generic;
 using System.Linq;
-
+using PropertyAdministration.Core.Extentions;
 namespace PropertyAdministration.Core.Services
 {
     public class HouseService
@@ -17,9 +17,10 @@ namespace PropertyAdministration.Core.Services
             _categoryRepository = catRepository;
 
         }
-        public IEnumerable<HOMEIndexViewModel>  GetAll()
+        public IEnumerable<HOMEIndexViewModel>  GetAll(string searchTerm)
         {
-            var houseViewModel = _houseRepository.GetAll
+            var houseViewModel = _houseRepository.GetAll.
+                SearchName(searchTerm)
              .Select(a => new HOMEIndexViewModel
              {
                  HouseId = a.HouseId,
@@ -28,8 +29,9 @@ namespace PropertyAdministration.Core.Services
                  Description = a.Description,
                  CategoryName = a.Category.CategoryName,
                  InvoicesBalance = a.Invoices.Where(s =>s.IsPaid==false).Sum( s=> s.Amount),
-                 FullName = a.Owner.FullName
+                 FullName = a.Owner.FullName 
              });
+
             return houseViewModel;
             
         }

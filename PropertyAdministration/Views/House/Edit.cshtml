@@ -5,8 +5,7 @@
 }
 
 <h2>Edit House</h2>
-<h3>@Model.House.StreetNumber @Model.House.StreetName</h3> 
-<h4>OWNER: @Model.House.FullName</h4>
+<h3>@Model.House.StreetNumber @Model.House.StreetName</h3>  
 <hr />
 <div class="row">
     <div class="col-md-6">
@@ -21,15 +20,15 @@
 
 
             <div class="form-group">
-                <label asp-for="Owners" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
+                <label>Owner</label>
+                <div>
                     <select asp-for="OwnerId" class="form-control"
                             asp-items="Model.Owners"></select>
                 </div>
             </div> 
             <div class="form-group">
                 <label asp-for="House.ERF" class=" control-label"></label>
-                <input asp-for="House.ERF" class="form-control  " id="chkIsPlot" />
+                <input asp-for="House.ERF" class="form-control" id="chkIsPlot" />
                 <span asp-validation-for="House.ERF" class="text-danger"></span>
             </div>
             <div class="form-group">

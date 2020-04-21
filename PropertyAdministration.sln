@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{17C92E2C-5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PropertyAdministration.Test", "PropertyAdministration.Test\PropertyAdministration.Test.csproj", "{C17665E4-9337-4CAD-9F1D-A155B0409EC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyAdministration.Application", "PropertyAdministration.Application\PropertyAdministration.Application.csproj", "{ECB0C536-C682-4175-BE2C-CD0B7C5EFF99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PropertyAdministration.Application", "PropertyAdministration.Application\PropertyAdministration.Application.csproj", "{ECB0C536-C682-4175-BE2C-CD0B7C5EFF99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

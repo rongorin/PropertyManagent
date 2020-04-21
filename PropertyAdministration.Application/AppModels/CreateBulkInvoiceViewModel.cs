@@ -12,7 +12,8 @@ namespace PropertyAdministration.Application.AppModels
         public string StreetName { get; set; }
         public int StreetNumber  { get; set; }
         public string FullName { get; set; }
- 
+        public bool IsPlot { get; set; }
+
 
 
     }

@@ -20,7 +20,9 @@ namespace PropertyAdministration.Application.AppModels
         [StringLength(1000, MinimumLength = 4)]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Please enter an amount")]
+        [Required(ErrorMessage = "Please enter an amount")] 
+        [Range(1, 20000,
+            ErrorMessage = "Amount must be between R{1} and R{2}.")]
         public decimal Amount { get; set; }
 
         [DataType(DataType.Date)]

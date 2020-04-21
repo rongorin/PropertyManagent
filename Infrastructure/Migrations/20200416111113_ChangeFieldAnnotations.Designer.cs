@@ -234,37 +234,37 @@ namespace Infrastructure.Migrations
 
                     b.ToTable("Categories");
 
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            CategoryName = "ÖwnerOccupied",
-                            Description = "Full time owner occupied"
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            CategoryName = "Swallow",
-                            Description = "Occupied but usually away overseas"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            CategoryName = "Tenanted",
-                            Description = "Tenants staying"
-                        },
-                        new
-                        {
-                            CategoryId = 4,
-                            CategoryName = "Vacant",
-                            Description = "House is empty"
-                        },
-                        new
-                        {
-                            CategoryId = 5,
-                            CategoryName = "Plot",
-                            Description = "Just a plot of land"
-                        });
+                    //b.HasData(
+                        //new
+                        //{
+                        //    CategoryId = 1,
+                        //    CategoryName = "ÖwnerOccupied",
+                        //    Description = "Full time owner occupied"
+                        //},
+                        //new
+                        //{
+                        //    CategoryId = 2,
+                        //    CategoryName = "Swallow",
+                        //    Description = "Occupied but usually away overseas"
+                        //},
+                        //new
+                        //{
+                        //    CategoryId = 3,
+                        //    CategoryName = "Tenanted",
+                        //    Description = "Tenants staying"
+                        //},
+                        //new
+                        //{
+                        //    CategoryId = 4,
+                        //    CategoryName = "Vacant",
+                        //    Description = "House is empty"
+                        //},
+                        //new
+                        //{
+                        //    CategoryId = 5,
+                        //    CategoryName = "Plot",
+                        //    Description = "Just a plot of land"
+                        //});
                 });
 
             modelBuilder.Entity("PropertyAdministration.Core.Model.House", b =>
@@ -306,67 +306,67 @@ namespace Infrastructure.Migrations
 
                     b.ToTable("Houses");
 
-                    b.HasData(
-                        new
-                        {
-                            HouseId = 1,
-                            CategoryId = 1,
-                            DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2006),
-                            Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
-                            ERF = "dd55da",
-                            IsPlot = false,
-                            OwnerId = 1,
-                            StreetName = "Whittle Way",
-                            StreetNumber = 11
-                        },
-                        new
-                        {
-                            HouseId = 2,
-                            CategoryId = 1,
-                            DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
-                            ERF = "6662222",
-                            IsPlot = false,
-                            OwnerId = 1,
-                            StreetName = "JanSmuts Ave",
-                            StreetNumber = 121
-                        },
-                        new
-                        {
-                            HouseId = 3,
-                            CategoryId = 2,
-                            DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2006),
-                            Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
-                            ERF = "663333",
-                            IsPlot = false,
-                            OwnerId = 2,
-                            StreetName = "Colebrook Cls",
-                            StreetNumber = 3
-                        },
-                        new
-                        {
-                            HouseId = 4,
-                            CategoryId = 2,
-                            DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2006),
-                            Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
-                            ERF = "1255a",
-                            IsPlot = false,
-                            OwnerId = 3,
-                            StreetName = "Whittle Way",
-                            StreetNumber = 31
-                        },
-                        new
-                        {
-                            HouseId = 5,
-                            CategoryId = 1,
-                            DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2006),
-                            Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
-                            ERF = "64332",
-                            IsPlot = false,
-                            OwnerId = 2,
-                            StreetName = "Whittle Way",
-                            StreetNumber = 4
-                        });
+                    //b.HasData(
+                    //    new
+                    //    {
+                    //        HouseId = 1,
+                    //        CategoryId = 1,
+                    //        DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2006),
+                    //        Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
+                    //        ERF = "dd55da",
+                    //        IsPlot = false,
+                    //        OwnerId = 1,
+                    //        StreetName = "Whittle Way",
+                    //        StreetNumber = 11
+                    //    },
+                    //    new
+                    //    {
+                    //        HouseId = 2,
+                    //        CategoryId = 1,
+                    //        DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                    //        Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
+                    //        ERF = "6662222",
+                    //        IsPlot = false,
+                    //        OwnerId = 1,
+                    //        StreetName = "JanSmuts Ave",
+                    //        StreetNumber = 121
+                    //    },
+                    //    new
+                    //    {
+                    //        HouseId = 3,
+                    //        CategoryId = 2,
+                    //        DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2006),
+                    //        Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
+                    //        ERF = "663333",
+                    //        IsPlot = false,
+                    //        OwnerId = 2,
+                    //        StreetName = "Colebrook Cls",
+                    //        StreetNumber = 3
+                    //    },
+                    //    new
+                    //    {
+                    //        HouseId = 4,
+                    //        CategoryId = 2,
+                    //        DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2006),
+                    //        Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
+                    //        ERF = "1255a",
+                    //        IsPlot = false,
+                    //        OwnerId = 3,
+                    //        StreetName = "Whittle Way",
+                    //        StreetNumber = 31
+                    //    },
+                    //    new
+                    //    {
+                    //        HouseId = 5,
+                    //        CategoryId = 1,
+                    //        DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2006),
+                    //        Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
+                    //        ERF = "64332",
+                    //        IsPlot = false,
+                    //        OwnerId = 2,
+                    //        StreetName = "Whittle Way",
+                    //        StreetNumber = 4
+                    //    });
                 });
 
             modelBuilder.Entity("PropertyAdministration.Core.Model.Invoice", b =>
@@ -438,38 +438,38 @@ namespace Infrastructure.Migrations
 
                     b.ToTable("Owners");
 
-                    b.HasData(
-                        new
-                        {
-                            OwnerId = 1,
-                            EmailAddress = "aaa@gmail.com",
-                            FullName = "S D Jone",
-                            PhoneNumber = "3342423",
-                            PhoneNumber2 = "0943342423",
-                            PropertiesOwned = 0,
-                            Title = "Mr"
-                        },
-                        new
-                        {
-                            OwnerId = 2,
-                            EmailAddress = "SDSSSSaa@gmail.com",
-                            FullName = "J Jonaronw",
-                            PhoneNumber = "3342423",
-                            PhoneNumber2 = "0943342423",
-                            PropertiesOwned = 0,
-                            Title = "Mr"
-                        },
-                        new
-                        {
-                            OwnerId = 3,
-                            EmailAddress = "sdsA@gmail.com",
-                            EmailAddress2 = "sds22A@gmail.com",
-                            FullName = "E Foeinf",
-                            PhoneNumber = "3342423",
-                            PhoneNumber2 = "0943342423",
-                            PropertiesOwned = 0,
-                            Title = "Mrs"
-                        });
+                    //b.HasData(
+                    //    new
+                    //    {
+                    //        OwnerId = 1,
+                    //        EmailAddress = "aaa@gmail.com",
+                    //        FullName = "S D Jone",
+                    //        PhoneNumber = "3342423",
+                    //        PhoneNumber2 = "0943342423",
+                    //        PropertiesOwned = 0,
+                    //        Title = "Mr"
+                    //    },
+                    //    new
+                    //    {
+                    //        OwnerId = 2,
+                    //        EmailAddress = "SDSSSSaa@gmail.com",
+                    //        FullName = "J Jonaronw",
+                    //        PhoneNumber = "3342423",
+                    //        PhoneNumber2 = "0943342423",
+                    //        PropertiesOwned = 0,
+                    //        Title = "Mr"
+                    //    },
+                    //    new
+                    //    {
+                    //        OwnerId = 3,
+                    //        EmailAddress = "sdsA@gmail.com",
+                    //        EmailAddress2 = "sds22A@gmail.com",
+                    //        FullName = "E Foeinf",
+                    //        PhoneNumber = "3342423",
+                    //        PhoneNumber2 = "0943342423",
+                    //        PropertiesOwned = 0,
+                    //        Title = "Mrs"
+                    //    });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

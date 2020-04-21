@@ -46,7 +46,7 @@ namespace PropertyAdministration.Core.Services
                 HouseId= houseId ,
                 InvoiceDate = invoiceDate,
                 Amount = Amount,
-                DatePaid = paidDate,
+                DatePaid = (isPaid) ? paidDate: null,
                 IsPaid = isPaid,
                 Description = description  
             };  

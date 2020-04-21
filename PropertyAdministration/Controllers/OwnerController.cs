@@ -60,7 +60,8 @@ namespace PropertyAdministration.Controllers
             }
 
             _ownerService.Edit(ownerVm);
-           return RedirectToAction("Index");
+            TempData.Add("ResultMessage", "Owner edited Successfully!");
+            return RedirectToAction("Index");
              
         }
 
@@ -75,7 +76,7 @@ namespace PropertyAdministration.Controllers
             if (saveChangesError.GetValueOrDefault())
             {
                 ViewData["ErrorMessage"] =
-                    "Delete failed. Try again, and if the problem persists call your system administrator.";
+                    "Delete failed. Possible due to Owner still linked to house. If persists, call your system administrator.";
             }
 
             var deleteVM = new OwnerViewModel
@@ -86,9 +87,10 @@ namespace PropertyAdministration.Controllers
                  PropertiesOwned = owner.PropertiesOwned,
                  FullName  = owner.FullName 
             };
+             
+           return View(deleteVM);
 
-            return View(deleteVM);
-
+      
         }
 
         // GET: /<controller>/
@@ -111,7 +113,9 @@ namespace PropertyAdministration.Controllers
                 {
                     _ownerService.Create(ownerVM);  
                     _ownerService.Save(); //finally commit 
-                     
+
+                    TempData.Add("ResultMessage", "Owner created Successfully!");
+
                     return RedirectToAction("Index" );
                 }
 
@@ -138,6 +142,8 @@ namespace PropertyAdministration.Controllers
             {
                 _ownerService.Delete(deleteId);
                 _ownerService.Save();
+                 TempData.Add("ResultMessage", "Owner deleted successfully!");
+           
             }
             catch (DbUpdateException /* ex */)
             {
@@ -145,6 +151,11 @@ namespace PropertyAdministration.Controllers
                 return RedirectToAction(nameof(Delete), new { id = deleteId, saveChangesError = true });
             }
 
+            catch (InvalidOperationException )
+            {
+                //Log the error (uncomment ex variable name and write a log.)
+                return RedirectToAction(nameof(Delete), new { id = deleteId, saveChangesError = true });
+            }
             return RedirectToAction(nameof(Index) );
 
         }

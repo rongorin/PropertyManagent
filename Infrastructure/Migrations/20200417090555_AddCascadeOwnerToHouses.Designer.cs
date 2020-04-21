@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20200410182439_populateOwnerdetails")]
-    partial class populateOwnerdetails
+    [Migration("20200417090555_AddCascadeOwnerToHouses")]
+    partial class AddCascadeOwnerToHouses
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -281,10 +281,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(1000)");
 
                     b.Property<string>("ERF")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(10)");
 
                     b.Property<bool>("IsPlot")
                         .HasColumnType("bit");
@@ -293,7 +293,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("StreetName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(70)");
 
                     b.Property<int>("StreetNumber")
                         .HasColumnType("int");
@@ -305,68 +305,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Houses");
-
-                    b.HasData(
-                        new
-                        {
-                            HouseId = 1,
-                            CategoryId = 1,
-                            DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2006),
-                            Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
-                            ERF = "dd55da",
-                            IsPlot = false,
-                            OwnerId = 1,
-                            StreetName = "Whittle Way",
-                            StreetNumber = 11
-                        },
-                        new
-                        {
-                            HouseId = 2,
-                            CategoryId = 1,
-                            DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
-                            ERF = "6662222",
-                            IsPlot = false,
-                            OwnerId = 1,
-                            StreetName = "JanSmuts Ave",
-                            StreetNumber = 121
-                        },
-                        new
-                        {
-                            HouseId = 3,
-                            CategoryId = 2,
-                            DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2006),
-                            Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
-                            ERF = "663333",
-                            IsPlot = false,
-                            OwnerId = 2,
-                            StreetName = "Colebrook Cls",
-                            StreetNumber = 3
-                        },
-                        new
-                        {
-                            HouseId = 4,
-                            CategoryId = 2,
-                            DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2006),
-                            Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
-                            ERF = "1255a",
-                            IsPlot = false,
-                            OwnerId = 3,
-                            StreetName = "Whittle Way",
-                            StreetNumber = 31
-                        },
-                        new
-                        {
-                            HouseId = 5,
-                            CategoryId = 1,
-                            DateMoveIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2006),
-                            Description = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee brownie brownie candy tootsie roll. Chocolate cake gingerbread tootsie roll oat cake House chocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate cake. Danish powder cookie macaroon chocolate donut tart. Carrot cake dragée croissant lemon drops liquorice lemon drops cookie lollipop toffee. Carrot cake carrot cake liquorice sugar plum topping bonbon House muffin jujubes. Jelly pastry wafer tart caramels bear claw. Tiramisu tart House cake danish lemon drops. Brownie cupcake dragée gummies.",
-                            ERF = "64332",
-                            IsPlot = false,
-                            OwnerId = 2,
-                            StreetName = "Whittle Way",
-                            StreetNumber = 4
-                        });
+ 
                 });
 
             modelBuilder.Entity("PropertyAdministration.Core.Model.Invoice", b =>
@@ -384,8 +323,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(150)")
-                        .HasMaxLength(150);
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
 
                     b.Property<int>("HouseId")
                         .HasColumnType("int");
@@ -411,30 +350,22 @@ namespace Infrastructure.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("EmailAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("varchar(70)");
 
                     b.Property<string>("EmailAddress2")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(70)");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("varchar(70)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("varchar(70)");
 
                     b.Property<string>("PhoneNumber2")
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("varchar(70)");
 
                     b.Property<string>("PhoneNumber3")
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("varchar(70)");
 
                     b.Property<int>("PropertiesOwned")
                         .HasColumnType("int");
@@ -446,38 +377,7 @@ namespace Infrastructure.Migrations
 
                     b.ToTable("Owners");
 
-                    b.HasData(
-                        new
-                        {
-                            OwnerId = 1,
-                            EmailAddress = "aaa@gmail.com",
-                            FullName = "S D Jone",
-                            PhoneNumber = "3342423",
-                            PhoneNumber2 = "0943342423",
-                            PropertiesOwned = 0,
-                            Title = "Mr"
-                        },
-                        new
-                        {
-                            OwnerId = 2,
-                            EmailAddress = "SDSSSSaa@gmail.com",
-                            FullName = "J Jonaronw",
-                            PhoneNumber = "3342423",
-                            PhoneNumber2 = "0943342423",
-                            PropertiesOwned = 0,
-                            Title = "Mr"
-                        },
-                        new
-                        {
-                            OwnerId = 3,
-                            EmailAddress = "sdsA@gmail.com",
-                            EmailAddress2 = "sds22A@gmail.com",
-                            FullName = "E Foeinf",
-                            PhoneNumber = "3342423",
-                            PhoneNumber2 = "0943342423",
-                            PropertiesOwned = 0,
-                            Title = "Mrs"
-                        });
+                     
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -540,7 +440,7 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("PropertyAdministration.Core.Model.Owner", "Owner")
-                        .WithMany()
+                        .WithMany("Houses")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
@@ -23,5 +24,9 @@ namespace PropertyAdministration.Core.Model
         public Owner Owner { get; set; } 
 
         public virtual ICollection<Invoice> Invoices { get; set; }
+        public House()
+        {
+            Invoices = new Collection<Invoice>();
+        }
     }
 }
