@@ -31,14 +31,29 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="Owner.EmailAddress" class="control-label"></label>
+                <input asp-for="Owner.EmailAddress" class="form-control" />
+                <span asp-validation-for="Owner.EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Owner.EmailAddress2" class="control-label"></label>
+                <input asp-for="Owner.EmailAddress2" class="form-control" />
+                <span asp-validation-for="Owner.EmailAddress2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Owner.PhoneNumber" class="control-label"></label>
                 <input asp-for="Owner.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Owner.PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Owner.EmailAddress" class="control-label"></label>
-                <input asp-for="Owner.EmailAddress" class="form-control" />
-                <span asp-validation-for="Owner.EmailAddress" class="text-danger"></span>
+                <label asp-for="Owner.PhoneNumber2" class="control-label"></label>
+                <input asp-for="Owner.PhoneNumber2" class="form-control" />
+                <span asp-validation-for="Owner.PhoneNumber2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Owner.PhoneNumber3" class="control-label"></label>
+                <input asp-for="Owner.PhoneNumber3" class="form-control" />
+                <span asp-validation-for="Owner.PhoneNumber3" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Owner.PropertiesOwned" class=" control-label"></label>

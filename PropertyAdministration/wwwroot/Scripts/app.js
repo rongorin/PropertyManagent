@@ -19,7 +19,7 @@
     var getHouses = function () {
         $.get(mySearchingUrl, { searchTerm: mySearchTerm })
             .done(function (data) {
-                $('#portfolioListing').html(data);
+                $('#housesListing').html(data);
             })
             .fail(function (data) {
                 alert("Something Failed!!");
@@ -49,7 +49,7 @@
 //    var getHouses = function (search) {
 //        $.get(mySearchingUrl, { searchTerm: search })
 //            .done(function (data) {
-//                $('#portfolioListing').html(data);
+//                $('#housesListing').html(data);
 //            })
 //            .fail(function (data) {
 //                alert("Something Failed!!");

@@ -59,8 +59,9 @@ namespace Infrastructure.Repositories
         {
             var invoice = GetById(invoiceId);
             _appDbContext.Set<Invoice>().Remove(invoice);
-            
+
         }
+ 
         public void Save()
         {
             _appDbContext.SaveChanges(); 

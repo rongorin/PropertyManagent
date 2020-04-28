@@ -4,7 +4,6 @@ using PropertyAdministration.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PropertyAdministration.Core.Services
 {
@@ -16,7 +15,7 @@ namespace PropertyAdministration.Core.Services
 
         public decimal AmountHouse;
 
-        public decimal AmountPlot; 
+        public decimal AmountPlot;
 
         public InvoiceService(IInvoiceRepository invoiceRepository,
             IHouseRepository houseRepository, ICategoryRepository catRepository)
@@ -32,26 +31,37 @@ namespace PropertyAdministration.Core.Services
                                                     .OrderByDescending(a => a.InvoiceDate);
             return invoices;
         }
-        public IEnumerable<Invoice> GetAllForHouse( int houseId )
+        public IEnumerable<Invoice> GetAllForHouse(int houseId)
         {
-            var invoices = _invoiceRepository.GetAllForHouse(houseId).OrderByDescending(a =>a.InvoiceDate);
-                return invoices;    
-        } 
-        public void Edit(int invoiceId, int houseId, DateTime invoiceDate, decimal Amount, string description,bool isPaid, 
+            var invoices = _invoiceRepository.GetAllForHouse(houseId).OrderByDescending(a => a.InvoiceDate);
+            return invoices;
+        }
+
+        public bool SetPaid(int invoiceId, bool isPaid)
+        {
+            Invoice invoice = GetById(invoiceId);
+            if (invoice == null)
+                return false;
+
+            invoice.IsPaid = isPaid;
+            _invoiceRepository.Edit(invoice);
+            return true;
+        }
+        public void Edit(int invoiceId, int houseId, DateTime invoiceDate, decimal Amount, string description, bool isPaid,
                         DateTime? paidDate)
-        { 
+        {
             Invoice invoice = new Invoice()
             {
                 InvoiceId = invoiceId,
-                HouseId= houseId ,
+                HouseId = houseId,
                 InvoiceDate = invoiceDate,
                 Amount = Amount,
-                DatePaid = (isPaid) ? paidDate: null,
+                DatePaid = (isPaid) ? paidDate : null,
                 IsPaid = isPaid,
-                Description = description  
-            };  
-             
-             _invoiceRepository.Edit(invoice); 
+                Description = description
+            };
+
+            _invoiceRepository.Edit(invoice);
         }
         public void Create(int invoiceId, int houseId, DateTime invoiceDate, decimal Amount, string description, bool isPaid,
                         DateTime? paidDate)
@@ -72,18 +82,18 @@ namespace PropertyAdministration.Core.Services
         }
         public void Save()
         {
-              _invoiceRepository.Save(); //finally commit:
+            _invoiceRepository.Save(); //finally commit:
         }
 
-         public Invoice GetById(int id)
+        public Invoice GetById(int id)
         {
             Invoice invoice = _invoiceRepository.GetById(id);
-            return invoice; 
+            return invoice;
         }
 
         public void Delete(int id)
         {
-            _invoiceRepository.Delete(id); 
+            _invoiceRepository.Delete(id);
         }
 
         public int BulkCreate(List<CreateBulkInvoiceViewModel> invoices)
@@ -95,17 +105,17 @@ namespace PropertyAdministration.Core.Services
                     continue;
                 Invoice newInvoice = new Invoice()
                 {
-                     Amount = invoice.Invoicev.Amount,
-                     DatePaid = invoice.Invoicev.DatePaid, 
-                     HouseId = invoice.Invoicev.HouseId,
-                     Description = invoice.Invoicev.Description,
-                     InvoiceDate = invoice.Invoicev.InvoiceDate,
-                     IsPaid = invoice.Invoicev.IsPaid  
+                    Amount = invoice.Invoicev.Amount,
+                    DatePaid = invoice.Invoicev.DatePaid,
+                    HouseId = invoice.Invoicev.HouseId,
+                    Description = invoice.Invoicev.Description,
+                    InvoiceDate = invoice.Invoicev.InvoiceDate,
+                    IsPaid = invoice.Invoicev.IsPaid
                 };
                 _invoiceRepository.Create(newInvoice);
                 counter++;
             }
-           
+
             _invoiceRepository.Save(); //finally commit:
 
             return counter;

@@ -1,42 +1,8 @@
-﻿<div id="portfolioListing">
+﻿<div id="housesListing">
     <ul class="houses">
         @foreach (var item in Model)
         {
-            <partial name="_HouseList" model="item" />
-
-            @*<li>
-                <div class="address">
-                    <div class="housenumber">
-                        <a asp-controller="House"
-                           asp-action="Details" 
-                           asp-route-id="@item.HouseId">@item.StreetNumber @item.StreetName</a>
-                    </div>
-                    <div class="fullname">
-                        @item.FullName
-                    </div>
-                </div>
-                <div class="details">
-                    <span class="categoryname pull-right">
-                        @item.InvoicesBalance.ToString("c")
-                    </span>
-                    <span class="invstatus">
-                        <div class="goToInvoices">
-                            <p class="button">
-                                <a class="btn btn-sm"
-                                   asp-controller="Invoice"
-                                   asp-action="Index"
-                                   asp-route-id="@item.HouseId">Invoices</a>
-                            </p>
-                        </div>
-                    </span>
-                </div>
-                <div class="details2">
-                    <span class="descr">
-                        @item.Description
-                    </span>
-                </div>
-            </li>*@
-
+            <partial name="_HouseList" model="item" /> 
         }
 
     </ul>

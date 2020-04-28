@@ -1,13 +1,13 @@
-﻿@model  InvoiceListVM 
+﻿@model InvoiceListVM
 
- <h2>@Html.DisplayFor(item => Model.ListingHeader)</h2>
+<h2>@Html.DisplayFor(item => Model.ListingHeader)</h2>
 <h4>Invoices listing </h4>
 
-<table class="table table-bordered ">
+<table id="tblInvoices" class="table table-bordered ">
     <thead>
         <tr>
             <th>Dated</th>
-            <th colspan="2">House</th> 
+            <th colspan="2">House</th>
             <th>Decription</th>
             <th>Date Paid</th>
             <th class="text-right">Paid?</th>
@@ -18,22 +18,21 @@
     <tbody>
         @foreach (var line in Model.invoiceListViewModel)
         {
-        <tr>
+        <tr id="@line.Invoicev.InvoiceId">
             <td class="text-left"> @line.Invoicev.InvoiceDate.ToString("d MMM yyyy") </td>
             <td>@line.HouseAddress</td>
             @if (@line.FullName.Length > 17)
             {
-                <td>  @line.FullName.ToString().Substring(0, 17)  </td>
-
+            <td>  @line.FullName.ToString().Substring(0, 17)  </td> 
             }
             else
             {
-                <td>  @line.FullName</td>
+            <td>  @line.FullName</td>
 
             }
             <td>@line.Invoicev.Description</td>
             <td>@Html.DisplayFor(item => line.Invoicev.DatePaid)  </td>
-            <td class="text-right">@(line.Invoicev.IsPaid ? "Yes" : "No") </td>
+            <td id="YesOrNo" class="text-right">@(line.Invoicev.IsPaid ? "Yes" : "NO") </td>
             <td class="text-right">
                 @line.Invoicev.Amount.ToString("c")
             </td>
@@ -43,12 +42,22 @@
                     <button type="submit" class="btn btn-sm btn-danger">
                         Delete
                     </button>
+
                 </form>
+                <button data-inv-id="@line.Invoicev.InvoiceId" class="btn btn-default  btn-sm js-toggle-paid">
+                    Paid??
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>
+                <button class="btn btn-sm btn-default like-btn active" type="button" id="10">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    <span class="text">Liked</span>
+                    <span class="badge like-badge">1</span>
+                </button> 
             </td>
         </tr>
         }
 
-        </tbody>
+    </tbody>
     <tfoot>
         <tr>
             <td colspan="6" class="text-right">Owing:</td>
@@ -58,10 +67,33 @@
         </tr>
     </tfoot>
 </table>
-
 <div class="text-center">
     <a class="btn btn-primary" asp-controller="Invoice"
        asp-action="Create"
        asp-route-houseId=@Model.HouseId>New Invoice</a>
 </div>
- 
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $(".js-toggle-paid").click(function(e) {
+                var button = $(e.target); 
+                var selectedRow = $(this).closest("tr");   
+               
+                $.get("/api/paid/" + button.attr("data-inv-id"))
+                    .done(function() {
+                        button
+                            .removeClass("btn-default")
+                            .addClass("btn-info")
+                            .text("Paid !");
+                        selectedRow.find('#YesOrNo').text("Yes");
+                    })
+                    .fail(function() {
+                        alert("Something failed!");
+                    });
+            });
+         
+        });
+    </script>
+}

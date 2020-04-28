@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-md-4 ">
-        <partial name="_HousesSearch" model="Model" /> 
+        <partial name="_HousesSearch" model="Model" />
 
         @*using (Ajax.BeginForm(
          new AjaxOptions
@@ -13,7 +13,7 @@
              HttpMethod = "get",
              InsertionMode = InsertionMode.Replace,
 
-             UpdateTargetId = "portfolioListing"
+             UpdateTargetId = "housesListing"
          }))
         {
 
@@ -32,7 +32,7 @@
 <partial name="_Houses" model="Model" />
 @section Scripts {
     <script type='text/javascript'>
-        var sUrl = mtpApp.Urls.baseUrl + "House/Index"; 
+        var sUrl = mtpApp.Urls.baseUrl + "/House/Index"; 
 
         housesController.init(sUrl);
 
@@ -45,7 +45,7 @@
                 //        alert(mySearchTerm);
                 //        $.get(mySearchingUrl, { searchTerm: mySearchTerm })
                 //            .done(function () {
-                //                $('#portfolioListing')
+                //                $('#housesListing')
                 //                    .html(data);
                 //            })
                 //            .fail(function (data) {

@@ -10,6 +10,7 @@ using PropertyAdministration.Core.Interface;
 using PropertyAdministration.Utility;
 using PropertyAdministration.ViewModels; 
 using PropertyAdministration.Core.Services;
+using Microsoft.AspNetCore.Localization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -41,7 +42,13 @@ namespace PropertyAdministration
 
         }
         public ActionResult Index(string searchTerm = null)
-        {
+        {  // Retrieves the requested culture
+
+                var rqf = Request.HttpContext.Features.Get<IRequestCultureFeature>();
+                // Culture contains the information of the requested culture
+
+                var culture = rqf.RequestCulture.Culture;
+             
 
             var houseViewModel = _houseService.GetAll(searchTerm)
                   .Select(a => new HOMEIndexViewModel

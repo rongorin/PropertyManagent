@@ -16,18 +16,28 @@
     <title>@ViewBag.Title</title>
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
-    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
-    <script src="~/lib/jquery/jquery.js"></script>
+
+    <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
+          asp-fallback-test-class="hidden"
+          asp-fallback-test-property="visibility"
+          asp-fallback-test-value="hidden" />
+
+    @*<link href="~/content/Site.css" rel="stylesheet" />
+        <script src="~/lib/jquery/jquery.js"></script>
+        <script src="~/Scripts/app.js"></script>
+        <script asp-src-include="lib/jquery/jquery.min.js"></script>
+        <script asp-src-include="lib/jquery-validation/jquery.validate.min.js"></script>
+        <script asp-src-include="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>*@
+
+    <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/Scripts/app.js"></script>
-    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
-    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway|Inconsolata|Montserrat|Titillium+Web|Ubuntu|Nunito:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/site.css" />
 
-    <link href="~/Content/site.css" rel="stylesheet" />
-
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Segoe+UI|Montserrat|Titillium+Web|Ubuntu|Nunito:400,700&display=swap" rel="stylesheet">
 
     <script type="text/javascript">
         var mtpApp = mtpApp || {};
@@ -54,8 +64,8 @@
                     @if (SignInManager.IsSignedIn(User))// && User.IsInRole("Administrator"))
                     {
                         @*<li>
-                <a asp-controller="Admin" asp-action="UserManagement">Manange users</a>
-            </li>*@
+                                <a asp-controller="Admin" asp-action="UserManagement">Manange users</a>
+                            </li>*@
                     }
 
                     <partial name="_LoginPartial" />
@@ -75,13 +85,20 @@
         <div class="container">
             @RenderSection("footer", required: false)
 
-            &copy; 2020 - RG 
-          
+            &copy; 2020 - RG
+
         </div>
     </footer>
-    @RenderSection("Scripts", required: false)
+    <environment names="Development"> 
+        <script src="~/lib/bootstrap/js/bootstrap.js"></script>
 
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+
+    </environment>
+     
+    @RenderSection("Scripts", required: false) 
 </body>
-
-
+ 
 </html>

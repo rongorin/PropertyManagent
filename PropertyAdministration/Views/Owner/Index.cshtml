@@ -1,6 +1,17 @@
 ﻿
-@model IEnumerable<PropertyAdministration.Application.AppModels.OwnerIndexViewModel> 
-<h2>Owners listing </h2>
+@model IEnumerable<PropertyAdministration.Application.AppModels.OwnerIndexViewModel>
+
+ 
+<div class="row">
+    <div class="col-md-10">
+        <h2>Owners listing </h2>
+    </div>
+
+    <div class="col-md-2">
+        <a class="btn btn-primary" asp-controller="Owner"
+           asp-action="Create">New Person</a>
+    </div>
+</div>
 
 @await Html.PartialAsync("_MsgSuccessFail", Model)
 
@@ -12,37 +23,47 @@
             <th>Address</th>
             <th>Phone</th>
             <th>Email</th>
-            <th class="text-right">Properties</th>
+            <th class="text-right">#owns</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var line in Model)
         {
-            <tr>
-                @if (@line.FullName.Length > 25)
-                {
-                    <td class="text-left">@line.Title @line.FullName.ToString().Substring(0, 25)  </td> 
-                }
-                else
-                {
-                    <td class="text-left">@line.Title @line.FullName  </td>
+        <tr>
+            @if (@line.FullName.Length > 25)
+            {
+            <td class="text-left col-md-3">@line.FullName.ToString().Substring(0, 25)  </td>
 
-                }
+            }
+            else
+            {
+            <td class="text-left col-md-3">@line.FullName  </td>
 
-                <td class="text-left">@line.HouseAddress </td>
-                <td>@line.PhoneNumber</td>
-                <td>@line.EmailAddress</td>
-                <td class="text-center">@Html.DisplayFor(item => line.PropertiesOwned)  </td>
-                <td>
-                    <form asp-action="Delete" asp-route-id="@line.OwnerId" method="get">
-                        <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@line.OwnerId">Edit</a>
-                        <button type="submit"  class="btn btn-sm btn-danger btn-link">
-                            Delete
-                        </button>
-                    </form>
-                </td>
-            </tr>
+            }
+
+            <td class="text-left col-md-2">@line.HouseAddress </td>
+            <td class="text-left col-md-3">@line.PhoneNumber</td>
+            @if (@line.EmailAddress.Length > 29)
+            {
+            <td class="text-left ">@line.EmailAddress.ToString().Substring(0, 29)  </td>
+            }
+            else
+            {
+            <td class="text-left">@line.EmailAddress</td>
+
+            }
+
+            <td class="text-center">@Html.DisplayFor(item => line.PropertiesOwned)  </td>
+            <td class="col-md-2">
+                <form asp-action="Delete" asp-route-id="@line.OwnerId" method="get">
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@line.OwnerId">Edit</a>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
         }
     </tbody>
 

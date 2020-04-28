@@ -16,22 +16,15 @@ namespace PropertyAdministration
     {
         public static void Main(string[] args)
         {
-            try
-
-            {
-                CreateHostBuilder(args).Build().Run();
-                //var host = CreateHostBuilder(args).Build();
-
-                //MigrateDatabase(host);
-
-                //host.Run();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
             // CreateHostBuilder(args).Build().Run();
-         
+            var host = CreateHostBuilder(args).Build();
+
+            MigrateDatabase(host);
+
+            host.Run();
+
+            CreateHostBuilder(args).Build().Run();
+
         }
         private static void MigrateDatabase(IHost host)
         {
@@ -41,14 +34,21 @@ namespace PropertyAdministration
                 db.Database.Migrate();
             }
         }
+        //public static IHostBuilder CreateHostBuilder(string[] args) =>
+        //    Host.CreateDefaultBuilder(args)
+        //        .ConfigureWebHostDefaults(webBuilder =>
+        //        {
+        //            webBuilder.UseStartup<Startup>();
+        //        });
+
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureLogging(logging =>
                 {
-                logging.ClearProviders();
-                logging.AddConsole();
-                logging.AddDebug();
-                //logging.SetMinimumLevel(LogLevel.Warning);
+                    logging.ClearProviders();
+                    logging.AddConsole();
+                    logging.AddDebug();
+                    //logging.SetMinimumLevel(LogLevel.Warning);
                 })
 
                 .ConfigureWebHostDefaults(webBuilder =>

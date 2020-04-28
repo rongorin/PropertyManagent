@@ -18,6 +18,9 @@ using PropertyAdministration.Core.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using System.Globalization; 
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Localization;
 
 namespace PropertyAdministration
 {
@@ -64,11 +67,27 @@ namespace PropertyAdministration
             var policy = new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
                 .Build();
+
+            //This forces in a specific localization:
+            var cultureInfo = new CultureInfo("en-UK");
+            cultureInfo.NumberFormat.CurrencySymbol = "R"; 
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            //services.Configure<RequestLocalizationOptions>(options =>
+            //{
+            //    options.DefaultRequestCulture = new RequestCulture("en-US");
+            //}); 
+            services.AddCors(); //This needs to let it default 
             services.AddMvc(options =>
             {
                 options.Filters.Add(new AuthorizeFilter(policy));
             });
 
+            ////added to resolve decimal dot not working on deployed server
+            //services.AddMvc((options) =>
+            //{
+            //    options.ModelBinderProviders.Insert(0, new CustomBinderProvider());
+            //});
 
             services.AddRazorPages();
         }
@@ -91,10 +110,16 @@ namespace PropertyAdministration
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseRouting(); 
+            app.UseRouting();
+            app.UseCors(
+            options => options.SetIsOriginAllowed(x => _ = true).AllowAnyMethod().AllowAnyHeader().AllowCredentials()
+        ); //This needs to set everything allowed
+
+
             app.UseAuthentication();
              app.UseAuthorization();
- 
+            // app.UseRequestLocalization(app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value);
+            app.UseRequestLocalization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -104,6 +129,8 @@ namespace PropertyAdministration
 
                 endpoints.MapRazorPages();
             });
+
+ 
         }
     }
 }

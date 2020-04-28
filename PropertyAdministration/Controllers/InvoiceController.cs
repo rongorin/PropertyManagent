@@ -101,7 +101,7 @@ namespace PropertyAdministration.Controllers
 
                      _invoiceService.Save(); //finally commit:
 
-             
+                    
                     // _shoppingCart.ClearCart();
                     return RedirectToAction("Index", new { id = invoiceVM.HouseId  });
                 }
