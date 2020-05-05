@@ -79,5 +79,11 @@ namespace PropertyAdministration.Test.TestServices
 
             //mockHouseRepository.Verify(x => x.Edit(house[0]));
         }
+
+        [TestCleanup]
+        public void Teardown()
+        {
+            service = null;
         }
     }
+}

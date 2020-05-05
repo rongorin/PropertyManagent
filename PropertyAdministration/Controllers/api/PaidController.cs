@@ -29,10 +29,8 @@ namespace PropertyAdministration.Controllers.api
             if (_invoiceService.SetPaid(id, true))
                 return Ok();
             else
-                return BadRequest("Update did was unsuccesful! Possibly invoice doesnt exist.");
+                return BadRequest("Update unsuccesful! Possibly invoice doesnt exist.");
 
-        }
-        
-        
+        }   
     }
 }

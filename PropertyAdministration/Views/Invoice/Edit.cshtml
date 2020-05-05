@@ -12,7 +12,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Invoice.InvoiceId" />
             <input type="hidden" asp-for="Invoice.HouseId" />
- 
+            <input type="hidden" asp-for="HouseAddress" />
+
             <div class="form-group">
                 <label asp-for="Invoice.InvoiceDate" class="control-label"></label>
                 <input asp-for="Invoice.InvoiceDate" class="form-control" />

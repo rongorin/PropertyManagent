@@ -55,8 +55,9 @@ namespace PropertyAdministration
             services.AddScoped<IInvoiceRepository, InvoiceRepository>(); 
             services.AddScoped<IOwnerRepository, OwnerRepository>();
             services.AddScoped<InvoiceService, InvoiceService>();
-            services.AddScoped<HouseService, HouseService>();
-            services.AddScoped<OwnerService, OwnerService>(); 
+            services.AddScoped<IHouseService, HouseService>();
+            services.AddScoped<IOwnerService, OwnerService>(); 
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IInvoiceEngine,  InvoiceEngine>();
 
             services.AddMemoryCache(); //caching

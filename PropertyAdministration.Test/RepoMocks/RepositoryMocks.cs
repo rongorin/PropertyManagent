@@ -1,4 +1,5 @@
-﻿using PropertyAdministration.Core.Model;
+﻿using PropertyAdministration.Application.AppModels;
+using PropertyAdministration.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -115,5 +116,33 @@ namespace PropertyAdministration.Test.RepoMocks
            };
             return owner.ToList(); 
         }
+        public static HouseViewModel GetFakeHouseViewModel() 
+        {
+            return  new HouseViewModel
+            {
+                CategoryId = 1,
+                OwnerId = 123
+            };
+        }
+        public static HouseEditViewModel GetFakeHouseEditViewModel()
+        {
+            return  new HouseEditViewModel
+            {
+                CategoryId = 1,
+                OwnerId = 1,
+                House = new HouseViewModel()
+            };
+        }
+        public static IEnumerable<HOMEIndexViewModel> GetFakeHomeIndexViewModel()
+        {
+            IEnumerable<HOMEIndexViewModel> items =  
+                 new List<HOMEIndexViewModel>
+                { 
+                     new HOMEIndexViewModel { HouseId = 2, StreetName = "Whittle Way TEST"  } 
+                };
+
+            return items;
+        }
+        
     }
 }

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PropertyAdministration.Core.Services
 {
-   public  class OwnerService
+   public  class OwnerService: IOwnerService
     {
         private IHouseRepository _houseRepository;
         private IOwnerRepository _ownerRepository; 

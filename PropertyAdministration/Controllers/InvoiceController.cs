@@ -23,29 +23,21 @@ namespace PropertyAdministration.Controllers
     public class InvoiceController : Controller
     {
         private readonly IConfiguration _config;
-
-        private IInvoiceRepository _invoiceRepo;
-        private IHouseRepository _houseRepo;
-        private ICategoryRepository _categoryRepository;
+         
+         
+        private IHouseService _houseService; 
         private InvoiceService _invoiceService;
         private readonly ILogger<InvoiceController> _logger;
 
-        public InvoiceController(IInvoiceRepository InvoiceRepository,
-                                 IHouseRepository HouseRepository,
-                                 ICategoryRepository CategoryRepository,
-                                 InvoiceService invoiceService,
+        public InvoiceController(InvoiceService invoiceService,
+                                 IHouseService houseService,
                                  ILogger<InvoiceController> logger,
-                                 IConfiguration config
-                                 )
-        {
-            _invoiceRepo = InvoiceRepository;
-            _houseRepo = HouseRepository;
-            _categoryRepository = CategoryRepository;
+                                 IConfiguration config)
+        {   
             _invoiceService = invoiceService;
-            _logger = logger;
-            _config = config;
-
-
+            _houseService = houseService;  
+             _logger = logger;
+            _config = config; 
         }
         
         // GET: /<controller>/  
@@ -72,7 +64,7 @@ namespace PropertyAdministration.Controllers
 
         private List<SelectListItem> GetHouseList()
         {
-            var houses = _houseRepo.GetAll; 
+            var houses = _houseService.GetAll(null); 
             var housesList = houses.Select(c => new SelectListItem
             {
                 Text = $"{c.StreetNumber} {c.StreetName}",
@@ -99,15 +91,15 @@ namespace PropertyAdministration.Controllers
                                        invoiceVM.Invoice.IsPaid,
                                        invoiceVM.Invoice.DatePaid);
 
-                     _invoiceService.Save(); //finally commit:
-
-                    
-                    // _shoppingCart.ClearCart();
+                     _invoiceService.Save();  
+                    TempData.Add("ResultMessage", "Invoice created Successfully!"); 
+                     
                     return RedirectToAction("Index", new { id = invoiceVM.HouseId  });
                 }
             }
             catch
             {
+                ViewData["ErrorMessage"] = "Create failed ";
             }
 
             invoiceVM.HousesList = GetHouseList();
@@ -122,8 +114,7 @@ namespace PropertyAdministration.Controllers
         [HttpGet]
         public IActionResult Edit(int invoiceId, int houseId)
         {
-            Invoice invoice = _invoiceRepo.GetById(invoiceId);
-            var categories = _categoryRepository.GetAll; //for dropdown
+            Invoice invoice = _invoiceService.GetById(invoiceId); 
 
             if (invoice == null) return RedirectToAction("Index", new { id = houseId });
 
@@ -153,8 +144,7 @@ namespace PropertyAdministration.Controllers
                 ModelState.AddModelError("", "no invoice object has been passed!");
             }
             if (ModelState.IsValid)
-            {
-                // _invoiceRepo.Edit(invoice ); 
+            { 
                 _invoiceService.Edit(invoiceVM.Invoice.InvoiceId,
                                     invoiceVM.Invoice.HouseId,
                                      invoiceVM.Invoice.InvoiceDate,
@@ -163,6 +153,7 @@ namespace PropertyAdministration.Controllers
                                      invoiceVM.Invoice.IsPaid, 
                                      invoiceVM.Invoice.DatePaid);
 
+                TempData.Add("ResultMessage", String.Format("Invoice for {0} edited successfully!", invoiceVM.HouseAddress));
                 return RedirectToAction("Index", new { id = invoiceVM.Invoice.HouseId });
 
             }
@@ -208,6 +199,7 @@ namespace PropertyAdministration.Controllers
             {
                 _invoiceService.Delete(deleteInvoiceId);
                 _invoiceService.Save();
+                 TempData.Add("ResultMessage", "Invoice deleted successfully!");
             }
             catch (DbUpdateException /* ex */)
             {
@@ -220,8 +212,8 @@ namespace PropertyAdministration.Controllers
         }
         private (string,string) GetAddress(int houseId)
         {
-            House house = _houseRepo.GetById(houseId);
-            return ($"{house.StreetNumber} {house.StreetName}",house.Owner.FullName);
+            var house = _houseService.GetById(houseId);
+            return ($"{house.StreetNumber} {house.StreetName}", house.FullName);
 
         }
         [HttpGet]
@@ -284,7 +276,7 @@ namespace PropertyAdministration.Controllers
             //    return RedirectToAction("BulkMain");
             //} 
 
-            var bulkInvoiceViewModel = _houseRepo.GetAll 
+            var bulkInvoiceViewModel = _houseService.GetAll(null)
                 .Select(a => new CreateBulkInvoiceViewModel
                 {  
                     Invoicev = new InvoiceViewModel
@@ -298,7 +290,7 @@ namespace PropertyAdministration.Controllers
                     IsCreate = true,
                     StreetNumber = a.StreetNumber,
                     StreetName = a.StreetName,
-                    FullName = a.Owner.FullName
+                    FullName =  a.FullName
                 }) ;
 
             return View(bulkInvoiceViewModel.ToList());
@@ -313,7 +305,7 @@ namespace PropertyAdministration.Controllers
                 if (ModelState.IsValid)
                 {
                     int count = _invoiceService.BulkCreate(invoices);
-                    //_invoiceRepo.Create(invoice);
+                   
                     ////  _shoppingCart.ClearCart();
                     TempData["Message"] = (count > 0) ? $"Successfully created {count} invoices!" : "No invoices created";
                     return RedirectToAction("BulkMain");

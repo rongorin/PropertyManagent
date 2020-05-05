@@ -17,39 +17,27 @@ using Microsoft.AspNetCore.Localization;
 namespace PropertyAdministration
 {
     public class HouseController : Controller
-    {
-        private IHouseRepository _houseRepo;
-        private IInvoiceEngine _invoiceRepo;
-        private ICategoryRepository _categoryRepo;
-        private HouseService _houseService;
-        private OwnerService _ownerService;
+    { 
+        private ICategoryService _categoryService;
+        private IHouseService _houseService;
+        private IOwnerService _ownerService;
 
         private readonly IMemoryCache _memoryCache; 
 
         // GET: /<controller>/
-        public HouseController(IHouseRepository houseRepository, IInvoiceEngine  invoiceEngine,
-                                ICategoryRepository  categoryRepository,
-                                 HouseService houseService,
-                                 OwnerService ownerService,
-                                IMemoryCache memoryCache)
-        {
-            _houseRepo = houseRepository;
-            _invoiceRepo = invoiceEngine;
+        public HouseController(  IHouseService houseService,
+                                 IOwnerService ownerService,
+                                 ICategoryService categoryService,
+                                 IMemoryCache memoryCache)
+        { 
             _memoryCache = memoryCache;
-            _categoryRepo = categoryRepository;
+            _categoryService = categoryService;
             _houseService = houseService;
             _ownerService = ownerService;
 
         }
         public ActionResult Index(string searchTerm = null)
-        {  // Retrieves the requested culture
-
-                var rqf = Request.HttpContext.Features.Get<IRequestCultureFeature>();
-                // Culture contains the information of the requested culture
-
-                var culture = rqf.RequestCulture.Culture;
-             
-
+        {  
             var houseViewModel = _houseService.GetAll(searchTerm)
                   .Select(a => new HOMEIndexViewModel
                   {
@@ -66,23 +54,12 @@ namespace PropertyAdministration
             if (isAjaxCall)
                 return PartialView("_Houses", houseViewModel );
              
-            return View(houseViewModel);
-
-        }
-        private List<SelectListItem> GetOwnersList()
-        {
-            var owners = _ownerService.GetAll();
-
-            return owners.Select(c => new SelectListItem
-            {
-                Text = c.FullName,
-                Value = c.OwnerId.ToString()
-            }).ToList(); 
-        }
+            return View(houseViewModel); 
+        } 
 
         public IActionResult Edit(int id)
         { 
-            var categories = _categoryRepo.GetAll; //for dropdown
+            var categories = _categoryService.GetAll(); //for dropdown
             var owners = _ownerService.GetAll(); //for dropdown
 
             var house = _houseService.GetById(id);
@@ -103,6 +80,9 @@ namespace PropertyAdministration
         [HttpPost]
         public IActionResult Edit(HouseEditViewModel houseVM)
         {
+            if (houseVM == null)
+                return NotFound();
+
             houseVM.House.CategoryId = houseVM.CategoryId; 
             houseVM.House.OwnerId = houseVM.OwnerId;
 
@@ -121,41 +101,25 @@ namespace PropertyAdministration
             return View(houseVM);
         }
          
-        //[HttpGet]
-        //public IActionResult Edit(int invoiceId, int houseId)
-        //{
-        //    Invoice invoice = _invoiceRepo.GetById(invoiceId);
-        //    var categories = _categoryRepository.GetAll; //for dropdown
-
-        //    if (invoice == null) return RedirectToAction("Index", new { id = houseId });
-
-        //    var invoiceEditVModel = new InvoiceEditViewModel
-        //    {
-        //        HouseAddress = GetAddress(houseId),
-        //        Categories = categories.Select(c => new SelectListItem()
-        //        { Text = c.CategoryName, Value = c.CategoryId.ToString() }).ToList(),
-        //        Invoice = new InvoiceViewModel
-        //        {
-        //            InvoiceDate = invoice.InvoiceDate,
-        //            Amount = invoice.Amount,
-        //            DatePaid = invoice.DatePaid,
-        //            IsPaid = invoice.IsPaid,
-        //            Description = invoice.Description,
-        //            InvoiceId = invoice.InvoiceId,
-        //            HouseId = invoice.HouseId
-        //        }
-        //    };
-
-        //    return View(invoiceEditVModel);
-        //}
+    
         public IActionResult Details(int id)
         {
-            var house = _houseRepo.GetById(id);
+            var house = _houseService.GetById(id);
             if (house == null)
                 return NotFound();
 
             return View(house);  
         }
-       
+        private List<SelectListItem> GetOwnersList()
+        {
+            var owners = _ownerService.GetAll();
+
+            return owners.Select(c => new SelectListItem
+            {
+                Text = c.FullName,
+                Value = c.OwnerId.ToString()
+            }).ToList();
+        }
+
     }
 }

@@ -13,10 +13,10 @@ namespace PropertyAdministration.Controllers
     public class HomeController : Controller
     {
         readonly IHouseRepository houseRepository;
-        private HouseService _houseService;
+        private IHouseService _houseService;
 
         public HomeController(IHouseRepository HouseRepo,
-                                 HouseService houseService)
+                                 IHouseService houseService)
         {
             _houseService = houseService;
             

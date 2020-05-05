@@ -5,14 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PropertyAdministration.Application.AppModels;
+using PropertyAdministration.Core.Interface;
 using PropertyAdministration.Core.Services;
 
 namespace PropertyAdministration.Controllers
 {
     public class OwnerController : Controller
     {
-        private OwnerService _ownerService;
-        public OwnerController(OwnerService ownerService)
+        private IOwnerService _ownerService;
+
+        public OwnerController(IOwnerService ownerService)
         {
             _ownerService = ownerService;
         }

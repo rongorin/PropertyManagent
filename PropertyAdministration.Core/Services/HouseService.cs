@@ -6,12 +6,13 @@ using System.Linq;
 using PropertyAdministration.Core.Extentions;
 namespace PropertyAdministration.Core.Services
 {
-    public class HouseService
+    public class HouseService : IHouseService
     { 
         private IHouseRepository _houseRepository;
         private ICategoryRepository _categoryRepository;
 
-        public HouseService(IHouseRepository houseRepository, ICategoryRepository catRepository)
+        public HouseService(IHouseRepository houseRepository,
+                            ICategoryRepository catRepository)
         { 
             _houseRepository = houseRepository;
             _categoryRepository = catRepository;
@@ -28,7 +29,7 @@ namespace PropertyAdministration.Core.Services
                  StreetName = a.StreetName,
                  Description = a.Description,
                  CategoryName = a.Category.CategoryName,
-                 InvoicesBalance = a.Invoices.Where(s =>s.IsPaid==false).Sum( s=> s.Amount),
+                 InvoicesBalance = a.Invoices.Where(s => s.IsPaid == false).Sum( s=> s.Amount),
                  FullName = a.Owner.FullName 
              });
 

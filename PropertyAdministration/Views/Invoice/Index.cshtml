@@ -2,6 +2,9 @@
 
 <h2>@Html.DisplayFor(item => Model.ListingHeader)</h2>
 <h4>Invoices listing </h4>
+@Html.HiddenFor(model => model.HouseId)
+
+@await Html.PartialAsync("_MsgSuccessFail", Model)
 
 <table id="tblInvoices" class="table table-bordered ">
     <thead>
@@ -9,8 +12,8 @@
             <th>Dated</th>
             <th colspan="2">House</th>
             <th>Decription</th>
-            <th>Date Paid</th>
             <th class="text-right">Paid?</th>
+            <th></th>
             <th class="text-right">Amount</th>
             <th></th>
         </tr>
@@ -23,17 +26,26 @@
             <td>@line.HouseAddress</td>
             @if (@line.FullName.Length > 17)
             {
-            <td>  @line.FullName.ToString().Substring(0, 17)  </td> 
+            <td id="Fullname">  @line.FullName.ToString().Substring(0, 17)  </td>
+
             }
             else
             {
-            <td>  @line.FullName</td>
+            <td id="Fullname">  @line.FullName</td>
 
             }
             <td>@line.Invoicev.Description</td>
-            <td>@Html.DisplayFor(item => line.Invoicev.DatePaid)  </td>
-            <td id="YesOrNo" class="text-right">@(line.Invoicev.IsPaid ? "Yes" : "NO") </td>
-            <td class="text-right">
+
+            <td id="YesOrNo" class="text-right">@(line.Invoicev.IsPaid ? "Yes!" : "NO") </td>
+            <td>
+                @if(line.Invoicev.IsPaid == false)
+                {
+                <button data-inv-id="@line.Invoicev.InvoiceId" class="btn btn-default btn-xs js-toggle-paid ">
+                    Paid??
+                </button>
+                }
+            </td>
+            <td id="Amount" class="text-right">
                 @line.Invoicev.Amount.ToString("c")
             </td>
             <td>
@@ -44,16 +56,9 @@
                     </button>
 
                 </form>
-                <button data-inv-id="@line.Invoicev.InvoiceId" class="btn btn-default  btn-sm js-toggle-paid">
-                    Paid??
-                    <span class="glyphicon glyphicon-ok"></span>
-                </button>
-                <button class="btn btn-sm btn-default like-btn active" type="button" id="10">
-                    <span class="glyphicon glyphicon-ok"></span>
-                    <span class="text">Liked</span>
-                    <span class="badge like-badge">1</span>
-                </button> 
+
             </td>
+
         </tr>
         }
 
@@ -64,6 +69,15 @@
             <td class="text-right">
                 @Model.InvoicesTotal.ToString("c")
             </td>
+            <td class="text-right">
+                <form asp-action="Index" asp-route-id="@Model.HouseId" method="get">
+
+                    <button id="BtnRefresh" type="submit" data-inv-idss="dffe" class="btn btn-sm btn-danger btn-link hide pull-left">
+                        refresh
+                    </button>
+
+                </form>
+            </td>
         </tr>
     </tfoot>
 </table>
@@ -73,27 +87,45 @@
        asp-route-houseId=@Model.HouseId>New Invoice</a>
 </div>
 
-@section scripts
+@section Scripts {
+    <script type='text/javascript'>
+        InvoicesController.init();
+    </script>
+
+}
+
+@*@section scripts
 {
     <script>
-        $(document).ready(function() {
-            $(".js-toggle-paid").click(function(e) {
-                var button = $(e.target); 
-                var selectedRow = $(this).closest("tr");   
-               
-                $.get("/api/paid/" + button.attr("data-inv-id"))
-                    .done(function() {
-                        button
-                            .removeClass("btn-default")
-                            .addClass("btn-info")
-                            .text("Paid !");
-                        selectedRow.find('#YesOrNo').text("Yes");
-                    })
-                    .fail(function() {
-                        alert("Something failed!");
-                    });
+        $(document).ready(function () {
+            $(".js-toggle-paid").click(function (e) {
+
+                var selectedRow = $(this).closest("tr");
+                var amount = selectedRow.find('#Amount').text();
+                var fullname = selectedRow.find('#Fullname').text();
+                if (confirm("Are you sure the following invoice is paid?" + fullname + amount)) {
+                    var button = $(e.target);
+
+                    var sUrl = mtpApp.Urls.baseUrl + "/api/paid/" + button.attr("data-inv-id");
+
+                    $.get(sUrl)
+                        .done(function () {
+                            button
+                                .removeClass("btn-default")
+                                .removeClass("btn-info")
+                                .addClass("hide");
+                            selectedRow.find('#YesOrNo').text("Yes!");
+                            var refreshBut = $("#BtnRefresh");
+                            refreshBut.removeClass("hide");
+                        })
+                        .fail(function () {
+                            alert("Something failed!");
+                        });
+                }
+                else
+                    return false;
             });
-         
+
         });
     </script>
-}
+}*@

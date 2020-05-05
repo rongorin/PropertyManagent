@@ -8,7 +8,7 @@ using Moq;
 using PropertyAdministration.Controllers;
 using System;
 
-namespace PropertyAdministration.Test.TestControllers
+namespace PropertyAdministration.Test.TestServices
 
 {
     [TestClass]
@@ -38,11 +38,7 @@ namespace PropertyAdministration.Test.TestControllers
                                 mockCategoryRepository.Object);
              
         } 
-        [TestCleanup]
-        public void Teardown()
-        {
-            invoiceService = null;
-        }
+      
         [TestMethod]
         public void GetAIvoicesForHouse_ReturnsValid_invoicesList()
         {
@@ -124,6 +120,12 @@ namespace PropertyAdministration.Test.TestControllers
             //assert
             Assert.IsTrue(resultInv.Equals(newInv));
             // CollectionAssert()
+        }
+
+        [TestCleanup]
+        public void Teardown()
+        {
+            invoiceService = null;
         }
     }
      

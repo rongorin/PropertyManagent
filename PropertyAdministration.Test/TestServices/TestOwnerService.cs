@@ -81,5 +81,11 @@ namespace PropertyAdministration.Test.TestServices
             mockOwnerRepository.VerifyAll();
               
         }
+
+        [TestCleanup]
+        public void Teardown()
+        {
+            service = null;
+        }
     }
 }
