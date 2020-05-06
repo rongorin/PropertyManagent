@@ -63,8 +63,7 @@ namespace PropertyAdministration.Controllers
 
             _ownerService.Edit(ownerVm);
             TempData.Add("ResultMessage", "Owner edited Successfully!");
-            return RedirectToAction("Index");
-             
+            return RedirectToAction("Index"); 
         }
 
         [HttpGet]
@@ -91,8 +90,7 @@ namespace PropertyAdministration.Controllers
             };
              
            return View(deleteVM);
-
-      
+             
         }
 
         // GET: /<controller>/

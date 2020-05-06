@@ -83,8 +83,9 @@ namespace PropertyAdministration.Test.TestServices
             //assert   
             Assert.IsNull(result);
         }
-        [TestMethod]
-        public void Edit_ChangeInvoice_ReturnsVoid()
+         
+        [TestMethod]   //INTEGRATION Test:
+        public void EditAndGetById_TestChangeInvoice_SuccssUpateGetByIdReturnsRecord()
         {
             //arrange
             var invoices = RepoMocks.RepositoryMocks.RepositoryInvoiceList();
@@ -96,31 +97,13 @@ namespace PropertyAdministration.Test.TestServices
 
             //act
             invoiceService.Edit(newInv.InvoiceId, newInv.HouseId, newInv.InvoiceDate,newInv.Amount, newInv.Description, newInv.IsPaid,newInv.DatePaid);
+
              var resultInv = invoiceService.GetById(newInv.InvoiceId);
 
             //assert
             Assert.IsTrue(resultInv.Equals(newInv));
             // CollectionAssert()
-        }
-        [TestMethod]
-        public void Edit_ChangeInvoice_ReturnsNotFound()
-        {
-            //arrange
-            var invoices = RepoMocks.RepositoryMocks.RepositoryInvoiceList();
-            mockInvoiceRepository.Setup(repo => repo.GetById(It.IsAny<int>()))
-                                    .Returns(invoices[0]);
-
-            var newInv = mockInvoiceRepository.Object.GetById(1);
-            newInv.Amount = 100M;
-
-            //act
-            invoiceService.Edit(newInv.InvoiceId, newInv.HouseId, newInv.InvoiceDate, newInv.Amount, newInv.Description, newInv.IsPaid, newInv.DatePaid);
-            var resultInv = invoiceService.GetById(newInv.InvoiceId);
-
-            //assert
-            Assert.IsTrue(resultInv.Equals(newInv));
-            // CollectionAssert()
-        }
+        } 
 
         [TestCleanup]
         public void Teardown()

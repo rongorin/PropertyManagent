@@ -49,8 +49,7 @@ namespace PropertyAdministration.Core.Services
                 PhoneNumber = owner.PhoneNumber,
                 PhoneNumber2= owner.PhoneNumber2,
                 PhoneNumber3 = owner.PhoneNumber3 ,
-                PropertiesOwned = owner.PropertiesOwned   
-                 
+                PropertiesOwned = owner.PropertiesOwned 
             };  
         }
         public void Edit(OwnerEditViewModel ownerVM)
@@ -96,9 +95,7 @@ namespace PropertyAdministration.Core.Services
         public void Delete(int id)
         {
             _ownerRepository.Delete(id);
-        }
-         
-
+        } 
         public void Save()
         {
             _ownerRepository.Save();

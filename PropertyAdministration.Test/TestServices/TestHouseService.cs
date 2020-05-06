@@ -28,8 +28,7 @@ namespace PropertyAdministration.Test.TestServices
 
             service = new HouseService(mockHouseRepository.Object, mockCategoryRepository.Object);
 
-        }
-        //MethodName_StateUnderTest_ExpectedBehavior - ie:admitStudent_MissingMandatoryFields_FailToAdmit
+        } 
         [TestMethod]
         public void GetById_ReturnsValid_HouseDetails()
         {

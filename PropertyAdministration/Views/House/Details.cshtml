@@ -1,10 +1,10 @@
-﻿@model House
+﻿@model PropertyAdministration.Application.AppModels.HouseViewModel
 <h2> @Model.StreetNumber @Model.StreetName </h2>
 @await Html.PartialAsync("_MsgSuccessFail", Model)
 <div class="thumbnail">
     <div class="caption-full">
         <h3>
-            Owner: @Model.Owner.Title @Model.Owner.FullName
+            Owner:@Model.FullName
             @* <a href="#">@Model.StreetNumber @Model.StreetName</a>*@
         </h3>
         <h4>House Notes</h4>
@@ -26,7 +26,7 @@
 <div class="btn-group">
     <a href="../Edit/@Model.HouseId " class="btn btn-primary active">
         <i class="glyphicon button" aria-hidden="true"></i> Edit
-    </a>   
+    </a>
 </div>
 <hr />
 <div>
