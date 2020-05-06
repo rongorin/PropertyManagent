@@ -26,10 +26,11 @@ namespace PropertyAdministration.Controllers
          
          
         private IHouseService _houseService; 
-        private InvoiceService _invoiceService;
+        private IInvoiceService _invoiceService;
+
         private readonly ILogger<InvoiceController> _logger;
 
-        public InvoiceController(InvoiceService invoiceService,
+        public InvoiceController(IInvoiceService invoiceService,
                                  IHouseService houseService,
                                  ILogger<InvoiceController> logger,
                                  IConfiguration config)

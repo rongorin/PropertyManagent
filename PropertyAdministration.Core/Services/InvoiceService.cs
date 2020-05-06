@@ -7,18 +7,19 @@ using System.Linq;
 
 namespace PropertyAdministration.Core.Services
 {
-    public class InvoiceService
-    {
+    public class InvoiceService : IInvoiceService
+    { 
+
         private IInvoiceRepository _invoiceRepository;
         private IHouseRepository _houseRepository;
         private ICategoryRepository _categoryRepository;
 
-        public decimal AmountHouse;
-
-        public decimal AmountPlot;
+        public decimal AmountHouse { get; set; }
+        public decimal AmountPlot { get; set; }
 
         public InvoiceService(IInvoiceRepository invoiceRepository,
-            IHouseRepository houseRepository, ICategoryRepository catRepository)
+                                IHouseRepository houseRepository, 
+                                ICategoryRepository catRepository)
         {
             _invoiceRepository = invoiceRepository;
             _houseRepository = houseRepository;
