@@ -49,8 +49,8 @@ var housesController = function () {
 
 var InvoicesController = function (invoiceService) { 
     var button;
-    var selectedRow
-    var init = function () {   
+    var selectedRow; 
+    var init = function () {     
         $(".js-toggle-paid").click(changeToPaid);
     };
 
@@ -85,7 +85,7 @@ var InvoicesController = function (invoiceService) {
         refreshBut.removeClass("hide");
     }
     return {
-        init: init
+        init: init 
     }
 }(InvoiceService);
 
