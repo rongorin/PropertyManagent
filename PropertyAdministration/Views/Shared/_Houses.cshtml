@@ -1,9 +1,20 @@
-﻿<div id="housesListing">
-    <ul class="houses">
-        @foreach (var item in Model)
-        {
-            <partial name="_HouseList" model="item" /> 
-        }
+﻿ 
+    <div id="housesListing">
+        <ul class="houses">
+            @foreach (var item in Model)
+            {
+                <partial name="_HouseList2" model="item" /> 
+            } 
+        </ul> 
+    </div>
+    @*<div>
+            <table class="table table-condensed table-bordered">
+                <tr>
+                    <td>11</td>
+                    <td> <img class="thumbnail" src="~/Images/28 JanSmuts.jpg" /></td>
+                    <td> </td>
+                    <td >ddd</td>
+                    </tr>
+                </table>
 
-    </ul>
-</div>
+        </div>*@

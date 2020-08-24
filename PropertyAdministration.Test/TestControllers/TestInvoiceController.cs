@@ -66,8 +66,13 @@ namespace PropertyAdministration.Test.TestControllers
         public void Index_InvoiceListingForSpecifiHouse_ReturnsViewResultAndModel()
         {
             //arrange
-            mockInvoiceService.Setup(s => s.GetAll()).Returns(new List<Invoice>());
 
+            List<Invoice> invoices = new List<Invoice>();
+            invoices.Add(new Invoice() { Amount=1, Description="test",HouseId=1, InvoiceId=1});
+
+            mockInvoiceService.Setup(s => s.GetAll()).Returns(invoices);
+            mockHouseService.Setup(s => s.GetById(It.IsAny<int>())).Returns(new HouseViewModel());
+            
             //act
             var res = _controller.Index(1);
 

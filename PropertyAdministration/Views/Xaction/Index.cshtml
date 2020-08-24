@@ -1,0 +1,44 @@
+﻿@model IEnumerable<PropertyAdministration.Application.AppModels.XactionViewModel>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table table-bordered ">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Amount</th>
+            @*<th>Phone</th>
+            <th>Email</th>
+            <th class="text-right">#owns</th>
+            <th></th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model)
+        {
+            <tr>
+                @if (@line.Description.Length > 25)
+                {
+                    <td class="text-left col-md-3">@line.Description.ToString().Substring(0, 25)  </td>
+
+                }
+                else
+                {
+                    <td class="text-left col-md-3">@line.Description  </td>
+
+                }
+
+                <td class="text-left col-md-2">@line.Amount </td> 
+                 
+                
+            </tr>
+        }
+    </tbody>
+
+</table>

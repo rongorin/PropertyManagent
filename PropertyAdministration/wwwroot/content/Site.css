@@ -11,6 +11,7 @@ body {
     font-family: Raleway, 'Source Sans Pro', sans-serif;
     background-color: #2c3853;
     color: white;
+    position: relative;
 }
 span.text-danger.field-validation-error {
     color: orangered; 
@@ -116,6 +117,7 @@ footer {
 
 .redHighlight {
     color: red;
+    background-color: #2c3853;
 }
 /* My specific Page-level styles */
 .houses {
@@ -175,7 +177,65 @@ footer {
     .houses > li .details2 .descr {
         font-size: 15px;
     }
+/*Navbar:*/
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover {
+    color: #fff;
+    background-color: #028277c2;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus { 
+    background-color: #de8d8d; 
+}
+.main-body{
+    position:relative;
+}
+#top-row {
+    position: sticky;
+    top: +35px;
+    background-color: #2c3853;
+}
 
+/*Images in Index page:*/
+.thumbnail img {
+    width: 100%;
+}
+.thumbnail {
+    margin-right: 10px;
+    border: 1px solid #2c3853;
+} 
+    .thumbnail .caption-full {
+        padding: 9px;
+        color: #333;
+  }
+
+  .contact-card {
+    display: flex;
+    padding: 10px,0,4px;
+    color: #ffffff;
+    box-shadow: 10px 5px 25px -16px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    max-width: 80%;
+    max-height: 325px;
+    margin-bottom: 10px; 
+}
+    .contact-card > img {
+        width: 300px;  
+        height: auto; 
+    }
+  .contact-card > .user-details { 
+    font-size: 18px ;
+    position:relative;
+  }
+    .contact-card > .user-details > #address {
+        font-size: 25px;
+        text-decoration: none;
+        color: #ffe47e;
+        
+    } 
+a:focus, a:hover {
+    color: #7bfff4; 
+    text-decoration: underline;
+}
+ 
 /*for a row color-profile Netflix animations fter https://css-tricks.com/how-to-re-create-a-nifty-netflix-animation-in-css/ */
         /*.containerx {
             display: flex;
