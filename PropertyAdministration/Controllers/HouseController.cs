@@ -47,7 +47,8 @@ namespace PropertyAdministration
                       Description = a.Description,
                       CategoryName = a.CategoryName,
                       FullName = a.FullName,
-                      InvoicesBalance = a.InvoicesBalance
+                      InvoicesBalance = a.InvoicesBalance,
+                      ImageThumbnail = a.ImageThumbnail
                   }).OrderBy(a => a.StreetName).ThenBy(a =>a.StreetNumber);
 
             bool isAjaxCall = HttpContext.Request.Headers["x-requested-with"] == "XMLHttpRequest";

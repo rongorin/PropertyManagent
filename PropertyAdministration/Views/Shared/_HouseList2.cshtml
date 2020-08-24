@@ -1,0 +1,31 @@
+﻿  
+    <div class="contact-card">
+      
+    <img class="thumbnail" src="@Model.ImageThumbnail" />
+    <div class="user-details">
+        <a id="address" asp-controller="House"
+           asp-action="Details"
+           asp-route-id="@Model.HouseId">@Model.StreetNumber @Model.StreetName </a>
+
+        <p id="ownername">
+            @if (Model.FullName.Length > 39)
+                @Model.FullName.ToString().Substring(0, 39)
+                else
+                    @Model.FullName
+        </p>
+       
+        <span class="invstatus">
+            <div class="goToInvoices">
+                <p class="button">
+                    <a class="btn btn-sm"
+                       asp-controller="Invoice"
+                       asp-action="Index"
+                       asp-route-id="@Model.HouseId">Invoices</a>
+                </p>
+            </div>
+        </span>
+        <span class="categoryname">
+            @Model.InvoicesBalance.ToString("c")
+        </span>
+    </div>
+    </div> 

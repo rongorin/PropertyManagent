@@ -19,14 +19,17 @@ namespace PropertyAdministration.Core.Model
         public string ERF {  get; set; }
         public DateTime DateMoveIn{ get; set; }
         public bool IsPlot { get; set; }
+        public string ImageThumbnail  { get; set; } 
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-        public Owner Owner { get; set; } 
-
+        public Owner Owner { get; set; }
+        public virtual ICollection<Xaction> Xactions { get; set; } 
         public virtual ICollection<Invoice> Invoices { get; set; }
         public House()
         {
             Invoices = new Collection<Invoice>();
+            Xactions = new Collection<Xaction>();
         }
+
     }
 }

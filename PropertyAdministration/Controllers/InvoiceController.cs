@@ -44,9 +44,9 @@ namespace PropertyAdministration.Controllers
         // GET: /<controller>/  
         public IActionResult Index(int? id)
         {
-            _logger.LogInformation("testmeessage in the index");
+            _logger.LogInformation("testmessage in the index");
 
-            return View( GetListing(id ?? null));
+            return View(GetListing(id ?? null));
 
         }  
           
@@ -348,9 +348,12 @@ namespace PropertyAdministration.Controllers
                         HouseId = a.HouseId
                     }).ToList()
                 };
+                var house = _houseService.GetById(id.Value); 
 
                 indexVM.InvoicesTotal = indexVM.invoiceListViewModel.Where(a => a.Invoicev.IsPaid==false).Sum(a => a.Invoicev.Amount);
-                indexVM.ListingHeader = $"{indexVM.invoiceListViewModel.Select(a => a.HouseAddress).FirstOrDefault()} - {indexVM.invoiceListViewModel.Select(a => a.FullName).FirstOrDefault()}";
+            
+                indexVM.ListingHeader = $"{house.StreetNumber} {house.StreetName} - {house.FullName}";
+                 
                 indexVM.HouseId = id.Value;
 
             }

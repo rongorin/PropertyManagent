@@ -1,10 +1,20 @@
-﻿<div id="housesListing">
-    <div class="contact-card">
-        <img src="https://via.placeholder.com/150" alt="profile" />
-        <div className="user-details">
-            <p>Name: Jenny Han</p>
-            <p>Email: Jenny.Han@notreal.com</p>
-            <p>Age: 25</p>
-        </div>
+﻿ 
+    <div id="housesListing">
+        <ul class="houses">
+            @foreach (var item in Model)
+            {
+                <partial name="_HouseList2" model="item" /> 
+            } 
+        </ul> 
     </div>
-</div>
+    @*<div>
+            <table class="table table-condensed table-bordered">
+                <tr>
+                    <td>11</td>
+                    <td> <img class="thumbnail" src="~/Images/28 JanSmuts.jpg" /></td>
+                    <td> </td>
+                    <td >ddd</td>
+                    </tr>
+                </table>
+
+        </div>*@

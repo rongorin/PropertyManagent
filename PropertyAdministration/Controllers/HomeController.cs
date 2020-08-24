@@ -35,6 +35,7 @@ namespace PropertyAdministration.Controllers
                     Description = a.Description,
                     CategoryName = a.CategoryName,
                     FullName = a.FullName ,
+                    ImageThumbnail = a.ImageThumbnail,
                     InvoicesBalance = a.InvoicesBalance
                 }).Where(o => o.InvoicesBalance > 10)
                 .OrderByDescending(a => a.InvoicesBalance)   ;

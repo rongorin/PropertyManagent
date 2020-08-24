@@ -28,6 +28,7 @@ namespace PropertyAdministration.Core.Services
                  StreetNumber = a.StreetNumber,
                  StreetName = a.StreetName,
                  Description = a.Description,
+                 ImageThumbnail = a.ImageThumbnail,
                  CategoryName = a.Category.CategoryName,
                  InvoicesBalance = a.Invoices.Where(s => s.IsPaid == false).Sum( s=> s.Amount),
                  FullName = a.Owner.FullName 

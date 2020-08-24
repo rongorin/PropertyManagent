@@ -17,6 +17,7 @@ namespace PropertyAdministration.Application.AppModels
         public string CategoryName { get; set; }
         public decimal InvoicesBalance { get; set; }
         public string FullName { get; set; } 
+        public string ImageThumbnail { get; set; }
     }
 
 }

@@ -24,6 +24,7 @@ namespace PropertyAdministration.Core.Model
         public string PhoneNumber3 { get; set; }
         public int PropertiesOwned { get; set; }
 
-        public virtual ICollection<House> Houses { get; set; } 
+        public virtual ICollection<House> Houses { get; set; }
+
     }
 }

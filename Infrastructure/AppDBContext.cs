@@ -20,6 +20,7 @@ namespace Infrastructure
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Xaction> Xactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

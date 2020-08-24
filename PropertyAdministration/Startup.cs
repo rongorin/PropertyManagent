@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Globalization; 
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Localization;
+using Infrastructure.Services;
 
 namespace PropertyAdministration
 {
@@ -53,11 +54,14 @@ namespace PropertyAdministration
             services.AddScoped<IHouseRepository, HouseRepository>();
             services.AddScoped<IInvoiceRepository, InvoiceRepository>(); 
             services.AddScoped<IOwnerRepository, OwnerRepository>();
-            services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<IXactionResository, XactionRepository>(); 
+            services.AddScoped<IInvoiceService, InvoiceService>(); 
             services.AddScoped<IHouseService, HouseService>();
             services.AddScoped<IOwnerService, OwnerService>(); 
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IXactionsService, XactionsService>();
             services.AddScoped<IInvoiceEngine,  InvoiceEngine>();
+            services.AddScoped<IEmailSender,  EmailSender>();
 
             services.AddMemoryCache(); //caching
  
